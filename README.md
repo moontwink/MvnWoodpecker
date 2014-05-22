@@ -5,7 +5,7 @@
 **Changes from TheWoodpecker:**
 
  * Maven Build
- * Integrated Twitter Crawler (Not yet storing to database)
+ * Integrated Twitter Crawler (update: already connected with database)
  * Dependency Management
 
 
