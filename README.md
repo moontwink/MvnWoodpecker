@@ -25,7 +25,7 @@ Lookie heree ~~~
 
  6.1.1 Clean > Build > Clean and Build in the same order **twitter4j-core** > **twitter4j-async** > **twitter4j-stream** until warning signs are gone. 
  
- 6.2 Go back to **MvnWoodpecker** and right click on **Dependencies** > **Add Dependency** > got to the **Open Projects** tab and add the **twitter4j-stream with version 4.0.2-SNAPSHOT** 
+ 6.2 Go back to **MvnWoodpecker** and right click on **Dependencies** > **Add Dependency** > got to the **Open Projects** tab and add the **twitter4j-stream with version 4.0.2-SNAPSHOT** (or clean > build > clean and build)
  
  7. Hmmmm.... things should be fine at this point already. 
 
