@@ -7,6 +7,7 @@
  * Maven Build
  * Integrated Twitter Crawler (update: already connected with database)
  * Dependency Management
+ * Integrated Pie Chart (still in JFrame)
 
 
 To run this, we'll have to do a number of stuff.
