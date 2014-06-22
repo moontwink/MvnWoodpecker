@@ -9,8 +9,8 @@ package tfidf;
  * @author Matt
  */
 public class Tfidf {
-    double score;
-    String tweet;
+    private double score;
+    private String tweet;
 
     public Tfidf(String tweet, double score)
     {

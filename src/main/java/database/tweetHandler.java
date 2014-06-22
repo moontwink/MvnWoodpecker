@@ -14,6 +14,7 @@ import model.FeatureStatistics;
 import model.LMDrillModel;
 import model.TMDrillModel;
 import ngram.NGramDriver;
+import tfidf.TM_TfidfDriver;
 import tfidf.TfidfDriver;
 
 /**
@@ -517,6 +518,7 @@ public class tweetHandler {
             }else{
                 tm.importData(results);
                 tm.trainTopics();
+                TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
                 tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics(), stat);
             }
