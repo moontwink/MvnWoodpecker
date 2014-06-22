@@ -130,6 +130,7 @@ public class Start extends javax.swing.JFrame {
         TDMethodPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         resetCriteriaBtn = new javax.swing.JButton();
+        progressBar = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -578,17 +579,27 @@ public class Start extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        progressBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        progressBar.setString(".....");
+        progressBar.setStringPainted(true);
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(21, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(tweetSourcePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(TDMethodPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(21, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(tweetSourcePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TDMethodPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(18, 18, 18))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGap(71, 71, 71)
+                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -602,6 +613,8 @@ public class Start extends javax.swing.JFrame {
                         .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(TDMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(tabPane)))
         );
@@ -675,156 +688,159 @@ public class Start extends javax.swing.JFrame {
 
     private void beginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginBtnActionPerformed
         
-    //IF LANGUAGE MODELER IS SELECTED
-    if(lmRB.isSelected()){
-        String method = "LM";
-        NGramDriver.emptyNgram();
+    System.out.println("THREAD START...........");
+    new Thread(new TweetpeckThread()).start();  
         
-        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) && dateCB.isSelected()){
-            TweetCleaner tc = new TweetCleaner();
-            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-            
-            LMDrillModel lmDrillModel = tc.cleanByKeywordsAndDate(keywordTF.getText(), start, end);
-            
-            if(lmDrillModel.getLevel() == -1){
-                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                String startMonth =  smonthMB.getSelectedItem().toString();
-                String startDay = sdayMB.getSelectedItem().toString();
-                String startYear = syearMB.getSelectedItem().toString();
-                String endMonth =  emonthMB.getSelectedItem().toString();
-                String endDay = edayMB.getSelectedItem().toString();
-                String endYear = eyearMB.getSelectedItem().toString();
-
-                String keys = keywordTF.getText();
-                keys = keys.replaceAll(",", " ");
-                keys = keys.replaceAll(";", " ");
-                String[] keywords = keys.split(" ");
-                
-                lmDrillModel.setKeywords(keywords);
-                
-                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
-                tabPane.add(method + " - LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
-                    + startMonth + "." + startDay + "." + startYear
-                    + "-" + endMonth + "." + endDay + "." + endYear 
-                    + "]", p);
-                tabPane.setSelectedComponent(p);
-            }
-        }
-        else if((keywordCB.isSelected() && !keywordTF.getText().isEmpty())){
-            TweetCleaner tc = new TweetCleaner();
-            LMDrillModel lmDrillModel = tc.cleanByKeyword(keywordTF.getText());
-            
-            if(lmDrillModel.getLevel() == -1){
-                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                String keys = keywordTF.getText();
-                keys = keys.replaceAll(",", " ");
-                keys = keys.replaceAll(";", " ");
-                String[] keywords = keys.split(" ");
-                
-                lmDrillModel.setKeywords(keywords);
-                
-                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
-                tabPane.add("LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
-                tabPane.setSelectedComponent(p);
-            }
-        }
-//        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) || dateCB.isSelected()){
-        else if(dateCB.isSelected()){
-            TweetCleaner tc = new TweetCleaner();
-            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-            
-            LMDrillModel lmDrillModel = tc.cleanByDate(start, end);
-            
-            if(lmDrillModel.getLevel() == -1){
-                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
-                tabPane.add("LV" + lmDrillModel.getLevel() + " - " + 
-                    "[" + smonthMB.getSelectedItem().toString()
-                    + "-" + emonthMB.getSelectedItem().toString() + " "
-                    + syearMB.getSelectedItem().toString() + "] - " + method, p);
-                tabPane.setSelectedComponent(p);
-            }
-            
-        }else if((keywordCB.isSelected() && keywordTF.getText().isEmpty())){
-            JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-    
-    //IF TOPIC MODELLER IS SELECTED
-    else if(topicRB.isSelected()){
-        String method = "TM";
-        
-        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) && dateCB.isSelected()){
-            TweetCleaner tc = new TweetCleaner();
-            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-            
-            TMDrillModel tmDrillModel = tc.TMcleanByKeywordsAndDate(keywordTF.getText(), start, end);
-            
-            if(tmDrillModel.getLevel() == -1){
-                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                String startMonth =  smonthMB.getSelectedItem().toString();
-                String startDay = sdayMB.getSelectedItem().toString();
-                String startYear = syearMB.getSelectedItem().toString();
-                String endMonth =  emonthMB.getSelectedItem().toString();
-                String endDay = edayMB.getSelectedItem().toString();
-                String endYear = eyearMB.getSelectedItem().toString();
-
-                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
-                tabPane.add(method + " - LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
-                    + startMonth + "." + startDay + "." + startYear
-                    + "-" + endMonth + "." + endDay + "." + endYear 
-                    + "]", p);
-                tabPane.setSelectedComponent(p);
-            }
-        }
-        
-        else if((keywordCB.isSelected() && !keywordTF.getText().isEmpty())){
-            TweetCleaner tc = new TweetCleaner();
-            TMDrillModel tmDrillModel = tc.TMcleanByKeyword(keywordTF.getText());
-            
-            if(tmDrillModel.getLevel() == -1){
-                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
-                tabPane.add("LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
-                tabPane.setSelectedComponent(p);
-            }
-        }
-        
-        else if(dateCB.isSelected()){
-            TweetCleaner tc = new TweetCleaner();
-            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-            
-            TMDrillModel tmDrillModel = tc.TMcleanByDate(start, end);
-            
-            if(tmDrillModel.getLevel() == -1){
-                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-            }else{
-                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
-                tabPane.add("LV" + tmDrillModel.getLevel() + " - " + 
-                    "[" + smonthMB.getSelectedItem().toString()
-                    + "-" + emonthMB.getSelectedItem().toString() + " "
-                    + syearMB.getSelectedItem().toString() + "] - " + method, p);
-                tabPane.setSelectedComponent(p);
-            }
-        }
-        else if((keywordCB.isSelected() && keywordTF.getText().isEmpty())){
-            JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
-    
-    //IF NO METHOD SELECTED
-    else {
-        JOptionPane.showMessageDialog(null, "Please select a method.", "Woodpecker Requirement", JOptionPane.INFORMATION_MESSAGE);
-    }
+//    //IF LANGUAGE MODELER IS SELECTED
+//    if(lmRB.isSelected()){
+//        String method = "LM";
+//        NGramDriver.emptyNgram();
+//        
+//        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) && dateCB.isSelected()){
+//            TweetCleaner tc = new TweetCleaner();
+//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+//            
+//            LMDrillModel lmDrillModel = tc.cleanByKeywordsAndDate(keywordTF.getText(), start, end);
+//            
+//            if(lmDrillModel.getLevel() == -1){
+//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+//            }else{
+//                String startMonth =  smonthMB.getSelectedItem().toString();
+//                String startDay = sdayMB.getSelectedItem().toString();
+//                String startYear = syearMB.getSelectedItem().toString();
+//                String endMonth =  emonthMB.getSelectedItem().toString();
+//                String endDay = edayMB.getSelectedItem().toString();
+//                String endYear = eyearMB.getSelectedItem().toString();
+//
+//                String keys = keywordTF.getText();
+//                keys = keys.replaceAll(",", " ");
+//                keys = keys.replaceAll(";", " ");
+//                String[] keywords = keys.split(" ");
+//                
+//                lmDrillModel.setKeywords(keywords);
+//                
+//                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
+//                tabPane.add(method + " - LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
+//                    + startMonth + "." + startDay + "." + startYear
+//                    + "-" + endMonth + "." + endDay + "." + endYear 
+//                    + "]", p);
+//                tabPane.setSelectedComponent(p);
+//            }
+//        }
+//        else if((keywordCB.isSelected() && !keywordTF.getText().isEmpty())){
+//            TweetCleaner tc = new TweetCleaner();
+//            LMDrillModel lmDrillModel = tc.cleanByKeyword(keywordTF.getText());
+//            
+//            if(lmDrillModel.getLevel() == -1){
+//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+//            }else{
+//                String keys = keywordTF.getText();
+//                keys = keys.replaceAll(",", " ");
+//                keys = keys.replaceAll(";", " ");
+//                String[] keywords = keys.split(" ");
+//                
+//                lmDrillModel.setKeywords(keywords);
+//                
+//                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
+//                tabPane.add("LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
+//                tabPane.setSelectedComponent(p);
+//            }
+//        }
+////        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) || dateCB.isSelected()){
+//        else if(dateCB.isSelected()){
+//            TweetCleaner tc = new TweetCleaner();
+//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+//            
+//            LMDrillModel lmDrillModel = tc.cleanByDate(start, end);
+//            
+//            if(lmDrillModel.getLevel() == -1){
+//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+//            }else{
+//                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
+//                tabPane.add("LV" + lmDrillModel.getLevel() + " - " + 
+//                    "[" + smonthMB.getSelectedItem().toString()
+//                    + "-" + emonthMB.getSelectedItem().toString() + " "
+//                    + syearMB.getSelectedItem().toString() + "] - " + method, p);
+//                tabPane.setSelectedComponent(p);
+//            }
+//            
+//        }else if((keywordCB.isSelected() && keywordTF.getText().isEmpty())){
+//            JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
+//        }
+//    }
+//    
+//    //IF TOPIC MODELLER IS SELECTED
+//    else if(topicRB.isSelected()){
+//        String method = "TM";
+//        
+//        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) && dateCB.isSelected()){
+//            TweetCleaner tc = new TweetCleaner();
+//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+//            
+//            TMDrillModel tmDrillModel = tc.TMcleanByKeywordsAndDate(keywordTF.getText(), start, end);
+//            
+//            if(tmDrillModel.getLevel() == -1){
+//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+//            }else{
+//                String startMonth =  smonthMB.getSelectedItem().toString();
+//                String startDay = sdayMB.getSelectedItem().toString();
+//                String startYear = syearMB.getSelectedItem().toString();
+//                String endMonth =  emonthMB.getSelectedItem().toString();
+//                String endDay = edayMB.getSelectedItem().toString();
+//                String endYear = eyearMB.getSelectedItem().toString();
+//
+//                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
+//                tabPane.add(method + " - LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
+//                    + startMonth + "." + startDay + "." + startYear
+//                    + "-" + endMonth + "." + endDay + "." + endYear 
+//                    + "]", p);
+//                tabPane.setSelectedComponent(p);
+//            }
+//        }
+//        
+//        else if((keywordCB.isSelected() && !keywordTF.getText().isEmpty())){
+//            TweetCleaner tc = new TweetCleaner();
+//            TMDrillModel tmDrillModel = tc.TMcleanByKeyword(keywordTF.getText());
+//            
+//            if(tmDrillModel.getLevel() == -1){
+//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+//            }else{
+//                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
+//                tabPane.add("LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
+//                tabPane.setSelectedComponent(p);
+//            }
+//        }
+//        
+//        else if(dateCB.isSelected()){
+//            TweetCleaner tc = new TweetCleaner();
+//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+//            
+//            TMDrillModel tmDrillModel = tc.TMcleanByDate(start, end);
+//            
+//            if(tmDrillModel.getLevel() == -1){
+//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+//            }else{
+//                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
+//                tabPane.add("LV" + tmDrillModel.getLevel() + " - " + 
+//                    "[" + smonthMB.getSelectedItem().toString()
+//                    + "-" + emonthMB.getSelectedItem().toString() + " "
+//                    + syearMB.getSelectedItem().toString() + "] - " + method, p);
+//                tabPane.setSelectedComponent(p);
+//            }
+//        }
+//        else if((keywordCB.isSelected() && keywordTF.getText().isEmpty())){
+//            JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
+//        }
+//    }
+//    
+//    //IF NO METHOD SELECTED
+//    else {
+//        JOptionPane.showMessageDialog(null, "Please select a method.", "Woodpecker Requirement", JOptionPane.INFORMATION_MESSAGE);
+//    }
       
     }//GEN-LAST:event_beginBtnActionPerformed
 
@@ -1015,6 +1031,227 @@ public class Start extends javax.swing.JFrame {
         fillEndDayBoxes(month, year);
     }//GEN-LAST:event_emonthMBItemStateChanged
 
+    private void setProgressToZero() {
+//        progressBar.setValue(0);
+        progressBar.setString(".....");
+        progressBar.setIndeterminate(false);
+    }
+    
+    private void setProgressToWork() {
+//        progressBar.setValue(0);
+        progressBar.setString("Woodpecking...");
+        progressBar.setIndeterminate(true);
+    }
+    
+    private void setProgressToComplete() {
+//        progressBar.setValue(100);
+        progressBar.setString("Complete!");
+        progressBar.setIndeterminate(false);
+    }
+    
+    public class TweetpeckThread implements Runnable {
+
+        @Override
+        public void run() {
+            
+            /* 
+             * IF LANGUAGE MODELER IS SELECTED
+             */
+            if(lmRB.isSelected()){
+                
+                boolean keywordCBselected = keywordCB.isSelected();
+                boolean keywordTFempty = keywordTF.getText().isEmpty();
+                boolean dateCBselected = dateCB.isSelected();
+                
+                if(!keywordCBselected && !dateCBselected) {
+                    JOptionPane.showMessageDialog(null, "Please fill in the criteria.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                else if(keywordCBselected && keywordTFempty) {
+                    JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                else{
+                    setProgressToWork();
+                    String method = "LM";
+                    NGramDriver.emptyNgram();
+
+                    if(keywordCBselected && !keywordTFempty && dateCBselected) {
+                        TweetCleaner tc = new TweetCleaner();
+                        String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+                        String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+
+                        LMDrillModel lmDrillModel = tc.cleanByKeywordsAndDate(keywordTF.getText(), start, end);
+
+                        if(lmDrillModel.getLevel() == -1){
+                            JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            String startMonth =  smonthMB.getSelectedItem().toString();
+                            String startDay = sdayMB.getSelectedItem().toString();
+                            String startYear = syearMB.getSelectedItem().toString();
+                            String endMonth =  emonthMB.getSelectedItem().toString();
+                            String endDay = edayMB.getSelectedItem().toString();
+                            String endYear = eyearMB.getSelectedItem().toString();
+
+                            String keys = keywordTF.getText();
+                            keys = keys.replaceAll(",", " ");
+                            keys = keys.replaceAll(";", " ");
+                            String[] keywords = keys.split(" ");
+
+                            lmDrillModel.setKeywords(keywords);
+
+                            LM_DrillDown p = new LM_DrillDown(lmDrillModel);
+                            tabPane.add(method + " - LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
+                                + startMonth + "." + startDay + "." + startYear
+                                + "-" + endMonth + "." + endDay + "." + endYear 
+                                + "]", p);
+                            tabPane.setSelectedComponent(p);
+                        }
+                        setProgressToComplete();
+                    }
+                    else if(keywordCBselected && !keywordTFempty){
+                        TweetCleaner tc = new TweetCleaner();
+                        LMDrillModel lmDrillModel = tc.cleanByKeyword(keywordTF.getText());
+
+                        if(lmDrillModel.getLevel() == -1){
+                            JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            String keys = keywordTF.getText();
+                            keys = keys.replaceAll(",", " ");
+                            keys = keys.replaceAll(";", " ");
+                            String[] keywords = keys.split(" ");
+
+                            lmDrillModel.setKeywords(keywords);
+
+                            LM_DrillDown p = new LM_DrillDown(lmDrillModel);
+                            tabPane.add("LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
+                            tabPane.setSelectedComponent(p);
+                        }
+                        setProgressToComplete();
+                    }
+                    else if(dateCBselected){
+                        TweetCleaner tc = new TweetCleaner();
+                        String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+                        String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+
+                        LMDrillModel lmDrillModel = tc.cleanByDate(start, end);
+
+                        if(lmDrillModel.getLevel() == -1){
+                            JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            LM_DrillDown p = new LM_DrillDown(lmDrillModel);
+                            tabPane.add("LV" + lmDrillModel.getLevel() + " - " + 
+                                "[" + smonthMB.getSelectedItem().toString()
+                                + "-" + emonthMB.getSelectedItem().toString() + " "
+                                + syearMB.getSelectedItem().toString() + "] - " + method, p);
+                            tabPane.setSelectedComponent(p);
+                        }
+                        setProgressToComplete();
+                    }
+                }
+            }
+
+            /* 
+            ** IF TOPIC MODELLER IS SELECTED
+             */
+            else if(topicRB.isSelected()){
+                
+                boolean keywordCBselected = keywordCB.isSelected();
+                boolean keywordTFempty = keywordTF.getText().isEmpty();
+                boolean dateCBselected = dateCB.isSelected();
+                
+                if(!keywordCBselected && !dateCBselected) {
+                    JOptionPane.showMessageDialog(null, "Please fill in the criteria.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                else if(keywordCBselected && keywordTFempty) {
+                    JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
+                }
+                
+                else {
+                    setProgressToWork();
+                    String method = "TM";
+
+                    if(keywordCBselected && !keywordTFempty && dateCBselected){
+                        TweetCleaner tc = new TweetCleaner();
+                        String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+                        String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+
+                        TMDrillModel tmDrillModel = tc.TMcleanByKeywordsAndDate(keywordTF.getText(), start, end);
+
+                        if(tmDrillModel.getLevel() == -1){
+                            JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            String startMonth =  smonthMB.getSelectedItem().toString();
+                            String startDay = sdayMB.getSelectedItem().toString();
+                            String startYear = syearMB.getSelectedItem().toString();
+                            String endMonth =  emonthMB.getSelectedItem().toString();
+                            String endDay = edayMB.getSelectedItem().toString();
+                            String endYear = eyearMB.getSelectedItem().toString();
+
+                            TM_DrillDown p = new TM_DrillDown(tmDrillModel);
+                            tabPane.add(method + " - LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
+                                + startMonth + "." + startDay + "." + startYear
+                                + "-" + endMonth + "." + endDay + "." + endYear 
+                                + "]", p);
+                            tabPane.setSelectedComponent(p);
+                        }
+                        setProgressToComplete();
+                    }
+
+                    else if(keywordCBselected && !keywordTFempty) {
+                        TweetCleaner tc = new TweetCleaner();
+                        TMDrillModel tmDrillModel = tc.TMcleanByKeyword(keywordTF.getText());
+
+                        if(tmDrillModel.getLevel() == -1){
+                            JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            TM_DrillDown p = new TM_DrillDown(tmDrillModel);
+                            tabPane.add("LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
+                            tabPane.setSelectedComponent(p);
+                        }
+                        setProgressToComplete();
+                    }
+
+                    else if(dateCBselected) {
+                        TweetCleaner tc = new TweetCleaner();
+                        String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
+                        String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
+
+                        TMDrillModel tmDrillModel = tc.TMcleanByDate(start, end);
+
+                        if(tmDrillModel.getLevel() == -1){
+                            JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
+                        }else{
+                            TM_DrillDown p = new TM_DrillDown(tmDrillModel);
+                            tabPane.add("LV" + tmDrillModel.getLevel() + " - " + 
+                                "[" + smonthMB.getSelectedItem().toString()
+                                + "-" + emonthMB.getSelectedItem().toString() + " "
+                                + syearMB.getSelectedItem().toString() + "] - " + method, p);
+                            tabPane.setSelectedComponent(p);
+                        }
+                        setProgressToComplete();
+                    }
+                }
+            }
+
+            //IF NO METHOD SELECTED
+            else {
+                JOptionPane.showMessageDialog(null, "Please select a method.", "Woodpecker Requirement", JOptionPane.INFORMATION_MESSAGE);
+            }
+            
+//            for(int i = 0; i <= 100; i++){
+//                progressBar.setValue(i);
+//                progressBar.repaint();
+//                try{
+//                    Thread.sleep(50);
+//                }catch(InterruptedException ex){
+//                }
+//            }
+        }
+    
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -1051,6 +1288,7 @@ public class Start extends javax.swing.JFrame {
                 System.out.println("Beginning to drop all temporary tables....");
                 TablesHandler.dropAllTempTables();
                 ((JFrame)(e.getComponent())).dispose();
+                System.exit(0);
             }
         });
 
@@ -1094,6 +1332,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JRadioButton locdbBtn;
     private javax.swing.JTextField longitudeField;
     private javax.swing.ButtonGroup methodGrp;
+    private javax.swing.JProgressBar progressBar;
     private javax.swing.JButton resetCriteriaBtn;
     private javax.swing.JLabel sDateLabel;
     private javax.swing.JComboBox sdayMB;

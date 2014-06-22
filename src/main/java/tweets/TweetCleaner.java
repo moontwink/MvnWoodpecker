@@ -15,6 +15,10 @@ import model.TMDrillModel;
  */
 public class TweetCleaner {
     ArrayList<tweetModel> tweets;
+
+    public TweetCleaner() {
+        tweetHandler.setTweetlinks(new ArrayList<String>());
+    }
     
     public LMDrillModel cleanByKeyword(String keyword){
         

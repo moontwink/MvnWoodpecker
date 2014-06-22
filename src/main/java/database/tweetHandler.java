@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mallet.TopicModel;
+import model.FeatureStatistics;
 import model.LMDrillModel;
 import model.TMDrillModel;
 import ngram.NGramDriver;
@@ -121,7 +122,7 @@ public class tweetHandler {
             
             tweet = tweet.replace(message, "").trim();
             
-            tweetlinks.add(message);
+            getTweetlinks().add(message);
             
        }
        
@@ -131,10 +132,10 @@ public class tweetHandler {
     
    public static void printLinks()
    {
-       for(int num = 0; num < tweetlinks.size(); num++)
+       for(int num = 0; num < getTweetlinks().size(); num++)
        {
            System.out.println("------------------------------");
-           System.out.println("Links "+num+ "are here mamasita  " +tweetlinks.get(num));
+           System.out.println("Links "+num+ "are here mamasita  " +getTweetlinks().get(num));
            
        }
        
@@ -187,8 +188,8 @@ public class tweetHandler {
         tweetModel t;
         
         String tablename = "temp-"+keywords+"-"+start[0]+"."+start[1]+"."+start[2]+"-"+end[0]+"."+end[1]+"."+end[2];;
-        tablename = tablename.replaceAll(",", "|");
-        tablename = tablename.replaceAll(";", "|");
+        tablename = tablename.replaceAll(",", "~");
+        tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
            System.out.println(tablename);
         
@@ -265,7 +266,8 @@ public class tweetHandler {
             }else{
                 sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
-                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist());
+                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -287,8 +289,8 @@ public class tweetHandler {
         tweetModel t;
         
         String tablename = "temp-"+keywords+"-"+start[0]+"."+start[1]+"."+start[2]+"-"+end[0]+"."+end[1]+"."+end[2];;
-        tablename = tablename.replaceAll(",", "|");
-        tablename = tablename.replaceAll(";", "|");
+        tablename = tablename.replaceAll(",", "~");
+        tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
            System.out.println(tablename);
         
@@ -366,7 +368,8 @@ public class tweetHandler {
             }else{
                 tm.importData(results);
                 tm.trainTopics();
-                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics());
+                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -385,8 +388,8 @@ public class tweetHandler {
         LMDrillModel lmDrillModel = new LMDrillModel();
         
         String tablename = "temp-"+keywords;
-        tablename = tablename.replaceAll(",", "|");
-        tablename = tablename.replaceAll(";", "|");
+        tablename = tablename.replaceAll(",", "~");
+        tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
            System.out.println(tablename);
         
@@ -439,7 +442,8 @@ public class tweetHandler {
             }else{
                 sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
-                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist());
+                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -458,8 +462,8 @@ public class tweetHandler {
         TMDrillModel tmDrillModel = new TMDrillModel();
         
         String tablename = "temp-"+keywords;
-        tablename = tablename.replaceAll(",", "|");
-        tablename = tablename.replaceAll(";", "|");
+        tablename = tablename.replaceAll(",", "~");
+        tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
            System.out.println(tablename);
         
@@ -513,7 +517,8 @@ public class tweetHandler {
             }else{
                 tm.importData(results);
                 tm.trainTopics();
-                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics());
+                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -607,7 +612,8 @@ public class tweetHandler {
             }else{
                 sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
-                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist());
+                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -702,7 +708,8 @@ public class tweetHandler {
             }else{
                 tm.importData(results);
                 tm.trainTopics();
-                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics());
+                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -777,26 +784,20 @@ public class tweetHandler {
         }
     }
     
-    public static ArrayList<tweetModel> getAllRetweets(){
+    public static int getAllRetweets(String tablename){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
         
         try{
             Connection c = DBFactory.getConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT * FROM tweets "
-                    + "WHERE message like 'RT%' "
-                    + "LIMIT 0,10");
+            PreparedStatement ps = c.prepareStatement("SELECT * FROM `" + tablename + "` "
+                    + "WHERE message like 'RT %' or message like '\"@%' or message like '“@%'");
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
                 t = new tweetModel();
-                t.setIdTweets(rs.getInt("idTweets"));
-                t.setStatusId(rs.getString("statusId"));
                 t.setUsername(rs.getString("username"));
                 t.setMessage(rs.getString("message"));
-                t.setRetweetCount(rs.getString("retweetCount"));
-                t.setLatitude(rs.getLong("latitude"));
-                t.setLonghitude(rs.getLong("longhitude"));
                 t.setDate(rs.getString("date"));
                 
                 results.add(t);
@@ -808,7 +809,7 @@ public class tweetHandler {
             Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return results;
+        return results.size();
     }
     
     public static String getEarliestDate(){
@@ -862,8 +863,8 @@ public class tweetHandler {
         LMDrillModel lmDrillModel = new LMDrillModel();
         
         String tablename = "temp-dd-"+keywords;
-        tablename = tablename.replaceAll(",", "|");
-        tablename = tablename.replaceAll(";", "|");
+        tablename = tablename.replaceAll(",", "~");
+        tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
            System.out.println(tablename);
         
@@ -914,7 +915,8 @@ public class tweetHandler {
             sortNgramAndRemoveOutliers();
             TfidfDriver.idfchecker(results);
             
-            lmDrillModel = new LMDrillModel(currentlmDM.getLevel()+1, tablename, TfidfDriver.getToplist());
+            FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+            lmDrillModel = new LMDrillModel(currentlmDM.getLevel()+1, tablename, TfidfDriver.getToplist(), stat);
             
         }catch(ClassNotFoundException ex){
             Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -932,8 +934,8 @@ public class tweetHandler {
         TMDrillModel tmDrillModel = new TMDrillModel();
         
         String tablename = "temp-dd-"+keywords;
-        tablename = tablename.replaceAll(",", "|");
-        tablename = tablename.replaceAll(";", "|");
+        tablename = tablename.replaceAll(",", "~");
+        tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
            System.out.println(tablename);
         
@@ -984,7 +986,8 @@ public class tweetHandler {
             tm.importData(results);
             tm.trainTopics();
             
-            tmDrillModel = new TMDrillModel(currenttmDM.getLevel()+1, tablename, tm.getAllTopics());
+            FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+            tmDrillModel = new TMDrillModel(currenttmDM.getLevel()+1, tablename, tm.getAllTopics(), stat);
             
         }catch(ClassNotFoundException ex){
             Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -993,5 +996,19 @@ public class tweetHandler {
         }
         
         return tmDrillModel;
+    }
+
+    /**
+     * @return the tweetlinks
+     */
+    public static ArrayList<String> getTweetlinks() {
+        return tweetlinks;
+    }
+
+    /**
+     * @param aTweetlinks the tweetlinks to set
+     */
+    public static void setTweetlinks(ArrayList<String> aTweetlinks) {
+        tweetlinks = aTweetlinks;
     }
 }

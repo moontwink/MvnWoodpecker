@@ -12,6 +12,7 @@ public class TMDrillModel {
     private int level;
     private String tablename;
     private ArrayList<TopicOutput> topics;
+    private FeatureStatistics statistics;
 
     public TMDrillModel() {
         level = 0;
@@ -25,6 +26,13 @@ public class TMDrillModel {
         this.level = level;
         this.tablename = tablename;
         this.topics = topics;
+    }
+
+    public TMDrillModel(int level, String tablename, ArrayList<TopicOutput> topics, FeatureStatistics statistics) {
+        this.level = level;
+        this.tablename = tablename;
+        this.topics = topics;
+        this.statistics = statistics;
     }
     
     /**
@@ -67,5 +75,19 @@ public class TMDrillModel {
      */
     public void setTopics(ArrayList<TopicOutput> topics) {
         this.topics = topics;
+    }
+
+    /**
+     * @return the statistics
+     */
+    public FeatureStatistics getStatistics() {
+        return statistics;
+    }
+
+    /**
+     * @param statistics the statistics to set
+     */
+    public void setStatistics(FeatureStatistics statistics) {
+        this.statistics = statistics;
     }
 }
