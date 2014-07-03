@@ -88,7 +88,7 @@ public class TopicModel {
         // Create a model with 100 topics, alpha_t = 0.01, beta_w = 0.01
         //  Note that the first parameter is passed as the sum over topics, while
         //  the second is 
-        int numTopics = 20;
+        int numTopics = 10;
         ParallelTopicModel model = new ParallelTopicModel(numTopics, 1.0, 0.01);
 
         model.addInstances(instances);

@@ -156,12 +156,6 @@ public class tweetHandler {
             
             System.out.println("Short link" +shortenedLinks+ " -->  Expanded Link " +expandedLinks );
           
-          /* 
-           * Check order of expanding and initializing influencers and checking and sorting
-           * Might be taking longer than necessary 
-           */
-          Influencer.initializeInfluenceModels();
-            
        }
        return tweet;
    }
@@ -175,17 +169,6 @@ public class tweetHandler {
         String expandedURL = connection.getHeaderField("Location");
         connection.getInputStream().close();
         return expandedURL;
-   }
-    
-   public static void printLinks()
-   {
-       for(int num = 0; num < getTweetlinks().size(); num++)
-       {
-           System.out.println("------------------------------");
-           System.out.println("Links "+num+ "are here mamasita  " +getTweetlinks().get(num));
-           
-       }
-       
    }
     
     //Retrieves all Tweets from specified table
@@ -313,6 +296,11 @@ public class tweetHandler {
             }else{
                 sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
+                /* 
+                * Initialize Influence Models
+                */
+               Influencer.initializeInfluenceModels();
+               
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
                 lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
             }
@@ -416,6 +404,11 @@ public class tweetHandler {
                 tm.importData(results);
                 tm.trainTopics();
                 TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
+                /* 
+                * Initialize Influence Models
+                */
+               Influencer.initializeInfluenceModels();
+               
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
                 tmDrillModel = new TMDrillModel(0, tablename, TM_TfidfDriver.getTopTopics(), stat);
             }
@@ -490,6 +483,11 @@ public class tweetHandler {
             }else{
                 sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
+                /* 
+                * Initialize Influence Models
+                */
+               Influencer.initializeInfluenceModels();
+               
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
                 lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
             }
@@ -566,8 +564,13 @@ public class tweetHandler {
                 tm.importData(results);
                 tm.trainTopics();
                 TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
-                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-                tmDrillModel = new TMDrillModel(0, tablename, TM_TfidfDriver.getTopTopics(), stat);
+                /* 
+                * Initialize Influence Models
+                */
+               Influencer.initializeInfluenceModels();
+                
+               FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
+               tmDrillModel = new TMDrillModel(0, tablename, TM_TfidfDriver.getTopTopics(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -661,6 +664,11 @@ public class tweetHandler {
             }else{
                 sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
+                /* 
+                * Initialize Influence Models
+                */
+               Influencer.initializeInfluenceModels();
+               
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
                 lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
             }
@@ -758,6 +766,11 @@ public class tweetHandler {
                 tm.importData(results);
                 tm.trainTopics();
                 TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
+                /* 
+                * Initialize Influence Models
+                */
+               Influencer.initializeInfluenceModels();
+               
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
                 tmDrillModel = new TMDrillModel(0, tablename, TM_TfidfDriver.getTopTopics(), stat);
             }
@@ -964,7 +977,11 @@ public class tweetHandler {
             System.out.println("******************************* ");
             sortNgramAndRemoveOutliers();
             TfidfDriver.idfchecker(results);
-            
+            /* 
+            * Initialize Influence Models
+            */
+           Influencer.initializeInfluenceModels();
+           
             FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
             lmDrillModel = new LMDrillModel(currentlmDM.getLevel()+1, tablename, TfidfDriver.getToplist(), stat);
             
@@ -1036,6 +1053,11 @@ public class tweetHandler {
             tm.importData(results);
             tm.trainTopics();
             TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
+            /* 
+            * Initialize Influence Models
+            */
+           Influencer.initializeInfluenceModels();
+           
             FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
             tmDrillModel = new TMDrillModel(currenttmDM.getLevel()+1, tablename, TM_TfidfDriver.getTopTopics(), stat);
             

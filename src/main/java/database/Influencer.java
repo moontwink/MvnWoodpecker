@@ -32,7 +32,7 @@ public class Influencer {
     /**
      *
      */
-      public static ArrayList<InfluenceModel> influencers;
+      private static ArrayList<InfluenceModel> influencers;
       public static ArrayList<String> shortenedlinks = new ArrayList();
       public static ArrayList<String> expandedlinks = new ArrayList();
       public static ArrayList<Integer> LinksCount = new ArrayList();
@@ -45,45 +45,45 @@ public class Influencer {
           
           linknames.add("gma");
           linknames.add("gmane.ws");
-          influencers.add(new InfluenceModel("GMA", InfluencerType.NEWS, linknames,1));
+          getInfluencers().add(new InfluenceModel("GMA", InfluencerType.NEWS, linknames,1));
           
           linknames = new ArrayList<>();
           linknames.add("ow.ly");
           linknames.add("abs");
-          influencers.add(new InfluenceModel("ABS", InfluencerType.NEWS, linknames,2));
+          getInfluencers().add(new InfluenceModel("ABS", InfluencerType.NEWS, linknames,2));
           
           linknames = new ArrayList<>();
           linknames.add("j.mp");
           linknames.add("anc");
-          influencers.add(new InfluenceModel("ANC", InfluencerType.NEWS, linknames,3));
+          getInfluencers().add(new InfluenceModel("ANC", InfluencerType.NEWS, linknames,3));
           
           linknames = new ArrayList<>();
           linknames.add("pagasa");
           linknames.add("PAGASA.DOST.GOV.PH");
-          influencers.add(new InfluenceModel("PAGASA", InfluencerType.NEWS, linknames,4));
+          getInfluencers().add(new InfluenceModel("PAGASA", InfluencerType.NEWS, linknames,4));
           
           linknames = new ArrayList<>();
           linknames.add("mmda.gov.ph");
           linknames.add("mmda");
-          influencers.add(new InfluenceModel("MMDA", InfluencerType.NEWS, linknames,5));
+          getInfluencers().add(new InfluenceModel("MMDA", InfluencerType.NEWS, linknames,5));
           
           linknames = new ArrayList<>();
           linknames.add("abscbn");
-          influencers.add(new InfluenceModel("TV PATROL", InfluencerType.NEWS, linknames,6));
+          getInfluencers().add(new InfluenceModel("TV PATROL", InfluencerType.NEWS, linknames,6));
           
           linknames = new ArrayList<>();
           linknames.add("deped");
-          influencers.add(new InfluenceModel("DEPED", InfluencerType.NEWS, linknames,7));
+          getInfluencers().add(new InfluenceModel("DEPED", InfluencerType.NEWS, linknames,7));
           
           linknames = new ArrayList<>();
           linknames.add("juanforfun");
           linknames.add("cebupacific");
-          influencers.add(new InfluenceModel("CEBUPACIFIC", InfluencerType.NEWS, linknames,8));
+          getInfluencers().add(new InfluenceModel("CEBUPACIFIC", InfluencerType.NEWS, linknames,8));
           
           linknames = new ArrayList<>();
           linknames.add("philippineairlines");
           linknames.add("philippine-airlines");
-          influencers.add(new InfluenceModel("PHILIPPINEAIRLINES", InfluencerType.NEWS, linknames,9));
+          getInfluencers().add(new InfluenceModel("PHILIPPINEAIRLINES", InfluencerType.NEWS, linknames,9));
           
           linknames = new ArrayList<>();
           linknames.add("INQUIRER");
@@ -91,127 +91,127 @@ public class Influencer {
           linknames.add("bandera.inquirer");
           linknames.add("bandera");
           linknames.add("inq.ph");
-          influencers.add(new InfluenceModel("INQUIRER", InfluencerType.NEWS, linknames,10));
+          getInfluencers().add(new InfluenceModel("INQUIRER", InfluencerType.NEWS, linknames,10));
           
           linknames = new ArrayList<>();
           linknames.add("phredcross");
           linknames.add("redcross");
-          influencers.add(new InfluenceModel("PHILIPPINEREDCROSS", InfluencerType.NEWS, linknames,11));
+          getInfluencers().add(new InfluenceModel("PHILIPPINEREDCROSS", InfluencerType.NEWS, linknames,11));
           
           linknames.add("gmane.ws");
-          influencers.add(new InfluenceModel("GMANEWS", InfluencerType.NEWS, linknames,12));
+          getInfluencers().add(new InfluenceModel("GMANEWS", InfluencerType.NEWS, linknames,12));
           
           linknames = new ArrayList<>();
           linknames.add("RAPPLER");
           linknames.add("rappler");
           linknames.add("rplr");
-          influencers.add(new InfluenceModel("RAPPLER", InfluencerType.NEWS, linknames,13));
+          getInfluencers().add(new InfluenceModel("RAPPLER", InfluencerType.NEWS, linknames,13));
           
           linknames = new ArrayList<>();
           linknames.add("Magic89.9");
           linknames.add("magic899fm");
-          influencers.add(new InfluenceModel("MAGIC89.9FM", InfluencerType.NEWS, linknames,14));
+          getInfluencers().add(new InfluenceModel("MAGIC89.9FM", InfluencerType.NEWS, linknames,14));
           
           linknames = new ArrayList<>();
           linknames.add("dzmm");
-          influencers.add(new InfluenceModel("DZMM", InfluencerType.NEWS, linknames,15));
+          getInfluencers().add(new InfluenceModel("DZMM", InfluencerType.NEWS, linknames,15));
           
           linknames = new ArrayList<>();
           linknames.add("mb.com.ph");
-          influencers.add(new InfluenceModel("MANILABULLETIN", InfluencerType.NEWS, linknames,16));
+          getInfluencers().add(new InfluenceModel("MANILABULLETIN", InfluencerType.NEWS, linknames,16));
           
           linknames = new ArrayList<>();
           linknames.add("gov.ph");
-          influencers.add(new InfluenceModel("PHILLIPINEOFFICIALGAZZETTE", InfluencerType.NEWS, linknames,17)); 
+          getInfluencers().add(new InfluenceModel("PHILLIPINEOFFICIALGAZZETTE", InfluencerType.NEWS, linknames,17)); 
           
           linknames = new ArrayList<>();
           linknames.add("smart.com.ph");
           linknames.add("smrt.ph");
-          influencers.add(new InfluenceModel("SMARTTELECOMMUNICATIONS", InfluencerType.NEWS, linknames,18));
+          getInfluencers().add(new InfluenceModel("SMARTTELECOMMUNICATIONS", InfluencerType.NEWS, linknames,18));
           
           linknames = new ArrayList<>();
           linknames.add("bandila.abs-cbnnews.com");
           linknames.add("Bandila.OFFICIAL");
-          influencers.add(new InfluenceModel("BANDILA", InfluencerType.NEWS, linknames,19)); 
+          getInfluencers().add(new InfluenceModel("BANDILA", InfluencerType.NEWS, linknames,19)); 
           
           linknames = new ArrayList<>();
           linknames.add("meralco");
-          influencers.add(new InfluenceModel("MERALCO", InfluencerType.NEWS, linknames,20));
+          getInfluencers().add(new InfluenceModel("MERALCO", InfluencerType.NEWS, linknames,20));
           
           linknames = new ArrayList<>();
           linknames.add("globe.com.ph");
           linknames.add("globeph");
-          influencers.add(new InfluenceModel("GLOBECOMMUNICATIONS", InfluencerType.NEWS, linknames,21));
+          getInfluencers().add(new InfluenceModel("GLOBECOMMUNICATIONS", InfluencerType.NEWS, linknames,21));
           
           linknames = new ArrayList<>();
           linknames.add("dohgov");
           linknames.add("OfficialDOHgov");
-          influencers.add(new InfluenceModel("DOH", InfluencerType.NEWS, linknames,22));
+          getInfluencers().add(new InfluenceModel("DOH", InfluencerType.NEWS, linknames,22));
           
           linknames = new ArrayList<>();
           linknames.add("PhCHED");
-          influencers.add(new InfluenceModel("CHED", InfluencerType.NEWS, linknames,23));
+          getInfluencers().add(new InfluenceModel("CHED", InfluencerType.NEWS, linknames,23));
           
           linknames = new ArrayList<>();
           linknames.add("yahoophilippines");
           linknames.add("ph.yahoo.com");
-          influencers.add(new InfluenceModel("YAHOOPHILIPPINES", InfluencerType.NEWS, linknames,24));
+          getInfluencers().add(new InfluenceModel("YAHOOPHILIPPINES", InfluencerType.NEWS, linknames,24));
           
           linknames = new ArrayList<>();
           linknames.add("philstar");
           linknames.add("philstarnews");
-          influencers.add(new InfluenceModel("PHILIPPINESTAR", InfluencerType.NEWS, linknames,25));
+          getInfluencers().add(new InfluenceModel("PHILIPPINESTAR", InfluencerType.NEWS, linknames,25));
           
           linknames = new ArrayList<>();
           linknames.add("uaap.sports");
           linknames.add("The-Official-ABS-CBN-Sports-Page");
-          influencers.add(new InfluenceModel("UAAPSPORTS", InfluencerType.NEWS, linknames,26));
+          getInfluencers().add(new InfluenceModel("UAAPSPORTS", InfluencerType.NEWS, linknames,26));
           
           linknames = new ArrayList<>();
           linknames.add("interaksyon");
           linknames.add("n5e");
           linknames.add("tv5");
-          influencers.add(new InfluenceModel("INTERAKSYON", InfluencerType.NEWS, linknames,27));
+          getInfluencers().add(new InfluenceModel("INTERAKSYON", InfluencerType.NEWS, linknames,27));
           
           linknames = new ArrayList<>();
           linknames.add("suncellular.com.ph");
           linknames.add("sun.cellular");
-          influencers.add(new InfluenceModel("SUNCELLULAR", InfluencerType.NEWS, linknames,28));
+          getInfluencers().add(new InfluenceModel("SUNCELLULAR", InfluencerType.NEWS, linknames,28));
           
           linknames = new ArrayList<>();
           linknames.add("up.edu.ph");
-          influencers.add(new InfluenceModel("UPSYSTEM", InfluencerType.NEWS, linknames,29)); 
+          getInfluencers().add(new InfluenceModel("UPSYSTEM", InfluencerType.NEWS, linknames,29)); 
           
           linknames = new ArrayList<>();
           linknames.add("dotc.gov.ph");
-          influencers.add(new InfluenceModel("DOTC", InfluencerType.SOCIALMEDIA, linknames,30));
+          getInfluencers().add(new InfluenceModel("DOTC", InfluencerType.SOCIALMEDIA, linknames,30));
           
           linknames = new ArrayList<>();
           linknames.add("Instagram");
           linknames.add("instagram");
-          influencers.add(new InfluenceModel("INSTAGRAM", InfluencerType.SOCIALMEDIA, linknames,31));
+          getInfluencers().add(new InfluenceModel("INSTAGRAM", InfluencerType.SOCIALMEDIA, linknames,31));
           
           linknames = new ArrayList<>();
           linknames.add("twitter");
           linknames.add("Twitter");
-          influencers.add(new InfluenceModel("TWITTER", InfluencerType.SOCIALMEDIA, linknames,32));
+          getInfluencers().add(new InfluenceModel("TWITTER", InfluencerType.SOCIALMEDIA, linknames,32));
           
           linknames = new ArrayList<>();
           linknames.add("4sq");
-          influencers.add(new InfluenceModel("FOURSQUARE", InfluencerType.SOCIALMEDIA, linknames,33)); 
+          getInfluencers().add(new InfluenceModel("FOURSQUARE", InfluencerType.SOCIALMEDIA, linknames,33)); 
           
           linknames = new ArrayList<>();
           linknames.add("youtube");
-          influencers.add(new InfluenceModel("YOUTUBE", InfluencerType.SOCIALMEDIA, linknames,34));
+          getInfluencers().add(new InfluenceModel("YOUTUBE", InfluencerType.SOCIALMEDIA, linknames,34));
           
           linknames = new ArrayList<>();
           linknames.add("google");
           linknames.add("goo.gl");
-          influencers.add(new InfluenceModel("GOOGLE", InfluencerType.SOCIALMEDIA, linknames,35));
+          getInfluencers().add(new InfluenceModel("GOOGLE", InfluencerType.SOCIALMEDIA, linknames,35));
           
           linknames = new ArrayList<>();
           linknames.add("tmblr");
-          influencers.add(new InfluenceModel("TUMBLER", InfluencerType.SOCIALMEDIA, linknames,36));
+          getInfluencers().add(new InfluenceModel("TUMBLER", InfluencerType.SOCIALMEDIA, linknames,36));
           
           try {
               linksExpander();
@@ -222,7 +222,6 @@ public class Influencer {
       
       public static void linksExpander() throws IOException
       {
-    
           for (int i = 0; i < getTweetlinks().size(); i++)
           {
                   System.out.println("link ["+i+ "] "+ getTweetlinks().get(i));
@@ -232,7 +231,7 @@ public class Influencer {
           {
               boolean linkIsCounted = false;
               
-              for(InfluenceModel m : influencers) {
+              for(InfluenceModel m : getInfluencers()) {
                 for(String linkname : m.getLinknames()) 
                 {
                     if(getTweetlinks().get(x).contains(linkname))
@@ -250,15 +249,22 @@ public class Influencer {
               }
           }
       
-          Collections.sort(influencers, new Influencer.MyComparator());
+          Collections.sort(getInfluencers(), new Influencer.MyComparator());
           
-          for(InfluenceModel f : influencers) {
+          for(InfluenceModel f : getInfluencers()) {
               System.out.println("The count of "+ f.getTwitter_account() + " links is "+ f.getLinks_count()+ " while the follower rank " +f.getFollower_rank());
           }
           
           InfluenceComputer();
 
       }
+
+    /**
+     * @return the influencers
+     */
+    public static ArrayList<InfluenceModel> getInfluencers() {
+        return influencers;
+    }
       
       public static class MyComparator implements Comparator<InfluenceModel> {
    
@@ -284,9 +290,9 @@ public class Influencer {
         public int compare(InfluenceModel o1, InfluenceModel o2) {
           
             try{
-                if (o1.getInfluence() > o2.getInfluence()) {
+                if (o1.getInfluence() < o2.getInfluence()) {
                     return -1;
-                } else if (o1.getInfluence() < o2.getInfluence()) {
+                } else if (o1.getInfluence() > o2.getInfluence()) {
                     return 1;
                 }
             }catch(Exception e){
@@ -302,20 +308,19 @@ public class Influencer {
           
           rankcreator();
           
-          for(int i = 0; i < influencers.size(); i++)
+          for(int i = 0; i < getInfluencers().size(); i++)
           {
-              count =  influencers.get(i).getFollower_rank() + influencers.get(i).getLink_rank();
-              influencers.get(i).setInfluence(count);
+              count =  getInfluencers().get(i).getFollower_rank() + getInfluencers().get(i).getLink_rank();
+              getInfluencers().get(i).setInfluence(count);
           }
            
-          Collections.sort(influencers, new Influencer.MyComparatorInfluence());
+          Collections.sort(getInfluencers(), new Influencer.MyComparatorInfluence());
           
           System.out.println("--------------------------------");
-          int z = 35;
-           for(int i = 0; i < influencers.size(); i++) 
+           for(int i = 0; i < getInfluencers().size(); i++) 
            {
-              
-              System.out.println("Twitter account -> "+influencers.get(i).getTwitter_account() +" link rank is " +influencers.get(i).getLink_rank()+ " follower rank is " +influencers.get(i).getFollower_rank()+ " = Aggregate Influence Rank " + (z-i+1) );
+              getInfluencers().get(i).setInfluence_rank((i+1));
+              System.out.println("Twitter account -> "+getInfluencers().get(i).getTwitter_account() +" link rank is " +getInfluencers().get(i).getLink_rank()+ " follower rank is " +getInfluencers().get(i).getFollower_rank()+ " = Aggregate Influence Rank " + (i+1) );
               System.out.println("--------------");
            }
       }
@@ -323,10 +328,10 @@ public class Influencer {
       public static void rankcreator()
       {
           int count = 0 ;
-            for(int i = 0; i < influencers.size(); i++)
+            for(int i = 0; i < getInfluencers().size(); i++)
             {
                 count+=1;
-                influencers.get(i).setLink_rank(count);
+                getInfluencers().get(i).setLink_rank(count);
             }
       }
       

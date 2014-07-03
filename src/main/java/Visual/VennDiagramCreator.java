@@ -86,17 +86,18 @@ public class VennDiagramCreator extends JFrame{
 //        
 //    }
     
-    public static void VennCreate(TMDrillModel tmDM) throws IOException
+    public static String VennCreate(TMDrillModel tmDM) throws IOException
     {
       VennContents = tmDM;
       int i =0;
       
-      VennDiagramCreator.setVenn(Topic1,Topic2,Topic3,count);
-      
+      String url = VennDiagramCreator.setVenn(Topic1,Topic2,Topic3,count);
+      return url;
     }
         
-    public static void setVenn(int topic1, int topic2, int topic3,int counter) throws IOException
+    public static String setVenn(int topic1, int topic2, int topic3,int counter) throws IOException
     {
+        String url = "";
         int i = 0,BCVennscore = 0, ABVennscore = 0,ACVennscore = 0;
         double abIntersect = 0.0 , caIntersect = 0.0 , bcIntersect = 0.0;
         //9 - 1 word //18 - 2 words //27 - 3 words//36 - 4 words//45 - 5 words 
@@ -105,13 +106,14 @@ public class VennDiagramCreator extends JFrame{
         
         if (counter == 1)
         {  
-            final VennDiagram chart = GCharts.newVennDiagram(50.0, 0.0, 0.0, abIntersect, caIntersect, bcIntersect, 0.0);
+            final VennDiagram chart = GCharts.newVennDiagram(100.0, 0.0, 0.0, abIntersect, caIntersect, bcIntersect, 0.0);
             chart.setTitle("Topic Modeller Results", BLACK, 20);
-            chart.setSize(600, 250);
+            chart.setSize(700, 250);
             chart.setCircleLegends("Topic " +topic1, " ", " ");
             chart.setCircleColors(FIREBRICK,VIOLET,GOLD);
             chart.setBackgroundFill(Fills.newSolidFill(WHITE));
-            displayUrlString(TM_DrillDown.venndiagrampanel,chart.toURLString());
+//            displayUrlString(TM_DrillDown.venndiagrampanel,chart.toURLString());
+            return chart.toURLString();
         }
         else if (counter == 2)
         {
@@ -119,33 +121,34 @@ public class VennDiagramCreator extends JFrame{
 //            ACVennscore = getVennACScore(topic1,topic2,topic3,counter,VennContents);
             ABVennscore = getVennABScore(topic1,topic2,topic3,counter,VennContents);
             System.out.println("The venn score passed to creator is " +ABVennscore);
-            final VennDiagram chart = GCharts.newVennDiagram(50.0, 50.0, 0.0, ABVennscore, caIntersect, bcIntersect, 0.0);
+            final VennDiagram chart = GCharts.newVennDiagram(100.0, 100.0, 0.0, ABVennscore, caIntersect, bcIntersect, 0.0);
             chart.setTitle("Topic Modeller Results", BLACK, 20);
-            chart.setSize(600, 250);
+            chart.setSize(700, 250);
             chart.setCircleLegends("Topic " +topic1,"Topic " +topic2," The common terms are  "+commonkeywords);
             chart.setCircleColors(FIREBRICK,VIOLET,GOLD);
             chart.setBackgroundFill(Fills.newSolidFill(WHITE));
-            displayUrlString(TM_DrillDown.venndiagrampanel,chart.toURLString());
+//            displayUrlString(TM_DrillDown.venndiagrampanel,chart.toURLString());
+            return chart.toURLString();
         }
         else if (counter == 3)
         {
             BCVennscore = getVennBCScore(topic1,topic2,topic3,counter,VennContents);
             ACVennscore = getVennACScore(topic1,topic2,topic3,counter,VennContents);
             ABVennscore = getVennABScore(topic1,topic2,topic3,counter,VennContents);
-            final VennDiagram chart = GCharts.newVennDiagram(50.0, 50.0, 50.0, ABVennscore, ACVennscore, BCVennscore, 0.0);
+            final VennDiagram chart = GCharts.newVennDiagram(100.0, 100.0, 100.0, ABVennscore, ACVennscore, BCVennscore, 0.0);
             chart.setTitle("Topic Modeller Results", BLACK, 20);
-            chart.setSize(600, 250);
+            chart.setSize(700, 250);
             chart.setCircleLegends("Topic " +topic1,"Topic " +topic2,"Topic " +topic3);
             chart.setCircleColors(FIREBRICK,VIOLET,GOLD);
             chart.setBackgroundFill(Fills.newSolidFill(WHITE));
-            displayUrlString(TM_DrillDown.venndiagrampanel,chart.toURLString());
-            
+//            displayUrlString(TM_DrillDown.venndiagrampanel,chart.toURLString());
+            return chart.toURLString();
         }
-       
+       return url;
     }
    
     
-   public static void displayUrlString(JPanel p,final String urlString) throws IOException
+   public static String displayUrlString(JPanel p,final String urlString) throws IOException
    {
         JFrame frame = new JFrame();
         ImageIcon icon = new ImageIcon(ImageIO.read(new URL(urlString))); 
@@ -160,7 +163,7 @@ public class VennDiagramCreator extends JFrame{
         frame.pack();
         frame.setVisible(true);
          
-      
+        return urlString;
         
         
         
