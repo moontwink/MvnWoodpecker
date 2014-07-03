@@ -67,7 +67,8 @@ public class TfidfDriver {
             tfscore = ngramlist.get(ngramindex).getFrequency()*java.lang.Math.log10(tweetListCount/count);
                 System.out.println("\t\t[["+ngramlist.get(ngramindex).getTweet()+"]] has "+count);
                 System.out.println("\t\t_frequency_ "+ngramlist.get(ngramindex).getFrequency());
-                System.out.println("\t\t___tfscore___ "+ngramlist.get(ngramindex).getFrequency()*java.lang.Math.log10(tweetListCount/count));
+                System.out.println("\t\t_tweetlistcount_ "+tweetListCount);
+                System.out.println("\t\t___tfscore___ "+tfscore);
 
             Tfidf newtf = new Tfidf(tweet, tfscore);
             getToplist().add(newtf);

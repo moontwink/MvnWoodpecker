@@ -2,7 +2,8 @@
 package model;
 
 import java.util.ArrayList;
-import mallet.TopicOutput;
+import tfidf.TM_TfidfDriver;
+import tfidf.TM_TfidfModel;
 
 /**
  *
@@ -11,7 +12,7 @@ import mallet.TopicOutput;
 public class TMDrillModel {
     private int level;
     private String tablename;
-    private ArrayList<TopicOutput> topics;
+    private ArrayList<TM_TfidfModel> topics;
     private FeatureStatistics statistics;
 
     public TMDrillModel() {
@@ -22,13 +23,13 @@ public class TMDrillModel {
         this.level = level;
     }
 
-    public TMDrillModel(int level, String tablename, ArrayList<TopicOutput> topics) {
+    public TMDrillModel(int level, String tablename, ArrayList<TM_TfidfModel> topics) {
         this.level = level;
         this.tablename = tablename;
         this.topics = topics;
     }
 
-    public TMDrillModel(int level, String tablename, ArrayList<TopicOutput> topics, FeatureStatistics statistics) {
+    public TMDrillModel(int level, String tablename, ArrayList<TM_TfidfModel> topics, FeatureStatistics statistics) {
         this.level = level;
         this.tablename = tablename;
         this.topics = topics;
@@ -66,14 +67,14 @@ public class TMDrillModel {
     /**
      * @return the topics
      */
-    public ArrayList<TopicOutput> getTopics() {
+    public ArrayList<TM_TfidfModel> getTopics() {
         return topics;
     }
 
     /**
      * @param topics the topics to set
      */
-    public void setTopics(ArrayList<TopicOutput> topics) {
+    public void setTopics(ArrayList<TM_TfidfModel> topics) {
         this.topics = topics;
     }
 

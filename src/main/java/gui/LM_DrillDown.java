@@ -2,7 +2,9 @@
 package gui;
 
 import Visual.PieChart;
-import static Visual.WordCloud.WordCloud;
+import Visual.WordCloudFX;
+import static Visual.WordCloudWriter.write;
+
 import database.TablesHandler;
 import database.tweetHandler;
 import java.io.IOException;
@@ -10,6 +12,7 @@ import model.tweetModel;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.JTabbedPane;
 import javax.swing.table.DefaultTableModel;
 import model.LMDrillModel;
@@ -45,20 +48,21 @@ public class LM_DrillDown extends javax.swing.JPanel {
             }
         }
         
-//        WordCloud(lmDM.getTopList(), lmDM.getKeywords());
-         
-//        insertTweetsList(TweetCleaner.getTweets());
-//        insertNgram(TweetCleaner.getTfngrams());
-//        WordCloud wc = new WordCloud(TweetCleaner.getTfngrams());
-//        wordcloud.setBackground(Color.white);
-//        WordCloud.display(wordcloud, WordCloud.getFont());
+        try {
+            /*Creates and Places Wordcloud in Panel*/
+            String url = write(lmDM.getTablename()+".html",lmDM.getTopList());
+            WordCloudFX.ApplicationFrame(wcPanel, url);
+        } catch (IOException ex) {
+           JOptionPane.showMessageDialog(null, "There has been an error loading the wordcloud.", "Wordcloud Construction", JOptionPane.ERROR_MESSAGE);
+        }
         
         try {
-         PieChart.createPieChart(lmDM.getTablename(), lmDM.getStatistics());
+            /*Creates Pie Chart for Feature Statistics*/
+            PieChart.createPieChart(lmDM.getTablename(), lmDM.getStatistics());
              System.out.println(lmDM.getTablename() +" "+ lmDM.getStatistics().getTweets() +" "+ lmDM.getStatistics().getRetweets() +" "+ lmDM.getStatistics().getLinks());
-         } catch (IOException ex) {
-            Logger.getLogger(LM_DrillDown.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        } catch (IOException ex) {
+           JOptionPane.showMessageDialog(null, "There has been an error loading the pie chart.", "Pie Chart Construction", JOptionPane.ERROR_MESSAGE);
+        }
     }
     
     private void insertNgram(){
@@ -104,7 +108,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         drilldownBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         viewtweetsBtn = new javax.swing.JButton();
-        wordcloud = new javax.swing.JPanel();
+        wcPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         drillkeyTF1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -192,19 +196,15 @@ public class LM_DrillDown extends javax.swing.JPanel {
             }
         });
 
-        wordcloud.setBackground(new java.awt.Color(0, 0, 0));
-        wordcloud.setOpaque(false);
-        wordcloud.setPreferredSize(new java.awt.Dimension(745, 483));
-
-        javax.swing.GroupLayout wordcloudLayout = new javax.swing.GroupLayout(wordcloud);
-        wordcloud.setLayout(wordcloudLayout);
-        wordcloudLayout.setHorizontalGroup(
-            wordcloudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 745, Short.MAX_VALUE)
+        javax.swing.GroupLayout wcPanelLayout = new javax.swing.GroupLayout(wcPanel);
+        wcPanel.setLayout(wcPanelLayout);
+        wcPanelLayout.setHorizontalGroup(
+            wcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
-        wordcloudLayout.setVerticalGroup(
-            wordcloudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+        wcPanelLayout.setVerticalGroup(
+            wcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 261, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -227,15 +227,15 @@ public class LM_DrillDown extends javax.swing.JPanel {
                                 .addComponent(jLabel1)))
                         .addGap(219, 219, 219))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(wcPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(drilldownBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(viewtweetsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(wordcloud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                .addComponent(viewtweetsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -253,8 +253,8 @@ public class LM_DrillDown extends javax.swing.JPanel {
                     .addComponent(viewtweetsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(wordcloud, javax.swing.GroupLayout.PREFERRED_SIZE, 450, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(wcPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(200, 200, 200))
         );
 
         RawData.addTab("Word Cloud", jPanel1);
@@ -287,6 +287,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
             }
         });
 
+        ngramtweetTable.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         ngramtweetTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
@@ -334,8 +335,8 @@ public class LM_DrillDown extends javax.swing.JPanel {
                         .addComponent(drilldownBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(viewtweetsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 78, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE))
+                        .addGap(0, 4, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -411,7 +412,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jLabel2)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -441,7 +442,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         );
         pieChartLayout.setVerticalGroup(
             pieChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 331, Short.MAX_VALUE)
+            .addGap(0, 342, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -492,7 +493,14 @@ public class LM_DrillDown extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
+        tweetTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tweetTable.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tweetTable.setIntercellSpacing(new java.awt.Dimension(1, 2));
         jScrollPane3.setViewportView(tweetTable);
+        if (tweetTable.getColumnModel().getColumnCount() > 0) {
+            tweetTable.getColumnModel().getColumn(0).setPreferredWidth(180);
+            tweetTable.getColumnModel().getColumn(1).setPreferredWidth(570);
+        }
 
         drillkeyTF3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -596,8 +604,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(RawData, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(RawData, javax.swing.GroupLayout.PREFERRED_SIZE, 392, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -779,7 +786,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
     private javax.swing.JButton viewtweetsBtn1;
     private javax.swing.JButton viewtweetsBtn2;
     private javax.swing.JButton viewtweetsBtn3;
-    public static javax.swing.JPanel wordcloud;
+    private javax.swing.JPanel wcPanel;
     // End of variables declaration//GEN-END:variables
 
     private Iterable<String> read() {

@@ -36,13 +36,14 @@ public class PieChart {
         pieDataset.setValue("Retweets", stat.getRetweets());
         JFreeChart chart = ChartFactory.createPieChart("Feature Statistics", pieDataset, true, true, false);
         
+        String url = "src\\visual\\pie\\"+name+"Chart.jpeg";
         try {
-            ChartUtilities.saveChartAsJPEG(new File("src\\pie\\"+name+"Chart.jpeg"), chart, 500, 300);
+            ChartUtilities.saveChartAsJPEG(new File(url), chart, 500, 300);
         } catch (Exception e) {
             System.out.println("Problem occurred creating chart.");
         }
         
-        String path = "src\\pie\\"+name+"Chart.jpeg";
+        String path = url;
         File file = new File(path);
         BufferedImage image = ImageIO.read(file);
         JLabel label = new JLabel(new ImageIcon(image));

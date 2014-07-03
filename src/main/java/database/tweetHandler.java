@@ -1,6 +1,10 @@
 
 package database;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.Proxy;
+import java.net.URL;
 import model.tweetModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -23,7 +27,9 @@ import tfidf.TfidfDriver;
  */
 public class tweetHandler {
     
-    private static ArrayList<String> tweetlinks = new ArrayList<String>();
+    private static ArrayList<String> tweetlinks = new ArrayList<>();
+    private static String expandedLinks = " ";
+    private static String shortenedLinks = " ";
     
     //Adds tweet to database
     public static String addTweet(tweetModel tm){
@@ -69,8 +75,8 @@ public class tweetHandler {
     
     //Cleans tweet
     public static String cleanTweet(String tweet){
-        tweet = normalizeTweet(tweet);
         tweet = RemoveLinks(tweet);
+        tweet = normalizeTweet(tweet);
         
         while(tweet.contains("@")){
             String mention = "";
@@ -121,14 +127,54 @@ public class tweetHandler {
                 }
             }
             
-            tweet = tweet.replace(message, "").trim();
+            /* Checks if last character of link is a special character */
+            char lastCharacter = message.charAt(message.length()-1);
+            if(!Character.isLetterOrDigit(lastCharacter)) {
+                message = message.substring(0, message.length()-1);
+            }
             
-            getTweetlinks().add(message);
+            shortenedLinks=message;
+            tweet = tweet.replace(message, "").trim();
+           
+           try {
+               expandedLinks = expandShortURL(shortenedLinks);
+           } catch (IOException ex) {
+               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            
+            if(expandedLinks != null)
+            {
+                if(expandedLinks.contains("bit.ly")||expandedLinks.contains("fb"))
+                   try {
+                       expandedLinks = expandShortURL(expandedLinks);
+                } catch (IOException ex) {
+                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                else
+                    getTweetlinks().add(expandedLinks);
+            }
+            
+            System.out.println("Short link" +shortenedLinks+ " -->  Expanded Link " +expandedLinks );
+          
+          /* 
+           * Check order of expanding and initializing influencers and checking and sorting
+           * Might be taking longer than necessary 
+           */
+          Influencer.initializeInfluenceModels();
             
        }
-       
-      
        return tweet;
+   }
+    
+   public static String expandShortURL(String address) throws IOException {
+        URL url = new URL(address);
+ 
+        HttpURLConnection connection = (HttpURLConnection) url.openConnection(Proxy.NO_PROXY); //using proxy may increase latency
+        connection.setInstanceFollowRedirects(false);
+        connection.connect();
+        String expandedURL = connection.getHeaderField("Location");
+        connection.getInputStream().close();
+        return expandedURL;
    }
     
    public static void printLinks()
@@ -369,8 +415,9 @@ public class tweetHandler {
             }else{
                 tm.importData(results);
                 tm.trainTopics();
+                TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics(), stat);
+                tmDrillModel = new TMDrillModel(0, tablename, TM_TfidfDriver.getTopTopics(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -520,7 +567,7 @@ public class tweetHandler {
                 tm.trainTopics();
                 TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics(), stat);
+                tmDrillModel = new TMDrillModel(0, tablename, TM_TfidfDriver.getTopTopics(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -710,8 +757,9 @@ public class tweetHandler {
             }else{
                 tm.importData(results);
                 tm.trainTopics();
+                TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-                tmDrillModel = new TMDrillModel(0, tablename, tm.getAllTopics(), stat);
+                tmDrillModel = new TMDrillModel(0, tablename, TM_TfidfDriver.getTopTopics(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -987,9 +1035,9 @@ public class tweetHandler {
             TopicModel tm = new TopicModel();
             tm.importData(results);
             tm.trainTopics();
-            
+            TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
             FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-            tmDrillModel = new TMDrillModel(currenttmDM.getLevel()+1, tablename, tm.getAllTopics(), stat);
+            tmDrillModel = new TMDrillModel(currenttmDM.getLevel()+1, tablename, TM_TfidfDriver.getTopTopics(), stat);
             
         }catch(ClassNotFoundException ex){
             Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
