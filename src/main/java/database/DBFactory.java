@@ -11,7 +11,7 @@ public class DBFactory {
     static String driver = "com.mysql.jdbc.Driver";
     static String url = "jdbc:mysql://localhost:3306/tweetdb";
     static String username = "root";
-    static String password = "chykUri*"; //"p@ssword";
+    static String password = ""; //"p@ssword";
     
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
