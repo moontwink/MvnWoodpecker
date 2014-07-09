@@ -20,7 +20,7 @@ public class TopicModel {
     private ArrayList<TopicOutput> allTopics;
     private int dataSize = 0;
     
-    public void importData(ArrayList<tweetModel> tweets){
+    public void importData(ArrayList<tweetModel> tweets) {
         String filePath = "src\\malletfile.txt";
         
         //Rewrites tweet to text file

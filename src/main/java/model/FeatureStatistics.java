@@ -6,6 +6,8 @@
 
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Nancy
@@ -13,9 +15,9 @@ package model;
 public class FeatureStatistics {
     private int tweets;
     private int links;
-    private int retweets;
+    private ArrayList<tweetModel> retweets;
 
-    public FeatureStatistics(int tweets, int links, int retweets) {
+    public FeatureStatistics(int tweets, int links, ArrayList<tweetModel> retweets) {
         this.tweets = tweets;
         this.links = links;
         this.retweets = retweets;
@@ -52,14 +54,14 @@ public class FeatureStatistics {
     /**
      * @return the retweets
      */
-    public int getRetweets() {
+    public ArrayList<tweetModel> getRetweets() {
         return retweets;
     }
 
     /**
      * @param retweets the retweets to set
      */
-    public void setRetweets(int retweets) {
+    public void setRetweets(ArrayList<tweetModel> retweets) {
         this.retweets = retweets;
     }
 }

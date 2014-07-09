@@ -184,7 +184,7 @@ public class tweetHandler {
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
-                t.setMessage(rs.getString("message"));
+                t.setMessage(cleanTweet(rs.getString("message")));
                 t.setDate(rs.getString("date"));
                 results.add(t);
             }
@@ -847,7 +847,7 @@ public class tweetHandler {
         }
     }
     
-    public static int getAllRetweets(String tablename){
+    public static ArrayList<tweetModel> getAllRetweets(String tablename){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
         
@@ -872,7 +872,7 @@ public class tweetHandler {
             Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return results.size();
+        return results;
     }
     
     public static String getEarliestDate(){

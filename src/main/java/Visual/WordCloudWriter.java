@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Visual;
 
@@ -51,8 +46,8 @@ public static String write (String filename, ArrayList<Tfidf> lmTopList) throws 
       }
         outputWriter.write("];\n" +
     "\n" +
-    " var width = 1500;\n" +
-    "var height = 600;\n" +
+    " var width = 720;\n" +
+    "var height = 1000;\n" +
     "\n" +
     "  for( var i = 0, len = freq.length; i < len; i++ ) {\n" +
     "    freq[i] = parseFloat( freq[i] );\n" +
@@ -60,7 +55,7 @@ public static String write (String filename, ArrayList<Tfidf> lmTopList) throws 
     "d3.layout.cloud()\n" +
     "    .size([width, height])\n" +
     "    .words(d3.zip(tarr, freq).map(function(d) {\n" +
-    "			return {text: d[0] , size: d[1]+ Math.random(1)* 60};\n" +
+    "			return {text: d[0] , size: d[1]+ Math.random(1)* 30};\n" +
     "		}))\n" +
     "    .padding(5)\n" +
     "    .rotate(function () {\n" +

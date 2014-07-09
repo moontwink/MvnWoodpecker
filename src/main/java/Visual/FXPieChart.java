@@ -55,7 +55,7 @@ public class FXPieChart {
           ObservableList<javafx.scene.chart.PieChart.Data> pieChartData =
                   FXCollections.observableArrayList(
                   new javafx.scene.chart.PieChart.Data("Tweets", statistics.getTweets()),
-                  new javafx.scene.chart.PieChart.Data("Retweets", statistics.getRetweets()),
+                  new javafx.scene.chart.PieChart.Data("Retweets", statistics.getRetweets().size()),
                   new javafx.scene.chart.PieChart.Data("Links", statistics.getLinks()));
 
           final javafx.scene.chart.PieChart chart = new javafx.scene.chart.PieChart(pieChartData);
@@ -70,7 +70,7 @@ public class FXPieChart {
                           @Override public void handle(MouseEvent e) {
                               caption.setTranslateX(e.getSceneX());
                               caption.setTranslateY(e.getSceneY());
-                              caption.setText(String.valueOf(data.getPieValue()));
+                              caption.setText(String.valueOf((int)data.getPieValue()));
                           }
                       });
           }

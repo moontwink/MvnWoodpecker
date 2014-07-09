@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package ngram;
 
@@ -116,6 +111,25 @@ public class NGramDriver{
         try{
             for(int ng=1;ng<5;ng++){
 	    extractor.extract(tweet , ng, false, true);
+	    setNgrams(extractor.getNGrams());
+	   }
+	}
+	catch (Exception e){
+	    System.err.println(e.toString());
+	}
+         for (String s : getNgrams()){
+		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
+                NGramList(s, extractor.getNGramFrequency(s));
+         }
+        //return ngrams;
+    }
+    
+    public static void TimelineNGramTweet(String tweet){
+	NGramExtractor extractor = new NGramExtractor();
+        
+        try{
+            for(int ng=1;ng<2;ng++){
+	    extractor.extract(tweet , 1, false, true);
 	    setNgrams(extractor.getNGrams());
 	   }
 	}
