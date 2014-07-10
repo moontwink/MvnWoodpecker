@@ -1,7 +1,6 @@
 
-package Visual;
+package Visual.venn;
 
-import gui.LM_DrillDown;
 
 import javafx.application.Platform;
 	import javafx.embed.swing.JFXPanel;
@@ -14,7 +13,7 @@ import javafx.application.Platform;
 	import java.awt.event.ActionEvent;
 	import java.awt.event.ActionListener;
 	 
-	public class VennDiaFX {
+	public class VennDiagramFX {
             
 	 static JFXPanel javafxPanel;
          static WebView webComponent;
@@ -61,15 +60,15 @@ import javafx.application.Platform;
 	        BorderPane borderPane = new BorderPane();
 	        webComponent = new WebView();
 	 
-//                String dir = System.getProperty("user.dir");
-//                    System.out.println("//current dir =  " + dir);
-//                dir = dir.replace("\\", "/");
-//                    System.out.println("//replaced dir = " + dir);
-//                String url = "file:///" + dir + "/" + vennurl;
-//                    System.out.println("//-url = " + url);
+                String dir = System.getProperty("user.dir");
+                    System.out.println("//current dir =  " + dir);
+                dir = dir.replace("\\", "/");
+                    System.out.println("//replaced dir = " + dir);
+                String url = "file:///" + dir + "/" + vennurl;
+                    System.out.println("//-url = " + url);
                 
 //	        webComponent.getEngine().load("file:///C:/Users/Nancy/Desktop/MvnWoodpecker-master/src/main/java/Visual/d3/temp-oscars.html");
-                webComponent.getEngine().load(vennurl);
+                webComponent.getEngine().load(url);
                     
                 borderPane.setCenter(webComponent);
 	        Scene scene = new Scene(borderPane,450,450);

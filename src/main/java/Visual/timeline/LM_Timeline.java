@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Visual.timeline;
 
@@ -21,11 +16,11 @@ import tfidf.Tfidf;
  *
  * @author JOY
  */
-public class Timeline {
+public class LM_Timeline {
     
     
     public static String timelineTopics(String filename, ArrayList<Tfidf> lmDM) throws IOException{
-         String[] keywords = splitTableName(filename);
+         String[] keywords= splitTableName(filename);
          ArrayList<tweetModel> tweets =  getAllTweets(filename);
          ArrayList<TimelineTopics> topics = new ArrayList<TimelineTopics>();
       
@@ -149,7 +144,9 @@ public class Timeline {
        temp2 = temp[1].split("~");
        temp3 = temp2[0].split("\\.");
 
-     
+//            System.out.println("__!! temp " + temp);
+//            System.out.println("__!! temp " + temp2);
+//            System.out.println("__!! temp " + temp3);
         for (int i=0; i<months.length;i++)
         {
             if(temp3.length>1)
@@ -158,7 +155,7 @@ public class Timeline {
             if (temp3[0].matches(months[i]))
             {
                 return null;
-            }else if(temp[1].matches("(.*)"+"dd"+"(.*)")){
+            }else if(temp[1].matches("dd")){
                 temp = filename.split("-");
                 temp = temp[2].split("~");
                 
