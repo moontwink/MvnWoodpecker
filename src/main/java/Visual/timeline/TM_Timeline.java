@@ -146,13 +146,13 @@ public class TM_Timeline {
      
         for (int i=0; i<months.length;i++)
         {
-            if(temp3.length>1)
+//            if(temp3.length>1)
           //  if(temp2.length>1)
           //  System.out.println("hiiiii "+ temp3[0]+" month: "+months[i]);
             if (temp3[0].matches(months[i]))
             {
                 return null;
-            }else if(temp[1].matches("dd")){
+            }else if(temp2[0].trim().equalsIgnoreCase("dd")){
                 temp = filename.split("-");
                 temp = temp[2].split("~");
                 

@@ -16,7 +16,7 @@ import java.util.regex.*;
 import java.io.*;
 import model.tweetModel;
 
-public class TopicModel {
+public class TopicModeller {
     private ArrayList<TopicOutput> allTopics;
     private int dataSize = 0;
     

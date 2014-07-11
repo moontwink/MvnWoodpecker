@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 public class NGramDriver{
    private static  LinkedList<String> ngrams=null;
    private static ArrayList<NGram> ngramlist= new ArrayList<>();
-   private static Pattern englishfunctionwords = Pattern.compile("\\b(?:"
+   private static final Pattern englishfunctionwords = Pattern.compile("\\b(?:"
         + "a|about|above|after|again|ago|all|almost|along|"
         +"already|also|although|always|am|among|an|and|another|any|"
         +"anybody|anything|anywhere|are|aren't|around|as|at|back|be|"
@@ -39,9 +39,9 @@ public class NGramDriver{
         +"we've|were|weren't|what|when|whence|where|whereas|which|while|"
         +"whither|who|whom|whose|why|will|with|within|without|won't|"
         +"would|wouldn't|yes|yesterday|yet|you|you'd|you'll|you're|you've|"
-        +"your|yours|yourself|yourselves)\\b\\s*", Pattern.CASE_INSENSITIVE);
+        +"your|yours|yourself|yourselves|s|t|re|ll|d|ve)\\b\\s*", Pattern.CASE_INSENSITIVE);
    
-   private static Pattern filipinofunctionwords = Pattern.compile("\\b(?:"
+   private static final Pattern filipinofunctionwords = Pattern.compile("\\b(?:"
         +"akin|aking|ako|akong|alin|aling|amin|aming|ang|"
         +"ano|anong|at|atin|ating|ay|ayan|ayon|ayun|dahil|"
         +"daw|di|din|dito|eto|ganito|ganiyan|ganon|ganoon|ganyan|"
@@ -51,7 +51,7 @@ public class NGramDriver{
         +"natin|ng|nga|nga|ngunit|nila|ninyo|nito|niya|niyon|"
         +"nya|nyo|nyon|pa|pag|pala|para|pati|sa|saan|"
         +"saka|samin|san|sapagkat|si|sila|sino|siya|subalit|sya|"
-        +"tayo|tungkol|ung|upang|yan|yun|yung)\\b\\s*", Pattern.CASE_INSENSITIVE);
+        +"tayo|tungkol|ung|upang|yan|yun|yung|eh|ehh|lang)\\b\\s*", Pattern.CASE_INSENSITIVE);
     
    /*
     * 

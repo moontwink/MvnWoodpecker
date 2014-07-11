@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mallet.TopicModel;
+import mallet.TopicModeller;
 import model.FeatureStatistics;
 import model.LMDrillModel;
 import model.TMDrillModel;
@@ -396,7 +396,7 @@ public class tweetHandler {
             c.close();
             
             System.out.println("******************************* ");
-            TopicModel tm = new TopicModel();
+            TopicModeller tm = new TopicModeller();
             
             if(results.isEmpty()){
                 tmDrillModel = new TMDrillModel(-1);
@@ -556,7 +556,7 @@ public class tweetHandler {
             c.close();
 
             System.out.println("******************************* ");
-            TopicModel tm = new TopicModel();
+            TopicModeller tm = new TopicModeller();
             
             if(results.isEmpty()){
                 tmDrillModel = new TMDrillModel(-1);
@@ -758,7 +758,7 @@ public class tweetHandler {
             
             System.out.println("******************************* ");
             
-            TopicModel tm = new TopicModel();
+            TopicModeller tm = new TopicModeller();
             
             if(results.isEmpty()){
                 tmDrillModel = new TMDrillModel(-1);
@@ -1049,7 +1049,7 @@ public class tweetHandler {
             c.close();
 
             System.out.println("******************************* ");
-            TopicModel tm = new TopicModel();
+            TopicModeller tm = new TopicModeller();
             tm.importData(results);
             tm.trainTopics();
             TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
