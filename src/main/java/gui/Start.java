@@ -7,6 +7,7 @@ package gui;
 import database.CalendarHandler;
 import database.TablesHandler;
 import database.tweetHandler;
+import filemanagement.FilesCleaner;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import model.tweetModel;
@@ -1287,6 +1288,7 @@ public class Start extends javax.swing.JFrame {
             public void componentHidden(ComponentEvent e) {
                 System.out.println("Beginning to drop all temporary tables....");
                 TablesHandler.dropAllTempTables();
+                FilesCleaner.cleanAllVisualFiles();
                 ((JFrame)(e.getComponent())).dispose();
                 System.exit(0);
             }
