@@ -51,7 +51,7 @@ public class NGramDriver{
         +"natin|ng|nga|nga|ngunit|nila|ninyo|nito|niya|niyon|"
         +"nya|nyo|nyon|pa|pag|pala|para|pati|sa|saan|"
         +"saka|samin|san|sapagkat|si|sila|sino|siya|subalit|sya|"
-        +"tayo|tungkol|ung|upang|yan|yun|yung|eh|ehh|lang)\\b\\s*", Pattern.CASE_INSENSITIVE);
+        +"tayo|tungkol|ung|upang|yan|yun|yung|eh|ehh|lang|ba|ha|ah|lang|eh)\\b\\s*", Pattern.CASE_INSENSITIVE);
     
    /*
     * 
@@ -89,11 +89,11 @@ public class NGramDriver{
    public static String cleanFunctionWordsFromTweet(String tweet){
            
         Matcher matcher = englishfunctionwords.matcher(tweet);
-        String clean = matcher.replaceAll("");
+        String clean = matcher.replaceAll(" _ ");
         tweet = clean;
 
         matcher = filipinofunctionwords.matcher(tweet);
-        clean = matcher.replaceAll("");
+        clean = matcher.replaceAll(" # ");
         tweet = clean;
        
         return tweet;

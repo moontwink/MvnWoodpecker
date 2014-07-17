@@ -128,9 +128,17 @@ public class tweetHandler {
             }
             
             /* Checks if last character of link is a special character */
-            char lastCharacter = message.charAt(message.length()-1);
-            if(!Character.isLetterOrDigit(lastCharacter)) {
-                message = message.substring(0, message.length()-1);
+            if(message.contains("\"")){
+                int lastCharacter = message.indexOf("\"");
+                message = message.substring(0, lastCharacter);
+            } else if(message.contains("”")) {
+                int lastCharacter = message.indexOf("”");
+                message = message.substring(0, lastCharacter);
+            } else {
+                char lastCharacter = message.charAt(message.length()-1);
+                if(!Character.isLetterOrDigit(lastCharacter)) {
+                    message = message.substring(0, message.length()-1);
+                }
             }
             
             shortenedLinks=message;

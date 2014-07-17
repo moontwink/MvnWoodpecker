@@ -32,7 +32,12 @@ public static String write (String filename, ArrayList<Tfidf> lmTopList) throws 
     "		var tarr = [");
                 for(int num = 0; num < lmTopList.size(); num++){
                   // t= lmTopList.getTopList().get(num).getTweet();
-                   outputWriter.write("\""+lmTopList.get(num).getTweet()+"\",");
+                    String newString = lmTopList.get(num).getTweet();
+                    newString = newString.replaceAll(" _ ", "");
+                    newString = newString.replaceAll("_", "");
+                    newString = newString.replaceAll(" # ", "");
+                    newString = newString.replaceAll("#", "");
+                   outputWriter.write("\""+newString+"\",");
                   // i= lmTopList.getTopList().get(num).getScore();
                  }
          outputWriter.write("];\n"+

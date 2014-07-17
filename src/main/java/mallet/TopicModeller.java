@@ -25,9 +25,10 @@ public class TopicModeller {
         
         //Rewrites tweet to text file
         try{
-            database.Writer write = new database.Writer(filePath, false);
-            write.writeToFile("");
-            write = new database.Writer(filePath, true);
+            File file = new File(filePath);
+            if(file.exists()) {
+                System.out.println("~~!!! FILE EXISTS.. now deleting"); file.delete(); }
+            database.Writer write = new database.Writer(filePath, true);
             for(tweetModel tm : tweets){
                 write.writeToFile("TWEET-00"+dataSize + " 	X	"+tm.getMessage());
                 dataSize++;
@@ -99,12 +100,13 @@ public class TopicModeller {
 
         // Run the model for 50 iterations and stop (this is for testing only, 
         //  for real applications, use 1000 to 2000 iterations)
-        int iterNum = dataSize+10;
-        if(dataSize > 1000 && dataSize < 2000){
-            iterNum = 1500;
-        }else if (dataSize > 2000) {
-            iterNum = 2000;
-        }
+//        int iterNum = dataSize+10;
+//        if(dataSize > 1000 && dataSize < 2000){
+//            iterNum = 1500;
+//        }else if (dataSize > 2000) {
+//            iterNum = 2000;
+//        }
+        int iterNum = 2000;
         model.setNumIterations(iterNum);
             
         try {
@@ -148,7 +150,7 @@ public class TopicModeller {
                 int rank = 0;
                 
                 ArrayList<String> keywords = new ArrayList<>();
-                while (iterator.hasNext() && rank < 5) {
+                while (iterator.hasNext() && rank < 20) {
                         IDSorter idCountPair = iterator.next();
                         out.format("%s ", dataAlphabet.lookupObject(idCountPair.getID()));
                         rank++;
@@ -167,7 +169,7 @@ public class TopicModeller {
         Iterator<IDSorter> iterator = topicSortedWords.get(0).iterator();
 
         int rank = 0;
-        while (iterator.hasNext() && rank < 5) {
+        while (iterator.hasNext() && rank < 20) {
                 IDSorter idCountPair = iterator.next();
                 topicZeroText.append(dataAlphabet.lookupObject(idCountPair.getID()) + " ");
                 rank++;
