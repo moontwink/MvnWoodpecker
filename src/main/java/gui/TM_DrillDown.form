@@ -100,15 +100,13 @@
                               <Component id="saveBtn" min="-2" pref="139" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="drilldownBtn" min="-2" pref="431" max="-2" attributes="0"/>
-                              <EmptySpace pref="32" max="32767" attributes="0"/>
-                              <Component id="viewtweetsBtn" min="-2" pref="139" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="10" max="32767" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="drillkeyTF" min="-2" pref="396" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace pref="151" max="32767" attributes="0"/>
                               <Component id="closetabBtn" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -130,7 +128,6 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="drilldownBtn" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                          <Component id="viewtweetsBtn" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="saveBtn" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -180,13 +177,8 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save..."/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="viewtweetsBtn">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="View Tweet Data"/>
-              </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewtweetsBtnActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="saveBtnActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JPanel" name="venndiagrampanel">
@@ -242,8 +234,7 @@
                               <Component id="saveBtn3" min="-2" pref="139" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Component id="drilldownBtn1" min="-2" pref="431" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Component id="viewtweetsBtn1" min="-2" pref="139" max="-2" attributes="0"/>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="topicsTableScrollPane" alignment="0" pref="759" max="32767" attributes="0"/>
                       </Group>
@@ -263,16 +254,11 @@
                           <Component id="closetabBtn3" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="saveBtn3" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="drilldownBtn1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="viewtweetsBtn1" alignment="0" min="-2" pref="32" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="saveBtn3" alignment="3" max="32767" attributes="0"/>
+                          <Component id="drilldownBtn1" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
+                      <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="topicsTableScrollPane" min="-2" pref="278" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                   </Group>
@@ -294,14 +280,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save..."/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="viewtweetsBtn1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="View Tweet Data"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewtweetsBtn1ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="closetabBtn3">
               <Properties>

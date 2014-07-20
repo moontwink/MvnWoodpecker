@@ -17,7 +17,7 @@ public class WordCloudWriter{
 public static String write (String filename, ArrayList<Tfidf> lmTopList) throws IOException{
    //lmDM.getTopList();
   BufferedWriter outputWriter = null;
-  String url = "src/visual/d3-wordcloud/"+filename;
+  String url = "src/visual/d3-wordcloud/wordcloud-"+filename;
   outputWriter = new BufferedWriter(new FileWriter(url));
   //String t;
   //double i;

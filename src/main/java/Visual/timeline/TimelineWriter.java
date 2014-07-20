@@ -22,7 +22,7 @@ public class TimelineWriter{
 public static String write (String filename, ArrayList<TimelineTopics> topics) throws IOException{
    //lmDM.getTopList();
   BufferedWriter outputWriter = null;
-  String url = "src/visual/jsfiddle-timeline/timeline-"+filename;
+  String url = "src/visual/highcharts-timeline/timeline-"+filename;
   outputWriter = new BufferedWriter(new FileWriter(url));
   //String t;
   //double i;

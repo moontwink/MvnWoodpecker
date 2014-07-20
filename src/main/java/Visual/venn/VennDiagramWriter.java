@@ -27,7 +27,7 @@ public class VennDiagramWriter {
   {
   BufferedWriter outputWriter = null;
 //  TopicModel tm = new TopicModel();
-  String url = "src/visual/d3-venndiagram/"+filename;
+  String url = "src/visual/d3-venndiagram/venn-"+filename;
   outputWriter = new BufferedWriter(new FileWriter(url));
   Map<String, VennScoreModel> finalVennScores = new ConcurrentHashMap<>();
   int vennscore = 0;

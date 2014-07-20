@@ -11,9 +11,12 @@ import org.apache.commons.io.FilenameUtils;
 public class FilesCleaner {
     private static final String vennfolderpath = "src/visual/d3-venndiagram/";
     private static final String wordcloudfolderpath = "src/visual/d3-wordcloud/";
-    private static final String timelinefolderpath = "src/visual/jsfiddle-timeline/";
+    private static final String timelinefolderpath = "src/visual/highcharts-timeline/";
+    private static final String LM_datafolderpath = "src/data/languagemodeller/";
+    private static final String TM_datafolderpath = "src/data/topicmodeller/";
     
     public static void cleanAllVisualFiles(){
+        System.out.println("Beginning to clean all HTML files...");
         cleanDirHTMLFiles(vennfolderpath);
         cleanDirHTMLFiles(wordcloudfolderpath);
         cleanDirHTMLFiles(timelinefolderpath);
@@ -25,12 +28,39 @@ public class FilesCleaner {
         
         for(File file : listOfFiles) {
             if(file.isFile()){
-                System.out.print("file name: " + file.getName());
+//                System.out.print("file name: " + file.getName());
                 String ext = FilenameUtils.getExtension(file.getName());
-                System.out.print(" == ext: " + ext + "\n");
+//                System.out.print(" == ext: " + ext + "\n");
                 if(ext.equals("html")){
                     file.delete();
-                    System.out.println("file deleted!");
+//                    System.out.println("file deleted!");
+                }
+            }
+        }
+    }
+    
+    public static void cleanDataFiles(){
+        System.out.println("Beginning to clean all TXT files...");
+        File folder = new File(LM_datafolderpath);
+        File[] listOfFiles = folder.listFiles();
+        
+        for(File file : listOfFiles) {
+            if(file.isFile()){
+                String ext = FilenameUtils.getExtension(file.getName());
+                if(ext.equals("txt")){
+                    file.delete();
+                }
+            }
+        }
+        
+        folder = new File(TM_datafolderpath);
+        listOfFiles = folder.listFiles();
+        
+        for(File file : listOfFiles) {
+            if(file.isFile()){
+                String ext = FilenameUtils.getExtension(file.getName());
+                if(ext.equals("txt")){
+                    file.delete();
                 }
             }
         }

@@ -166,13 +166,11 @@ public class TM_DrillDown extends javax.swing.JPanel {
         closetabBtn = new javax.swing.JButton();
         drilldownBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
-        viewtweetsBtn = new javax.swing.JButton();
         venndiagrampanel = new javax.swing.JPanel();
         rawDataTabPanel = new javax.swing.JPanel();
         drillkeyTF1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         saveBtn3 = new javax.swing.JButton();
-        viewtweetsBtn1 = new javax.swing.JButton();
         closetabBtn3 = new javax.swing.JButton();
         drilldownBtn1 = new javax.swing.JButton();
         topicsTableScrollPane = new javax.swing.JScrollPane();
@@ -256,11 +254,9 @@ public class TM_DrillDown extends javax.swing.JPanel {
         });
 
         saveBtn.setText("Save...");
-
-        viewtweetsBtn.setText("View Tweet Data");
-        viewtweetsBtn.addActionListener(new java.awt.event.ActionListener() {
+        saveBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewtweetsBtnActionPerformed(evt);
+                saveBtnActionPerformed(evt);
             }
         });
 
@@ -295,14 +291,12 @@ public class TM_DrillDown extends javax.swing.JPanel {
                         .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(drilldownBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
-                        .addComponent(viewtweetsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 10, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(vennDiaTabPanelLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(drillkeyTF, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                         .addComponent(closetabBtn)
                         .addContainerGap())))
         );
@@ -319,7 +313,6 @@ public class TM_DrillDown extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(vennDiaTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(drilldownBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(viewtweetsBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(venndiagrampanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -332,13 +325,6 @@ public class TM_DrillDown extends javax.swing.JPanel {
         jLabel5.setText("KEYWORD/S FOR DRILLDOWN :");
 
         saveBtn3.setText("Save...");
-
-        viewtweetsBtn1.setText("View Tweet Data");
-        viewtweetsBtn1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                viewtweetsBtn1ActionPerformed(evt);
-            }
-        });
 
         closetabBtn3.setText("X");
         closetabBtn3.setToolTipText("close this tab");
@@ -410,8 +396,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
                         .addComponent(saveBtn3, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(drilldownBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(viewtweetsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(topicsTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -425,13 +410,10 @@ public class TM_DrillDown extends javax.swing.JPanel {
                         .addComponent(drillkeyTF1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(closetabBtn3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(rawDataTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(rawDataTabPanelLayout.createSequentialGroup()
-                        .addGroup(rawDataTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(saveBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(drilldownBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(3, 3, 3))
-                    .addComponent(viewtweetsBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(rawDataTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(saveBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(drilldownBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(3, 3, 3)
                 .addComponent(topicsTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
@@ -760,11 +742,6 @@ public class TM_DrillDown extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void viewtweetsBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewtweetsBtn1ActionPerformed
-        viewTweets vt = new viewTweets();
-        vt.setVisible(true);
-    }//GEN-LAST:event_viewtweetsBtn1ActionPerformed
-
     private void closetabBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closetabBtn3ActionPerformed
         TablesHandler.dropTable(tmDM.getTablename());
         this.getParent().remove(this);
@@ -842,11 +819,6 @@ public class TM_DrillDown extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_viewtweetsBtn3ActionPerformed
 
-    private void viewtweetsBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewtweetsBtnActionPerformed
-        viewTweets vt = new viewTweets();
-        vt.setVisible(true);
-    }//GEN-LAST:event_viewtweetsBtnActionPerformed
-
     private void drilldownBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drilldownBtnActionPerformed
         if( !drillkeyTF.getText().isEmpty()){
             JTabbedPane tabPane = (JTabbedPane)this.getParent();
@@ -871,6 +843,11 @@ public class TM_DrillDown extends javax.swing.JPanel {
     private void drillkeyTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drillkeyTFActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_drillkeyTFActionPerformed
+
+    private void saveBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtnActionPerformed
+        TM_SelectSave selectsavemenu = new TM_SelectSave(tmDM);
+        selectsavemenu.setVisible(true);
+    }//GEN-LAST:event_saveBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane RawData;
@@ -917,8 +894,6 @@ public class TM_DrillDown extends javax.swing.JPanel {
     private javax.swing.JTable tweetTable;
     private javax.swing.JPanel vennDiaTabPanel;
     public static javax.swing.JPanel venndiagrampanel;
-    private javax.swing.JButton viewtweetsBtn;
-    private javax.swing.JButton viewtweetsBtn1;
     private javax.swing.JButton viewtweetsBtn2;
     private javax.swing.JButton viewtweetsBtn3;
     // End of variables declaration//GEN-END:variables

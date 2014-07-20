@@ -100,13 +100,13 @@ public class TopicModeller {
 
         // Run the model for 50 iterations and stop (this is for testing only, 
         //  for real applications, use 1000 to 2000 iterations)
-//        int iterNum = dataSize+10;
-//        if(dataSize > 1000 && dataSize < 2000){
-//            iterNum = 1500;
-//        }else if (dataSize > 2000) {
-//            iterNum = 2000;
-//        }
-        int iterNum = 2000;
+        int iterNum = dataSize+10;
+        if(dataSize > 1000 && dataSize < 2000){
+            iterNum = 1500;
+        }else if (dataSize > 2000) {
+            iterNum = 2000;
+        }
+//        int iterNum = 2000;
         model.setNumIterations(iterNum);
             
         try {

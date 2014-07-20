@@ -1289,6 +1289,7 @@ public class Start extends javax.swing.JFrame {
                 System.out.println("Beginning to drop all temporary tables....");
                 TablesHandler.dropAllTempTables();
                 FilesCleaner.cleanAllVisualFiles();
+                FilesCleaner.cleanDataFiles();
                 ((JFrame)(e.getComponent())).dispose();
                 System.exit(0);
             }
