@@ -818,6 +818,9 @@
             <Property name="string" type="java.lang.String" value="....."/>
             <Property name="stringPainted" type="boolean" value="true"/>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="9"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

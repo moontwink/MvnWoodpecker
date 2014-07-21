@@ -53,4 +53,31 @@ public class TablesHandler {
             Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    public static void dropAllImportTables(){
+        System.out.println("---------- Closing Database Operation ----------");
+        System.out.println("Operation: Drop all import tables");
+        System.out.println("Status: Beginning to drop all imported tables");
+        
+        try{
+            Connection c = DBFactory.getConnection();
+            PreparedStatement ps = c.prepareStatement(
+                "select table_name " +
+                "from information_schema.tables " +
+                "where table_name like 'import-%' " +
+                "and table_schema = 'tweetdb'; "
+                );
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()){
+                dropTable(rs.getString("table_name"));
+                System.out.println("drop table `" + rs.getString("table_name") + "`;");
+            }
+            System.out.println("---------- End of Database Operation ----------\n\n");
+        }catch(ClassNotFoundException ex){
+            Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(SQLException ex){
+            Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }

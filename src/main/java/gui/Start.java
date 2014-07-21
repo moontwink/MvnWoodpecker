@@ -5,6 +5,7 @@ import database.CalendarHandler;
 import database.TablesHandler;
 import database.tweetHandler;
 import filemanagement.FilesCleaner;
+import filemanagement.ImportFiles;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import model.tweetModel;
@@ -672,7 +673,7 @@ public class Start extends javax.swing.JFrame {
     }//GEN-LAST:event_importBtnActionPerformed
 
     private void browseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBtnActionPerformed
-        
+        new Thread(new ImportThread()).start();
     }//GEN-LAST:event_browseBtnActionPerformed
 
     private void locdbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locdbBtnActionPerformed
@@ -1047,6 +1048,18 @@ public class Start extends javax.swing.JFrame {
         progressBar.setIndeterminate(false);
     }
     
+    public class ImportThread implements Runnable {
+
+        @Override
+        public void run() {
+            progressBar.setString("Importing...");
+            ImportFiles.importCSVFile();
+            progressBar.setString("Finished!");
+            progressBar.setIndeterminate(false);
+        }
+        
+    }
+    
     public class TweetpeckThread implements Runnable {
 
         @Override
@@ -1331,7 +1344,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JRadioButton locdbBtn;
     private javax.swing.JTextField longitudeField;
     private javax.swing.ButtonGroup methodGrp;
-    private javax.swing.JProgressBar progressBar;
+    public static javax.swing.JProgressBar progressBar;
     private javax.swing.JButton resetCriteriaBtn;
     private javax.swing.JLabel sDateLabel;
     private javax.swing.JComboBox sdayMB;
