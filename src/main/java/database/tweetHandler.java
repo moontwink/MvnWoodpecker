@@ -45,7 +45,7 @@ public class tweetHandler {
             ps.setString(3, tm.getMessage());
             ps.setString(4, tm.getRetweetCount());
             ps.setDouble(5, tm.getLatitude());
-            ps.setDouble(6, tm.getLonghitude());
+            ps.setDouble(6, tm.getLongitude());
             ps.setString(7, tm.getDate());
             
             int i = ps.executeUpdate();
@@ -933,7 +933,7 @@ public class tweetHandler {
         tweetModel t;
         LMDrillModel lmDrillModel = new LMDrillModel();
         
-        String tablename = "temp-dd-"+keywords;
+        String tablename = "LMx"+(currentlmDM.getLevel()+1)+"temp-dd-"+keywords;
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
@@ -1008,7 +1008,7 @@ public class tweetHandler {
         tweetModel t;
         TMDrillModel tmDrillModel = new TMDrillModel();
         
-        String tablename = "temp-dd-"+keywords;
+        String tablename = "TMx"+(currenttmDM.getLevel()+1)+"temp-dd-"+keywords;
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");

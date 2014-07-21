@@ -16,10 +16,13 @@ public class FilesCleaner {
     private static final String TM_datafolderpath = "src/data/topicmodeller/";
     
     public static void cleanAllVisualFiles(){
-        System.out.println("Beginning to clean all HTML files...");
+        System.out.println("---------- Clean Visual Files Operation ----------");
+        System.out.println("Operation: Clean all HTML files");
+        System.out.println("Status: Beginning to clean all HTML files");
         cleanDirHTMLFiles(vennfolderpath);
         cleanDirHTMLFiles(wordcloudfolderpath);
         cleanDirHTMLFiles(timelinefolderpath);
+        System.out.println("---------- End of Visual Files Operation ----------\n\n");
     }
     
     private static void cleanDirHTMLFiles(String path) {
@@ -40,7 +43,10 @@ public class FilesCleaner {
     }
     
     public static void cleanDataFiles(){
-        System.out.println("Beginning to clean all TXT files...");
+        System.out.println("---------- Clean Data Files Operation ----------");
+        System.out.println("Operation: Clean all TXT files");
+        System.out.println("Status: Beginning to clean all TXT files");
+        
         File folder = new File(LM_datafolderpath);
         File[] listOfFiles = folder.listFiles();
         
@@ -64,5 +70,6 @@ public class FilesCleaner {
                 }
             }
         }
+        System.out.println("---------- End of Data Files Operation ----------\n\n");
     }
 }

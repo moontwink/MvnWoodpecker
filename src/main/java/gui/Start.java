@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gui;
 
 import database.CalendarHandler;
@@ -675,7 +672,7 @@ public class Start extends javax.swing.JFrame {
     }//GEN-LAST:event_importBtnActionPerformed
 
     private void browseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBtnActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_browseBtnActionPerformed
 
     private void locdbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locdbBtnActionPerformed
@@ -1286,7 +1283,6 @@ public class Start extends javax.swing.JFrame {
         test.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentHidden(ComponentEvent e) {
-                System.out.println("Beginning to drop all temporary tables....");
                 TablesHandler.dropAllTempTables();
                 FilesCleaner.cleanAllVisualFiles();
                 FilesCleaner.cleanDataFiles();

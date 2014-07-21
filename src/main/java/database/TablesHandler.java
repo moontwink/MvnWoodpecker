@@ -28,6 +28,10 @@ public class TablesHandler {
     }
     
     public static void dropAllTempTables(){
+        System.out.println("---------- Closing Database Operation ----------");
+        System.out.println("Operation: Drop all temporary tables");
+        System.out.println("Status: Beginning to drop all temporary tables");
+        
         try{
             Connection c = DBFactory.getConnection();
             PreparedStatement ps = c.prepareStatement(
@@ -42,7 +46,7 @@ public class TablesHandler {
                 dropTable(rs.getString("table_name"));
                 System.out.println("drop table `" + rs.getString("table_name") + "`;");
             }
-            
+            System.out.println("---------- End of Database Operation ----------\n\n");
         }catch(ClassNotFoundException ex){
             Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }catch(SQLException ex){

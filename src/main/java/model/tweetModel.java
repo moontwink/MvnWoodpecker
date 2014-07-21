@@ -12,7 +12,7 @@ public class tweetModel {
     private String message;
     private String retweetCount;
     private double latitude;
-    private double longhitude;
+    private double longitude;
     private String date;
 
     /**
@@ -86,17 +86,17 @@ public class tweetModel {
     }
 
     /**
-     * @return the longhitude
+     * @return the longitude
      */
-    public double getLonghitude() {
-        return longhitude;
+    public double getLongitude() {
+        return longitude;
     }
 
     /**
-     * @param longhitude the longhitude to set
+     * @param longitude the longitude to set
      */
-    public void setLonghitude(double longhitude) {
-        this.longhitude = longhitude;
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 
     /**
