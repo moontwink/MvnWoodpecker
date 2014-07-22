@@ -22,8 +22,8 @@ public class ImportHandler {
         importNumber += 1;
     }
     
-    public String importCSVData(List<tweetModel> tweets) {
-        String tablename = importname + importNumber;
+    public String importCSVData(String csvname, List<tweetModel> tweets) {
+        String tablename = importname + importNumber + "-" + csvname;
         
         try{
             Connection c = DBFactory.getConnection();

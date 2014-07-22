@@ -31,6 +31,7 @@ import twitter4j.VersionStream;
  * @author Nancy
  */
 public class Start extends javax.swing.JFrame {
+    private final String TABLE_NAME = "tweets";
     
     /**
      * Creates new form Start
@@ -43,6 +44,7 @@ public class Start extends javax.swing.JFrame {
         setDisabled();
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        insertImportedTables();
     }
     
     public void setDisabled(){
@@ -70,6 +72,25 @@ public class Start extends javax.swing.JFrame {
         browseBtn.setEnabled(false);
         
         
+    }
+    
+    private void enableDateBoxes(){
+        sDateLabel.setEnabled(true);
+        eDateLabel.setEnabled(true);
+        dateCB.setEnabled(true);
+        smonthMB.setEnabled(true);
+        sdayMB.setEnabled(true);
+        syearMB.setEnabled(true);
+        emonthMB.setEnabled(true);
+        edayMB.setEnabled(true);
+        eyearMB.setEnabled(true);
+    }
+    
+    private void insertImportedTables(){
+        if(importCB.getItemCount() != 0){ importCB.removeAllItems(); }
+        for(String s : TablesHandler.getAllImportTables()){
+            importCB.addItem(s);
+        }
     }
 
     /**
@@ -109,23 +130,24 @@ public class Start extends javax.swing.JFrame {
         locdbBtn = new javax.swing.JRadioButton();
         jSeparator2 = new javax.swing.JSeparator();
         selectSourceBtn = new javax.swing.JButton();
+        importCB = new javax.swing.JComboBox();
         filterCriteriaPanel = new javax.swing.JPanel();
         keywordTF = new javax.swing.JTextField();
         sDateLabel = new javax.swing.JLabel();
         eDateLabel = new javax.swing.JLabel();
-        smonthMB = new javax.swing.JComboBox();
-        sdayMB = new javax.swing.JComboBox();
-        syearMB = new javax.swing.JComboBox();
         keywordCB = new javax.swing.JCheckBox();
         dateCB = new javax.swing.JCheckBox();
-        emonthMB = new javax.swing.JComboBox();
-        edayMB = new javax.swing.JComboBox();
-        eyearMB = new javax.swing.JComboBox();
         jSeparator5 = new javax.swing.JSeparator();
         topicRB = new javax.swing.JRadioButton();
         lmRB = new javax.swing.JRadioButton();
         jSeparator6 = new javax.swing.JSeparator();
         beginBtn = new javax.swing.JButton();
+        smonthMB = new javax.swing.JComboBox();
+        sdayMB = new javax.swing.JComboBox();
+        emonthMB = new javax.swing.JComboBox();
+        edayMB = new javax.swing.JComboBox();
+        syearMB = new javax.swing.JComboBox();
+        eyearMB = new javax.swing.JComboBox();
         TDMethodPanel = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         resetCriteriaBtn = new javax.swing.JButton();
@@ -349,6 +371,8 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
+        importCB.setEnabled(false);
+
         javax.swing.GroupLayout tweetSourcePanelLayout = new javax.swing.GroupLayout(tweetSourcePanel);
         tweetSourcePanel.setLayout(tweetSourcePanelLayout);
         tweetSourcePanelLayout.setHorizontalGroup(
@@ -356,22 +380,26 @@ public class Start extends javax.swing.JFrame {
             .addGroup(tweetSourcePanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(tweetSourcePanelLayout.createSequentialGroup()
-                        .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(tweetSourcePanelLayout.createSequentialGroup()
-                                .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(tweetSourcePanelLayout.createSequentialGroup()
-                                        .addComponent(importBtn)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(browseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(locdbBtn))
-                                .addGap(118, 118, 118)))
-                        .addContainerGap(14, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tweetSourcePanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(selectSourceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84))))
+                        .addGap(84, 84, 84))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tweetSourcePanelLayout.createSequentialGroup()
+                        .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(tweetSourcePanelLayout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(locdbBtn)
+                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tweetSourcePanelLayout.createSequentialGroup()
+                                .addComponent(importBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(importCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(tweetSourcePanelLayout.createSequentialGroup()
+                                        .addComponent(browseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addContainerGap())))
         );
         tweetSourcePanelLayout.setVerticalGroup(
             tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,12 +408,14 @@ public class Start extends javax.swing.JFrame {
                 .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(browseBtn)
                     .addComponent(importBtn))
+                .addGap(10, 10, 10)
+                .addComponent(importCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(locdbBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(selectSourceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(selectSourceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -396,17 +426,6 @@ public class Start extends javax.swing.JFrame {
 
         eDateLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         eDateLabel.setText("END DATE");
-
-        smonthMB.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                smonthMBItemStateChanged(evt);
-            }
-        });
-        smonthMB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                smonthMBActionPerformed(evt);
-            }
-        });
 
         keywordCB.setText("KEYWORD/S");
         keywordCB.addActionListener(new java.awt.event.ActionListener() {
@@ -419,12 +438,6 @@ public class Start extends javax.swing.JFrame {
         dateCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateCBActionPerformed(evt);
-            }
-        });
-
-        emonthMB.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                emonthMBItemStateChanged(evt);
             }
         });
 
@@ -451,36 +464,30 @@ public class Start extends javax.swing.JFrame {
             }
         });
 
+        smonthMB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC" }));
+        smonthMB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                smonthMBActionPerformed(evt);
+            }
+        });
+
+        sdayMB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
+        emonthMB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEPT", "OCT", "NOV", "DEC" }));
+        emonthMB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emonthMBActionPerformed(evt);
+            }
+        });
+
+        edayMB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+
         javax.swing.GroupLayout filterCriteriaPanelLayout = new javax.swing.GroupLayout(filterCriteriaPanel);
         filterCriteriaPanel.setLayout(filterCriteriaPanelLayout);
         filterCriteriaPanelLayout.setHorizontalGroup(
             filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
                 .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
-                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, filterCriteriaPanelLayout.createSequentialGroup()
-                                .addGap(21, 21, 21)
-                                .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(smonthMB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filterCriteriaPanelLayout.createSequentialGroup()
-                                        .addGap(0, 0, Short.MAX_VALUE)
-                                        .addComponent(eDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
-                                    .addGap(27, 27, 27)
-                                    .addComponent(sDateLabel))
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filterCriteriaPanelLayout.createSequentialGroup()
-                                    .addGap(6, 6, 6)
-                                    .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(18, 18, 18)
-                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(edayMB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(sdayMB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(syearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(eyearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -498,7 +505,29 @@ public class Start extends javax.swing.JFrame {
                             .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
                         .addGap(86, 86, 86)
-                        .addComponent(beginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(beginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
+                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filterCriteriaPanelLayout.createSequentialGroup()
+                                    .addGap(16, 16, 16)
+                                    .addComponent(sDateLabel))
+                                .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
+                                    .addContainerGap()
+                                    .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(eDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(smonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(sdayMB, 0, 40, Short.MAX_VALUE)
+                            .addComponent(edayMB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(syearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eyearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         filterCriteriaPanelLayout.setVerticalGroup(
@@ -515,22 +544,21 @@ public class Start extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
-                        .addComponent(smonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(eDateLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(31, 31, 31)
+                        .addComponent(eDateLabel))
                     .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
                         .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(smonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(sdayMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(syearMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(31, 31, 31)
                         .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(edayMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(eyearMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lmRB)
                     .addComponent(topicRB))
@@ -544,6 +572,7 @@ public class Start extends javax.swing.JFrame {
         TDMethodPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
 
         jButton1.setText("START OVER");
+        jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -551,6 +580,7 @@ public class Start extends javax.swing.JFrame {
         });
 
         resetCriteriaBtn.setText("RESET");
+        resetCriteriaBtn.setEnabled(false);
         resetCriteriaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resetCriteriaBtnActionPerformed(evt);
@@ -589,7 +619,7 @@ public class Start extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(21, Short.MAX_VALUE)
+                        .addContainerGap(25, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tweetSourcePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -666,8 +696,10 @@ public class Start extends javax.swing.JFrame {
     }//GEN-LAST:event_stopBtnActionPerformed
 
     private void importBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importBtnActionPerformed
-        if(importBtn.isSelected())
-        browseBtn.setEnabled(true);
+        if(importBtn.isSelected()){
+            browseBtn.setEnabled(true);
+            importCB.setEnabled(true);
+        }
         else
         browseBtn.setEnabled(false);
     }//GEN-LAST:event_importBtnActionPerformed
@@ -680,10 +712,6 @@ public class Start extends javax.swing.JFrame {
         if(locdbBtn.isSelected())
         browseBtn.setEnabled(false);
     }//GEN-LAST:event_locdbBtnActionPerformed
-
-    private void smonthMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smonthMBActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_smonthMBActionPerformed
 
     private void beginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginBtnActionPerformed
         
@@ -883,25 +911,30 @@ public class Start extends javax.swing.JFrame {
     private void selectSourceBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectSourceBtnActionPerformed
         if(dataGrp.getSelection() != null){
             filterCriteriaPanel.setEnabled(true);
-        
             keywordCB.setEnabled(true);
-            dateCB.setEnabled(true);
+            enableDateBoxes();
             resetCriteriaBtn.setEnabled(true);
             beginBtn.setEnabled(true);
             lmRB.setEnabled(true);
             topicRB.setEnabled(true);
-            fillDateBoxes();
+            
+            if(importBtn.isSelected()){
+                fillDateBoxes(importCB.getSelectedItem().toString());
+            }else{
+                fillDateBoxes(TABLE_NAME);
+            }
         }else{
             JOptionPane.showMessageDialog(null, "Must select tweet data source.", "Tweets Source Requirement", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_selectSourceBtnActionPerformed
 
     //Fills date boxes with initial values
-    private void fillDateBoxes(){
-        String[] start = tweetHandler.getEarliestDate().split(" "); //[0] day, [1] month, [2] year
-        String[] end = tweetHandler.getLatestDate().split(" ");
+    private void fillDateBoxes(String tablename){
+        String[] start = tweetHandler.getEarliestDate(tablename).split(" "); //[0] day, [1] month, [2] year
+        String[] end = tweetHandler.getLatestDate(tablename).split(" ");
         
-            System.out.println(start[0]+","+start[1]+","+start[2] + " | " + end[0]+","+end[1]+","+end[2]);
+        System.out.println("EARLIEST DATE --- "+start[0]+","+start[1]+","+start[2]);
+        System.out.println("LATEST DATE --- "+end[0]+","+end[1]+","+end[2] + "\n");
         //Fills year boxes
         int firstYear = Integer.parseInt(start[2]);
         int lastYear = Integer.parseInt(end[2]);
@@ -914,92 +947,6 @@ public class Start extends javax.swing.JFrame {
         for(int y = firstYear; y <= lastYear; y++){
             syearMB.addItem(y);
             eyearMB.addItem(y);
-        }
-        
-        //Fills month boxes
-        int firstMonth = CalendarHandler.monthNumber(start[1]);
-        int lastMonth = CalendarHandler.monthNumber(end[1]);
-        
-        if(firstYear != Integer.parseInt(syearMB.getSelectedItem().toString()))
-            firstMonth = 1;
-        if(lastMonth < 12) lastMonth = 12;
-            System.out.println(firstMonth + " | " + lastMonth);
-          
-        if(smonthMB.getItemCount() != 0)
-            smonthMB.removeAllItems();
-        if(emonthMB.getItemCount() != 0)
-            emonthMB.removeAllItems();
-        
-        for(int i = firstMonth; i <= lastMonth; i++){
-            if(i == 1) {
-                System.out.println(" | " + i);
-                smonthMB.addItem("Jan");
-                emonthMB.addItem("Jan");
-            }
-            else if(i == 2) {
-                smonthMB.addItem("Feb");
-                emonthMB.addItem("Feb");
-            }
-            else if(i == 3) {
-                smonthMB.addItem("Mar");
-                emonthMB.addItem("Mar");
-            }
-            else if(i == 4) {
-                smonthMB.addItem("Apr");
-                emonthMB.addItem("Apr");
-            }
-            else if(i == 5) {
-                smonthMB.addItem("May");
-                emonthMB.addItem("May");
-            }
-            else if(i == 6) {
-                smonthMB.addItem("Jun");
-                emonthMB.addItem("Jun");
-            }
-            else if(i == 7) {
-                smonthMB.addItem("Jul");
-                emonthMB.addItem("Jul");
-            }
-            else if(i == 8) {
-                smonthMB.addItem("Aug");
-                emonthMB.addItem("Aug");
-            }
-            else if(i == 9) {
-                smonthMB.addItem("Sep");
-                emonthMB.addItem("Sep");
-            }
-            else if(i == 10) {
-                smonthMB.addItem("Oct");
-                emonthMB.addItem("Oct");
-            }
-            else if(i == 11) {
-                smonthMB.addItem("Nov");
-                emonthMB.addItem("Nov");
-            }
-            else if(i == 12) {
-                smonthMB.addItem("Dec");
-                emonthMB.addItem("Dec");
-            }
-        }
-        
-        //Fills day boxes
-        fillStartDayBoxes(firstMonth, Integer.parseInt(syearMB.getSelectedItem().toString()));
-        fillEndDayBoxes(firstMonth, Integer.parseInt(eyearMB.getSelectedItem().toString()));
-    }
-    
-    private void fillStartDayBoxes(int month, int year){
-        if(sdayMB.getItemCount() != 0)
-            sdayMB.removeAllItems();
-        for(int x = 1; x <= CalendarHandler.numDaysinMonth(month, year); x++){
-            sdayMB.addItem(x);
-        }
-    }
-    
-    private void fillEndDayBoxes(int month, int year){
-        if(edayMB.getItemCount() != 0)
-            edayMB.removeAllItems();
-        for(int x = 1; x <= CalendarHandler.numDaysinMonth(month, year); x++){
-            edayMB.addItem(x);
         }
     }
     
@@ -1018,17 +965,21 @@ public class Start extends javax.swing.JFrame {
         setDisabled();
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void smonthMBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_smonthMBItemStateChanged
-        int month = CalendarHandler.monthNumber(smonthMB.getSelectedItem().toString());
-        int year = Integer.parseInt(syearMB.getSelectedItem().toString());
-        fillStartDayBoxes(month, year);
-    }//GEN-LAST:event_smonthMBItemStateChanged
+    private void smonthMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smonthMBActionPerformed
+        if(sdayMB.getItemCount() != 0)
+            sdayMB.removeAllItems();
+        for(int x = 1; x <= CalendarHandler.numDaysinMonthname(smonthMB.getSelectedItem().toString(), Integer.parseInt(syearMB.getSelectedItem().toString())); x++){
+            sdayMB.addItem(x);
+        }
+    }//GEN-LAST:event_smonthMBActionPerformed
 
-    private void emonthMBItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_emonthMBItemStateChanged
-        int month = CalendarHandler.monthNumber(emonthMB.getSelectedItem().toString());
-        int year = Integer.parseInt(eyearMB.getSelectedItem().toString());
-        fillEndDayBoxes(month, year);
-    }//GEN-LAST:event_emonthMBItemStateChanged
+    private void emonthMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emonthMBActionPerformed
+        if(edayMB.getItemCount() != 0)
+            edayMB.removeAllItems();
+        for(int x = 1; x <= CalendarHandler.numDaysinMonthname(emonthMB.getSelectedItem().toString(), Integer.parseInt(eyearMB.getSelectedItem().toString())); x++){
+            edayMB.addItem(x);
+        }
+    }//GEN-LAST:event_emonthMBActionPerformed
 
     private void setProgressToZero() {
 //        progressBar.setValue(0);
@@ -1053,7 +1004,8 @@ public class Start extends javax.swing.JFrame {
         @Override
         public void run() {
             progressBar.setString("Importing...");
-            ImportFiles.importCSVFile();
+            String tablename = ImportFiles.importCSVFile();
+            importCB.addItem(tablename);
             progressBar.setString("Finished!");
             progressBar.setIndeterminate(false);
         }
@@ -1323,6 +1275,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JComboBox eyearMB;
     private javax.swing.JPanel filterCriteriaPanel;
     private javax.swing.JRadioButton importBtn;
+    private javax.swing.JComboBox importCB;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

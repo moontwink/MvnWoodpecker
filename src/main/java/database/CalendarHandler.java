@@ -70,23 +70,24 @@ public class CalendarHandler {
         }
     }
     
-    public static int numDaysinMonthname(String month){
+    public static int numDaysinMonthname(String month, int year){
         int numdays = 30;
         
         switch(month){
                 
-            case "Jan": return 31;
-            case "Feb":return 28;
-            case "Mar":return 31;
-            case "Apr":return 30;
-            case "May":return 31;
-            case "Jun":return 30;
-            case "Jul":return 31;
-            case "Aug":return 31;
-            case "Sep":return 30;
-            case "Oct":return 31;
-            case "Nov":return 30;
-            case "Dec":return 31;
+            case "JAN": return 31;
+            case "FEB":if(year%4 == 0) return 29;
+                    else return 28;
+            case "MAR":return 31;
+            case "APR":return 30;
+            case "MAY":return 31;
+            case "JUN":return 30;
+            case "JUL":return 31;
+            case "AUG":return 31;
+            case "SEPT":return 30;
+            case "OCT":return 31;
+            case "NOV":return 30;
+            case "DEC":return 31;
             default: return numdays;
         }
     }

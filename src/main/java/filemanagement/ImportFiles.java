@@ -18,11 +18,12 @@ import model.tweetModel;
  */
 public class ImportFiles {
     
-    public static void importCSVFile() {
+    public static String importCSVFile() {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter ext = new FileNameExtensionFilter("CSV Files", "csv");
         chooser.addChoosableFileFilter(ext);
         chooser.setFileFilter(ext);
+        String tablename = "";
 
         int retrieval = chooser.showOpenDialog(null);
         if(retrieval == JFileChooser.APPROVE_OPTION){
@@ -31,6 +32,7 @@ public class ImportFiles {
                 System.out.println("Operation: Import CSV file into database");
                 System.out.println("Status: Reading CSV file");
                 CSVReader reader = new CSVReader(new FileReader(chooser.getSelectedFile()));
+                String filename = chooser.getSelectedFile().getName();
 
                 ColumnPositionMappingStrategy<tweetModel> strat = new ColumnPositionMappingStrategy<>();
                 strat.setType(tweetModel.class);
@@ -52,7 +54,7 @@ public class ImportFiles {
                 
                 System.out.println("Status: Storing CSV entries into database");
                 ImportHandler importer = new ImportHandler();
-                importer.importCSVData(list);
+                tablename = importer.importCSVData(filename, list);
                 System.out.println("Status: CSV entries successfully stored into database");
                 System.out.println("---------- End of Database Operation ----------\n\n");
                 
@@ -63,52 +65,6 @@ public class ImportFiles {
                         + "(3) You are trying to import a CORRUPTED file", "Import CSV Error", JOptionPane.ERROR_MESSAGE);
             }
         }
-    
+        return tablename;
     }
-        public static void main(String[] args) {
-
-            String sb = "TEST CONTENT";
-            JFileChooser chooser = new JFileChooser();
-            FileNameExtensionFilter ext = new FileNameExtensionFilter("CSV Files", "csv");
-            chooser.addChoosableFileFilter(ext);
-            chooser.setFileFilter(ext);
-
-            int retrieval = chooser.showOpenDialog(null);
-            if(retrieval == JFileChooser.APPROVE_OPTION){
-                try{
-
-                    CSVReader reader = new CSVReader(new FileReader(chooser.getSelectedFile()));
-
-                    ColumnPositionMappingStrategy<tweetModel> strat = new ColumnPositionMappingStrategy<>();
-                    strat.setType(tweetModel.class);
-                    String[] columns = new String[] {"statusId", "username", "message", "date", "latitude", "longitude"}; // the fields to bind do in your JavaBean
-                    strat.setColumnMapping(columns);
-
-                    CsvToBean<tweetModel> csv = new CsvToBean<>();
-                    List<tweetModel> list = csv.parse(strat, reader);
-
-
-                    for(tweetModel t : list){
-                        System.out.println(t.getStatusId());
-                        System.out.println("\t" + t.getUsername());
-                        System.out.println("\t" + t.getMessage());
-                        System.out.println("\t" + t.getDate());
-                        System.out.println("\t" + t.getLatitude());
-                        System.out.println("\t" + t.getLongitude());
-                    }
-
-                    reader.close();
-                    
-                    ImportHandler importer = new ImportHandler();
-                    importer.importCSVData(list);
-
-                }catch(Exception ex){
-                    JOptionPane.showMessageDialog(null, "There's seems to be an error in your CSV File caused by any of the following: \n"
-                        + "(1) You are not following the REQUIRED format \n"
-                        + "(2) You are MISSING some data \n"
-                        + "(3) You are trying to import a CORRUPTED file", "Import CSV Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
-  
-	}
 }

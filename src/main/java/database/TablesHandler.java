@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -54,11 +55,12 @@ public class TablesHandler {
         }
     }
     
-    public static void dropAllImportTables(){
+    public static ArrayList<String> getAllImportTables(){
         System.out.println("---------- Closing Database Operation ----------");
         System.out.println("Operation: Drop all import tables");
         System.out.println("Status: Beginning to drop all imported tables");
         
+        ArrayList<String> importtables = new ArrayList<>();
         try{
             Connection c = DBFactory.getConnection();
             PreparedStatement ps = c.prepareStatement(
@@ -70,8 +72,7 @@ public class TablesHandler {
             ResultSet rs = ps.executeQuery();
             
             while(rs.next()){
-                dropTable(rs.getString("table_name"));
-                System.out.println("drop table `" + rs.getString("table_name") + "`;");
+                importtables.add(rs.getString("table_name"));
             }
             System.out.println("---------- End of Database Operation ----------\n\n");
         }catch(ClassNotFoundException ex){
@@ -79,5 +80,6 @@ public class TablesHandler {
         }catch(SQLException ex){
             Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return importtables;
     }
 }

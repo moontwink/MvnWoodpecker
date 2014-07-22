@@ -883,13 +883,13 @@ public class tweetHandler {
         return results;
     }
     
-    public static String getEarliestDate(){
+    public static String getEarliestDate(String tablename){
         String date = "";
         
         try{
             Connection c = DBFactory.getConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT date FROM tweets "
-                    + "ORDER BY idtweets ASC "
+            PreparedStatement ps = c.prepareStatement("SELECT date FROM `"+ tablename + "`"
+                    + "ORDER BY statusid ASC "
                     + "LIMIT 1;");
             
             ResultSet rs = ps.executeQuery();
@@ -905,13 +905,13 @@ public class tweetHandler {
         return date;
     }
     
-    public static String getLatestDate(){
+    public static String getLatestDate(String  tablename){
         String date = "";
         
         try{
             Connection c = DBFactory.getConnection();
-            PreparedStatement ps = c.prepareStatement("SELECT date FROM tweets "
-                    + "ORDER BY idtweets DESC "
+            PreparedStatement ps = c.prepareStatement("SELECT date FROM `"+ tablename + "`"
+                    + "ORDER BY statusid DESC "
                     + "LIMIT 1;");
             
             ResultSet rs = ps.executeQuery();
