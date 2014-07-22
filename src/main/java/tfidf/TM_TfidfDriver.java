@@ -15,6 +15,11 @@ import org.apache.commons.lang.StringUtils;
 public class TM_TfidfDriver {
     private static ArrayList<TM_TfidfModel> topTopics;
     
+    /**
+     * This method computes the IDF value of all topics.
+     * @param tweetList
+     * @param allTopics
+     */
     public static void idfChecker(ArrayList<tweetModel> tweetList, ArrayList<TopicOutput> allTopics)
     {
         int count = 0;
@@ -41,6 +46,13 @@ public class TM_TfidfDriver {
     }
     
     @SuppressWarnings("empty-statement")
+    /**
+     * This method gets the TF-IDF score of the topic.
+     * @param topic
+     * @param keyFreq
+     * @param count
+     * @param tweetListCount
+     */
     private static void tfidfscore(TopicOutput topic, int keyFreq, int count, int tweetListCount)
     {
         if(topic.getKeywords().isEmpty());
@@ -60,43 +72,12 @@ public class TM_TfidfDriver {
         }
     }
     
-//    private static double topic_tfidfscore(ArrayList<TopicOutput> allTopics, TopicOutput topic){
-//        if(topic.getKeywords().isEmpty());
-//        else {
-//            if(count == 0) count = 1;
-//        }
-//    }
-//    
-//    private static int getTopicKeywordsCount(ArrayList<TopicOutput> allTopics, TopicOutput topic) {
-//        int count = 0;
-//        
-//        
-//        for(String s : topic.getKeywords()){
-//            for(TopicOutput t : allTopics){
-//                if(t.getKeywords().contains(s)){
-//                    count++;
-//                }
-//            }
-//        }
-//        
-//        return count;
-//    }
-//    
-//    private static int getTopicKeywordsFrequency(ArrayList<TopicOutput> allTopics, TopicOutput currentTopic) {
-//        int freq = 0;
-//        double tfidf = 0;
-//        
-//        for(TopicOutput t : allTopics){                         //for every topic T
-//            for(String r : t.getKeywords()){                    //for every keyword R of T
-//                for(String s : currentTopic.getKeywords()){     //for every keyword S of current topic C
-//                    freq += StringUtils.countMatches(r, s);     //how many times R appeared in C
-//                }
-//            }
-////            tfidf += topic_tfidfscore(allTopics, currentTopic);
-//        }
-//        return freq;
-//    }
-    
+    /**
+     * This method computes the frequency value of the topic
+     * @param tweetList
+     * @param topic
+     * @return int, the frequency of the topic
+     */
     private static int getTopicFrequency(ArrayList<tweetModel> tweetList, TopicOutput topic) {
         int freq = 0;
         
@@ -108,8 +89,9 @@ public class TM_TfidfDriver {
         return freq;
     }
     
-    
-    
+    /**
+     * Prints the list of topics in order
+     */
     private static void printTopList()
     {
         for(TM_TfidfModel tf : getTopTopics()) {
@@ -128,25 +110,32 @@ public class TM_TfidfDriver {
         return topTopics;
     }
     
+    /**
+     * Sorts the list of topics in DESCENDING order by TF-IDF score
+     * @param list
+     */
     public static void sortTopicsList(ArrayList<TM_TfidfModel> list){
         Collections.sort(list, new MyComparator());
     }
     
-      public static class MyComparator implements Comparator<TM_TfidfModel> {
-   
-        @Override
-        public int compare(TM_TfidfModel o1, TM_TfidfModel o2) {
-          
-        try{
-            if (o1.getScore() > o2.getScore()) {
-                return -1;
-            } else if (o1.getScore()< o2.getScore()) {
-                return 1;
-        }
-        }catch(Exception e){
-            System.err.println(e.toString());
-        }
-        return 0;
-        }
-    }
+    /**
+     * Comparator used by sortTopicsList to sort.
+     */
+    public static class MyComparator implements Comparator<TM_TfidfModel> {
+
+      @Override
+      public int compare(TM_TfidfModel o1, TM_TfidfModel o2) {
+
+      try{
+          if (o1.getScore() > o2.getScore()) {
+              return -1;
+          } else if (o1.getScore()< o2.getScore()) {
+              return 1;
+      }
+      }catch(Exception e){
+          System.err.println(e.toString());
+      }
+      return 0;
+      }
+  }
 }

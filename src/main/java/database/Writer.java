@@ -12,15 +12,29 @@ public class Writer {
     private String path;
     private boolean append_to_text = false;
     
+    /**
+     * Writer constructor.
+     * @param file_path
+     */
     public Writer(String file_path){
         path = file_path;
     }
     
+    /**
+     * Writer constructor.
+     * @param file_path
+     * @param append_value 
+     **/
     public Writer(String file_path, boolean append_value){
         path = file_path;
         append_to_text = append_value;
     }
     
+    /**
+     * Writes textLine into file.
+     * @param textLine the String to write
+     * @throws IOException
+     **/
     public void writeToFile(String textLine) throws IOException{
         FileWriter write = new FileWriter(path, append_to_text);
         PrintWriter print_line = new PrintWriter(write);

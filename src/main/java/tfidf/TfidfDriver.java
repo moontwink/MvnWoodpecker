@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tfidf;
 
 /**
@@ -12,8 +9,6 @@ package tfidf;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.LinkedList;
-import java.lang.Math;
 import model.tweetModel;
 import ngram.NGramDriver;
 
@@ -21,6 +16,10 @@ public class TfidfDriver {
     private static ArrayList<ngram.NGram> ngramlist; //contains the list of the ngrams and the frequency counts
     private static ArrayList <Tfidf> toplist; // contains the list of the top ngrams given tf-idf scores
     
+    /**
+     * This method computes the IDF value of all ngrams.
+     * @param newList
+     */
     public static void idfchecker(ArrayList<tweetModel> newList)//gets the idf element by checkin the ngram results against the filtered corpus
     {
         int count=0;
@@ -51,6 +50,13 @@ public class TfidfDriver {
         printTopList();
     }
     
+    @SuppressWarnings("empty-statement")
+    /**
+     * This method gets the TF-IDF score of the ngram.
+     * @param ngramindex 
+     * @param count
+     * @param tweetListCount
+     */
     public static void tfidfscore(int ngramindex, int count, int tweetListCount) //compute for the tf-idf scores
     {
 //        tf * log(idf)
@@ -75,6 +81,9 @@ public class TfidfDriver {
         }
     }
     
+    /**
+     * Prints the list of ngrams in order
+     */
     private static void printTopList(){
         sorttoplist(getToplist());
         
@@ -83,6 +92,10 @@ public class TfidfDriver {
         }
     }
     
+    /**
+     * Sorts the list of ngrams in DESCENDING order by TF-IDF score
+     * @param list
+     */
     public static void sorttoplist(ArrayList<Tfidf> list){
 
         Collections.sort(list, new MyComparator());
@@ -96,6 +109,9 @@ public class TfidfDriver {
         return toplist;
     }
     
+    /**
+     * Comparator used by sorttoplist to sort
+     */
     public static class MyComparator implements Comparator<Tfidf> {
    
         @Override

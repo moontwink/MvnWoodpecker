@@ -16,10 +16,14 @@ import java.util.regex.*;
 import java.io.*;
 import model.tweetModel;
 
-public class TopicModeller {
+public class TopicModeler {
     private ArrayList<TopicOutput> allTopics;
     private int dataSize = 0;
     
+    /**
+     * Imports tweets data into a MALLET TXT file.
+     * @param tweets
+     */
     public void importData(ArrayList<tweetModel> tweets) {
         String filePath = "src/malletfile.txt";
         
@@ -38,10 +42,17 @@ public class TopicModeller {
         }
     }
     
+    /**
+     * Sorts list of topics by TF-IDF in DESCENDING order.
+     * @param list 
+     */
     public static void sortTopicsList(ArrayList<TopicOutput> list){
         Collections.sort(list, new MyComparator());
     }
     
+    /**
+     * Comparator used by sortTopicsList for sorting.
+     */
       public static class MyComparator implements Comparator<TopicOutput> {
    
 
@@ -61,6 +72,9 @@ public class TopicModeller {
         }
     }
     
+    /**
+     * Trains topics using imported mallet file.
+     */
     public void trainTopics(){
         // Begin by importing documents from text to feature sequences
         ArrayList<Pipe> pipeList = new ArrayList<Pipe>();

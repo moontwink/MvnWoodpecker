@@ -15,6 +15,9 @@ public class FilesCleaner {
     private static final String LM_datafolderpath = "src/data/languagemodeller/";
     private static final String TM_datafolderpath = "src/data/topicmodeller/";
     
+    /**
+     * Cleans all visual files found in the visual directory.
+     */
     public static void cleanAllVisualFiles(){
         System.out.println("---------- Clean Visual Files Operation ----------");
         System.out.println("Operation: Clean all HTML files");
@@ -25,6 +28,10 @@ public class FilesCleaner {
         System.out.println("---------- End of Visual Files Operation ----------\n\n");
     }
     
+    /**
+     * This method cleans all HTML files from the path.
+     * @param path
+     */
     private static void cleanDirHTMLFiles(String path) {
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
@@ -42,6 +49,9 @@ public class FilesCleaner {
         }
     }
     
+    /**
+     * This method cleans all TXT files in the data directory
+     */
     public static void cleanDataFiles(){
         System.out.println("---------- Clean Data Files Operation ----------");
         System.out.println("Operation: Clean all TXT files");

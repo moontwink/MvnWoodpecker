@@ -2,7 +2,6 @@
 package model;
 
 import java.util.ArrayList;
-import tfidf.TM_TfidfDriver;
 import tfidf.TM_TfidfModel;
 
 /**
@@ -15,20 +14,27 @@ public class TMDrillModel {
     private ArrayList<TM_TfidfModel> topics;
     private FeatureStatistics statistics;
 
+    /**
+     * TMDrillModel constructor.
+     */
     public TMDrillModel() {
         level = 0;
     }
     
+    /**
+     * LMDrillModel constructor.
+     * @param level
+     */
     public TMDrillModel(int level) {
         this.level = level;
     }
 
-    public TMDrillModel(int level, String tablename, ArrayList<TM_TfidfModel> topics) {
-        this.level = level;
-        this.tablename = tablename;
-        this.topics = topics;
-    }
-
+    /**
+     * LMDrillModel constructor.
+     * @param level
+     * @param topics
+     * @param statistics 
+     */
     public TMDrillModel(int level, String tablename, ArrayList<TM_TfidfModel> topics, FeatureStatistics statistics) {
         this.level = level;
         this.tablename = tablename;

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Visual.venn;
 
@@ -23,6 +18,13 @@ import model.TMDrillModel;
 public class VennDiagramWriter {
     private static TMDrillModel VennContents;
     
+/**
+ * This method writes the html file for the venn diagram. 
+ * @param filename
+ * @param tmDM
+ * @return String returns the URL of the file
+ * @throws IOException
+ */
   public static String write (String filename, TMDrillModel tmDM) throws IOException
   {
   BufferedWriter outputWriter = null;

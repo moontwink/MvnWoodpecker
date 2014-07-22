@@ -2,7 +2,7 @@
 package gui;
 
 import filemanagement.ZipFiles;
-import filemanagement.fileDataWriter;
+import filemanagement.FileDataWriter;
 import java.util.ArrayList;
 import java.util.List;
 import model.LMDrillModel;
@@ -116,7 +116,7 @@ public class LM_SelectSave extends javax.swing.JFrame {
             filesToSave.add(wordcloudUrl+"d3.layout.cloud.js");
         }
         if(rawDataCB.isSelected()){
-            filesToSave.add(fileDataWriter.writeLMToplist(lmDM.getTablename(), lmDM.getTopList()));
+            filesToSave.add(FileDataWriter.writeLMToplist(lmDM.getTablename(), lmDM.getTopList()));
         }
         if(timelineCB.isSelected()){
             filesToSave.add(timelineUrl+"timeline-"+lmDM.getTablename()+".html");

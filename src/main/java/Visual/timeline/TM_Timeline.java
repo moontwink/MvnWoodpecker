@@ -17,7 +17,13 @@ import static ngram.NGramDriver.sortngramlist;
  */
 public class TM_Timeline {
     
-    
+    /**
+     * Generates the data for Timeline
+     * @param filename
+     * @param tmDM
+     * @return url
+     * @throws IOException
+     */
     public static String timelineTopics(String filename, ArrayList<TopicOutput> tmDM) throws IOException{
          String[] keywords= splitTableName(filename);
          ArrayList<tweetModel> tweets =  getAllTweets(filename);
@@ -38,6 +44,12 @@ public class TM_Timeline {
        return url;
     }
     
+    /**
+     * Checks if the user doesn't have keywords input and fixes the data for timeline.
+     * @param tweets
+     * @param topics
+     * @param tmDM
+     */
      public static void withoutKeywords(ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics, ArrayList<TopicOutput> tmDM){
          NGramDriver grammy = new NGramDriver();
          NGramDriver.setNgramlist(new ArrayList<NGram>());
@@ -98,6 +110,12 @@ public class TM_Timeline {
        
      }
     
+     /**
+     * Checks if the user have keywords input and fixes the data for timeline.
+     * @param keywords
+     * @param tweets
+     * @param topics
+     */
      public static void  withKeywords(String[] keywords, ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics){
          
         
@@ -132,6 +150,11 @@ public class TM_Timeline {
          }
      }
      
+     /**
+     * From the table name, keywords are extracted.
+     * @param filename
+     * @return String[] 
+     */
      public static String[] splitTableName(String filename){
         String[] temp;       
         String[] temp2;       
@@ -162,6 +185,11 @@ public class TM_Timeline {
         return temp2;
     }
     //17 Oct 2013 10:01:19 GMT
+     /**
+     * Changes the date format for the timeline.
+     * @param date
+     * @return String
+     */
       public static String splitDate(String date){
         String[] temp= null;       
         String dates= null; 
@@ -173,6 +201,11 @@ public class TM_Timeline {
         return dates;
     }
     // [Date.UTC(year,  month, day), frequency ]
+    /**
+     * Changes months to number format.
+     * @param month
+     * @return int
+     */   
       private static int monthNumber(String month){
         int monthnum = 0;
         

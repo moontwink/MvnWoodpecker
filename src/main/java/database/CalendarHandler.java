@@ -6,7 +6,12 @@ package database;
  * @author Nancy
  */
 public class CalendarHandler {
-    //Converts Month to its Number Equivalent
+    
+    /**
+     * Converts Month to its Number Equivalent
+     * @param month
+     * @return int this is the number form of the month
+     */
     public static int monthNumber(String month){
         int monthnum = 0;
         
@@ -27,7 +32,11 @@ public class CalendarHandler {
         }
     }
     
-    //Converts Month Number to its name equivalent
+    /**
+     * Converts Month Number to its name equivalent
+     * @param month This is the number form on a month.
+     * @return String This is the word form on a month.
+     */
     public static String monthName(int month){
         String name = " ";
         
@@ -48,7 +57,12 @@ public class CalendarHandler {
         }
     }
     
-    //Returns number of days in a month
+    /**
+     * This returns the number of days in a month.
+     * @param month
+     * @param year
+     * @return int 
+     */
     public static int numDaysinMonth(int month, int year){
         int numdays = 30;
         
@@ -70,6 +84,12 @@ public class CalendarHandler {
         }
     }
     
+    /**
+     * This returns the number of days in a month by name.
+     * @param month
+     * @param year
+     * @return int 
+     */
     public static int numDaysinMonthname(String month, int year){
         int numdays = 30;
         

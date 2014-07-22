@@ -15,20 +15,27 @@ public class LMDrillModel {
     private String[] keywords;
     private FeatureStatistics statistics;
 
+    /**
+     * LMDrillModel constructor.
+     */
     public LMDrillModel() {
         level = 0;
     }
     
+    /**
+     * LMDrillModel constructor.
+     * @param level
+     */
     public LMDrillModel(int level) {
         this.level = level;
     }
 
-    public LMDrillModel(int level, String tablename, ArrayList<Tfidf> topList) {
-        this.level = level;
-        this.tablename = tablename;
-        this.topList = topList;
-    }
-
+    /**
+     * LMDrillModel constructor.
+     * @param level
+     * @param topList
+     * @param statistics
+     */
     public LMDrillModel(int level, String tablename, ArrayList<Tfidf> topList, FeatureStatistics statistics) {
         this.level = level;
         this.tablename = tablename;
@@ -105,8 +112,4 @@ public class LMDrillModel {
     public void setStatistics(FeatureStatistics statistics) {
         this.statistics = statistics;
     }
-    
-    
-    
-    
 }

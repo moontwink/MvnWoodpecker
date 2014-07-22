@@ -2,7 +2,7 @@
 package gui;
 
 import filemanagement.ZipFiles;
-import filemanagement.fileDataWriter;
+import filemanagement.FileDataWriter;
 import java.util.ArrayList;
 import java.util.List;
 import model.TMDrillModel;
@@ -117,7 +117,7 @@ public class TM_SelectSave extends javax.swing.JFrame {
             filesToSave.add(vennUrl+"venn.js");
         }
         if(rawDataCB.isSelected()){
-            filesToSave.add(fileDataWriter.writeTMTopics(tmDM.getTablename(), tmDM.getTopics()));
+            filesToSave.add(FileDataWriter.writeTMTopics(tmDM.getTablename(), tmDM.getTopics()));
         }
         if(timelineCB.isSelected()){
             filesToSave.add(timelineUrl+"timeline-"+tmDM.getTablename()+".html");

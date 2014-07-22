@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package ngram;
 
@@ -14,6 +9,11 @@ public class NGram {
      String tweet;
      int frequency;
 
+     /**
+     *
+     * @param tweet
+     * @param frequency
+     */
     public NGram(String tweet, int frequency){
      this.tweet = tweet;
      this.frequency = frequency;

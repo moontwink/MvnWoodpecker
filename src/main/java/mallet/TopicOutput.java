@@ -13,9 +13,12 @@ public class TopicOutput {
     private double relevance;
     private ArrayList<String> keywords;
 
-    public TopicOutput() {
-    }
-    
+    /**
+     * TopicOutput constructor.
+     * @param topicnum
+     * @param relevance
+     * @param keywords
+     */
     public TopicOutput(int topicnum, double relevance, ArrayList<String> keywords) {
         this.topicnum = topicnum;
         this.relevance = relevance;

@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import mallet.TopicModeller;
+import mallet.TopicModeler;
 import model.FeatureStatistics;
 import model.LMDrillModel;
 import model.TMDrillModel;
@@ -31,7 +31,11 @@ public class tweetHandler {
     private static String expandedLinks = " ";
     private static String shortenedLinks = " ";
     
-    //Adds tweet to database
+    /**
+     * Adds tweet to database.
+     * @param tm this is the tweet model
+     * @return String This is if the message is saved
+     */
     public static String addTweet(tweetModel tm){
         String message = "* Saving Failed.";
         
@@ -67,13 +71,21 @@ public class tweetHandler {
         
     }
     
-    //Normalizes tweet
+    /**
+     * This method makes the tweet messages to lower case.
+     * @param tweet
+     * @return String
+     */
     public static String normalizeTweet(String tweet){
         String tweetLine = tweet.toLowerCase();
         return tweetLine;
     }
     
-    //Cleans tweet
+    /**
+     * Cleans tweet of links and normalizes it.
+     * @param tweet
+     * @return String Returns cleaned tweets
+     */
     public static String cleanTweet(String tweet){
         tweet = RemoveLinks(tweet);
         tweet = normalizeTweet(tweet);
@@ -95,6 +107,11 @@ public class tweetHandler {
         return tweet;
     }
     
+    /**
+     * Removes links from tweet
+     * @param tweet
+     * @return String Return the tweet without the links
+     */
     public static String RemoveLinks(String tweet)
    {
         
@@ -168,6 +185,12 @@ public class tweetHandler {
        return tweet;
    }
     
+   /**
+    * Expands the address to its expanded version
+    * @param address
+    * @return String Returns expanded URL.
+    * @throws IOException
+    */
    public static String expandShortURL(String address) throws IOException {
         URL url = new URL(address);
  
@@ -179,7 +202,11 @@ public class tweetHandler {
         return expandedURL;
    }
     
-    //Retrieves all Tweets from specified table
+   /**
+    * Gets all tweets from a table
+    * @param tablename
+    * @return ArrayList<tweetModel> 
+    **/
     public static ArrayList<tweetModel> getAllTweets(String tablename){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
@@ -210,13 +237,21 @@ public class tweetHandler {
         return results;
     }
     
-   
+    /**
+     * This method sorts the Ngram list and removes outliers.
+     **/
     private static void sortNgramAndRemoveOutliers(){
         NGramDriver.sortngramlist(NGramDriver.getNgramlist());
         NGramDriver.removeOutliers();
     }
     
-    //Language Modeller - Retrieves all Tweets via Keywords
+    /**
+     * LANGUAGE MODELER - This method gets all tweets in the database given the keywords and date.
+     * @param keywords
+     * @param startDate
+     * @param endDate
+     * @return LMDrillModel
+     */
     public static LMDrillModel getAllTweetsByKeywordAndDate(String keywords, String startDate, String endDate){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         LMDrillModel lmDrillModel = new LMDrillModel();
@@ -322,7 +357,13 @@ public class tweetHandler {
         return lmDrillModel;
     }
     
-    //Topic Modeller - Retrieves all Tweets via Keywords
+    /**
+     * TOPIC MODELER - This method gets all tweets in the database given the keywords and date.
+     * @param keywords
+     * @param startDate
+     * @param endDate
+     * @return TMDrillModel
+     */
     public static TMDrillModel TMgetAllTweetsByKeywordAndDate(String keywords, String startDate, String endDate){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         TMDrillModel tmDrillModel = new TMDrillModel();
@@ -404,7 +445,7 @@ public class tweetHandler {
             c.close();
             
             System.out.println("******************************* ");
-            TopicModeller tm = new TopicModeller();
+            TopicModeler tm = new TopicModeler();
             
             if(results.isEmpty()){
                 tmDrillModel = new TMDrillModel(-1);
@@ -430,8 +471,13 @@ public class tweetHandler {
         return tmDrillModel;
     }
     
-    //Retrieves all Tweets via Keywords
-    public static LMDrillModel getAllTweetsByKeyword(String keywords){
+    /**
+     * LANGUAGE MODELER - This method gets all tweets in the database given the keywords.
+     * @param dbtablename  
+     * @param keywords
+     * @return LMDrillModel
+     */
+    public static LMDrillModel getAllTweetsByKeyword(String dbtablename, String keywords){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
         LMDrillModel lmDrillModel = new LMDrillModel();
@@ -464,7 +510,7 @@ public class tweetHandler {
                 System.out.println(ps);
             ps = c.prepareStatement(
                 "INSERT INTO `" + tablename + "` (username, date, message) " + 
-                "SELECT username, date, message FROM `tweets` " +
+                "SELECT username, date, message FROM `" + dbtablename + "` " +
                 "WHERE message like '%" + keywords + "%';");
                 ps.execute();   
                 System.out.println(ps);
@@ -509,7 +555,11 @@ public class tweetHandler {
         return lmDrillModel;
     }
     
-    //Topic Modeller - Retrieves all Tweets via Keywords
+    /**
+     * TOPIC MODELER - This method gets all tweets in the database given the keywords.
+     * @param keywords
+     * @return TMDrillModel
+     */
     public static TMDrillModel TMgetAllTweetsByKeyword(String keywords){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
@@ -564,7 +614,7 @@ public class tweetHandler {
             c.close();
 
             System.out.println("******************************* ");
-            TopicModeller tm = new TopicModeller();
+            TopicModeler tm = new TopicModeler();
             
             if(results.isEmpty()){
                 tmDrillModel = new TMDrillModel(-1);
@@ -590,7 +640,12 @@ public class tweetHandler {
         return tmDrillModel;
     }
     
-    //Retrieves all Tweets via Date
+    /**
+     * LANGUAGE MODELER - This method gets all tweets in the database given the dates.
+     * @param startDate
+     * @param endDate
+     * @return LMDrillModel
+     */
     public static LMDrillModel getAllTweetsByDate(String startDate, String endDate){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         LMDrillModel lmDrillModel = new LMDrillModel();
@@ -690,7 +745,12 @@ public class tweetHandler {
         return lmDrillModel;
     }
     
-    //Topic Modeller - Retrieves all Tweets via Date
+    /**
+     * TOPIC MODELER - This method gets all tweets in the database given the dates.
+     * @param startDate
+     * @param endDate
+     * @return TMDrillModel
+     */
     public static TMDrillModel TMgetAllTweetsByDate(String startDate, String endDate){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         TMDrillModel tmDrillModel = new TMDrillModel();
@@ -766,7 +826,7 @@ public class tweetHandler {
             
             System.out.println("******************************* ");
             
-            TopicModeller tm = new TopicModeller();
+            TopicModeler tm = new TopicModeler();
             
             if(results.isEmpty()){
                 tmDrillModel = new TMDrillModel(-1);
@@ -792,7 +852,11 @@ public class tweetHandler {
         return tmDrillModel;
     }
     
-    //Converts Month to its Number Equivalent
+    /**
+     * This method converts month to its Number Equivalent.
+     * @param month
+     * @return int
+     */   
     private static int monthNumber(String month){
         int monthnum = 0;
         
@@ -813,7 +877,11 @@ public class tweetHandler {
         }
     }
     
-    //Converts Month Number to its name equivalent
+    /**
+     * This method converts the number equivalent of month to its word equivalent.
+     * @param month
+     * @return String
+     */  
     private static String monthName(int month){
         String name = " ";
         
@@ -834,7 +902,11 @@ public class tweetHandler {
         }
     }
     
-    //Returns number of days in a month
+    /**
+     * This returns the number of days in a month.
+     * @param month
+     * @return int 
+     */
     private static int numDaysinMonth(int month){
         int numdays = 30;
         
@@ -855,6 +927,11 @@ public class tweetHandler {
         }
     }
     
+    /**
+     * Gets all retweets from a table.
+     * @param tablename
+     * @return ArrayList<tweetModel>
+     */
     public static ArrayList<tweetModel> getAllRetweets(String tablename){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
@@ -883,6 +960,11 @@ public class tweetHandler {
         return results;
     }
     
+    /**
+     * Gets the earliest date from the table.
+     * @param tablename
+     * @return String
+     */
     public static String getEarliestDate(String tablename){
         String date = "";
         
@@ -905,6 +987,11 @@ public class tweetHandler {
         return date;
     }
     
+    /**
+     * Gets the lates date from the table.
+     * @param tablename
+     * @return String
+     */
     public static String getLatestDate(String  tablename){
         String date = "";
         
@@ -927,7 +1014,12 @@ public class tweetHandler {
         return date;
     }
     
-    //Drilldown Via Language Modeller
+    /**
+     * LANGUAGE MODELER - This method gets the tweets for the Drill Down.
+     * @param keywords
+     * @param currentlmDM
+     * @return LMDrillModel
+     */
     public static LMDrillModel drillDownByLM(String keywords, LMDrillModel currentlmDM){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
@@ -1002,7 +1094,12 @@ public class tweetHandler {
         return lmDrillModel;
     }
     
-    //Drilldown Via Topic Modeller
+    /**
+     * TOPIC MODELER - This method gets the tweets for the Drill Down.
+     * @param keywords
+     * @param currenttmDM
+     * @return TMDrillModel
+     */
     public static TMDrillModel drillDownByTM(String keywords, TMDrillModel currenttmDM){
         ArrayList<tweetModel> results = new ArrayList<tweetModel>();
         tweetModel t;
@@ -1057,7 +1154,7 @@ public class tweetHandler {
             c.close();
 
             System.out.println("******************************* ");
-            TopicModeller tm = new TopicModeller();
+            TopicModeler tm = new TopicModeler();
             tm.importData(results);
             tm.trainTopics();
             TM_TfidfDriver.idfChecker(results, tm.getAllTopics());

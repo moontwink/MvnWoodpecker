@@ -1,7 +1,6 @@
 
 package Visual;
 
-import gui.LM_DrillDown;
 
 import javafx.application.Platform;
 	import javafx.embed.swing.JFXPanel;
@@ -11,8 +10,6 @@ import javafx.application.Platform;
 	 
 	import javax.swing.*;
 	import java.awt.*;
-	import java.awt.event.ActionEvent;
-	import java.awt.event.ActionListener;
 	 
 	public class WordCloudFX {
             
@@ -21,6 +18,11 @@ import javafx.application.Platform;
          static String htmlrelativeurl;
 	 // JPanel mainPanel;
 	 
+        /**
+         * Loads the JFXPanel for Wordcloud into the tabbed pane in the main gui
+         * @param panel
+         * @param url
+         */
 	  public static void ApplicationFrame(JPanel panel, String url){
 	 
 	    javafxPanel = new JFXPanel();

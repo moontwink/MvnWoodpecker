@@ -18,6 +18,10 @@ import model.tweetModel;
  */
 public class ImportFiles {
     
+    /**
+     * This method import a CSV file selected from the JFileChooser.
+     * @return String
+     */
     public static String importCSVFile() {
         JFileChooser chooser = new JFileChooser();
         FileNameExtensionFilter ext = new FileNameExtensionFilter("CSV Files", "csv");

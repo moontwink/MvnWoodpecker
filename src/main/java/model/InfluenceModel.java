@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package model;
 
@@ -22,10 +17,13 @@ public class InfluenceModel {
     private int influence = 0;
     private InfluencerType type;
 
-    public InfluenceModel(String twitter_account) {
-        this.twitter_account = twitter_account;
-    }
-
+    /**
+     * InfluenceModel constructor.
+     * @param twitter_account 
+     * @param type 
+     * @param linknames 
+     * @param follower_rank 
+     */
     public InfluenceModel(String twitter_account, InfluencerType type, ArrayList<String> linknames, int follower_rank) {
         this.twitter_account = twitter_account;
         this.type = type;
@@ -33,13 +31,6 @@ public class InfluenceModel {
         this.follower_rank = follower_rank;
     }
     
-    
-    
-    public InfluenceModel(String account,int links) //con
-    {
-        this.links_count = links;
-        this.twitter_account = account;
-    }
     /**
      * @return the twitter_account
      */

@@ -11,11 +11,18 @@ public class VennScoreModel {
     private ArrayList<String> similarwords;
     private int vennscore;
 
+    /**
+     * Constructor for VennScoreModel
+     */
     public VennScoreModel() {
         this.similarwords = new ArrayList<>();
         this.vennscore = 0;
     }
     
+    /**
+     * Adds new similar word to list
+     * @param newword
+     */
     public void addSimilarWord(String newword) {
         similarwords.add(newword);
     }

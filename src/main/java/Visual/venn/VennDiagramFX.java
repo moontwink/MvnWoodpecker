@@ -10,8 +10,6 @@ import javafx.application.Platform;
 	 
 	import javax.swing.*;
 	import java.awt.*;
-	import java.awt.event.ActionEvent;
-	import java.awt.event.ActionListener;
 	 
 	public class VennDiagramFX {
             
@@ -20,6 +18,11 @@ import javafx.application.Platform;
          static String vennurl;
 	 // JPanel mainPanel;
 	 
+         /**
+        * Loads the JFXPanel for Venn diagram into the tabbed pane in the main gui
+        * @param panel
+        * @param url
+        */
 	  public static void VennApplicationFrame(JPanel panel, String url){
 	 
 	    javafxPanel = new JFXPanel();

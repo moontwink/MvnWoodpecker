@@ -77,6 +77,10 @@ public class NGramDriver{
    * 
    */
    
+   /**
+     * This method removes the outliers from the NGramlist.
+     * 
+     */
    public static void removeOutliers(){
         double trim = ngramlist.size() * 0.20;
         System.out.print("********************trim**** " + trim);
@@ -86,6 +90,11 @@ public class NGramDriver{
         }
    }
    
+   /**
+     * This method removes the function words from tweets
+     * @param tweet
+     * @return String, the string without function words
+     */
    public static String cleanFunctionWordsFromTweet(String tweet){
            
         Matcher matcher = englishfunctionwords.matcher(tweet);
@@ -99,12 +108,19 @@ public class NGramDriver{
         return tweet;
    }
    
+   /**
+    * This method removes all NGrams in the NGramlist
+    */
    public static void emptyNgram(){
        if(!ngramlist.isEmpty()){
            ngramlist.removeAll(ngramlist);
        }
    }
    
+   /**
+     * This method sends the tweet message to the tokenizer.
+     * @param tweet
+     */
     public static void NGramTweet(String tweet){
 	NGramExtractor extractor = new NGramExtractor();
         
@@ -124,6 +140,10 @@ public class NGramDriver{
         //return ngrams;
     }
     
+    /**
+     * This method sends the tweet message to the tokenizer for Timeline.
+     * @param tweet
+     */
     public static void TimelineNGramTweet(String tweet){
 	NGramExtractor extractor = new NGramExtractor();
         
@@ -143,6 +163,11 @@ public class NGramDriver{
         //return ngrams;
     }
     
+    /**
+     * This method adds Ngrams to the list and checks if it exists already.
+     * @param tweet
+     * @param frequency
+     */
     public static void NGramList(String tweet, int frequency){
         System.out.println(tweet + " [" + frequency + "]");
         if(CompareMessage(ngramlist,tweet, frequency)){
@@ -151,9 +176,15 @@ public class NGramDriver{
         }
     }
     
+    /**
+     * This method compares the each NGram in the list
+     * @param list
+     * @param tweet
+     * @param frequency
+     * @return boolean
+     */
      public static boolean CompareMessage(ArrayList<NGram> list,String tweet, int frequency){
-//        System.out.println(tweet + frequency);
-        
+
         int fre = 0; 
    		for(int num = 0; num < list.size() ; num++){
                   if(tweet.compareTo( list.get(num).getTweet())==0){
@@ -167,6 +198,10 @@ public class NGramDriver{
                 return true;
     }
     
+        /**
+        * Sorts Ngram list in DESCENDING order by frequency
+        * @param list
+        */
       public static void sortngramlist(ArrayList<NGram> list){
         
         //Collections.sort(list, Collections.reverseOrder());
@@ -178,6 +213,10 @@ public class NGramDriver{
     
 
       }
+      
+       /**
+        * Comparator used by sortngramlist to sort list
+        */
       public static class MyComparator implements Comparator<NGram> {
    
 

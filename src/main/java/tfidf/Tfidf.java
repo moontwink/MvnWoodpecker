@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package tfidf;
 
 /**
@@ -12,6 +9,11 @@ public class Tfidf {
     private double score;
     private String tweet;
 
+    /**
+     * General constructor of Tfidf.
+     * @param tweet
+     * @param score
+     */
     public Tfidf(String tweet, double score)
     {
         this.score = score;

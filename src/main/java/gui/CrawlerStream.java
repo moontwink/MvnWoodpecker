@@ -1,12 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package gui;
 
-import javax.swing.JFrame;
 import twitter4j.FilterQuery;
 import twitter4j.StallWarning;
 import twitter4j.Status;
@@ -14,7 +8,6 @@ import twitter4j.StatusDeletionNotice;
 import twitter4j.StatusListener;
 import twitter4j.TwitterStream;
 import twitter4j.TwitterStreamFactory;
-import twitter4j.VersionStream;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
@@ -37,7 +30,7 @@ public class CrawlerStream extends javax.swing.JFrame {
     }
     
     /**
-     * Set OAuth Configurations
+     * Set OAuth Configurations.
      */
     private ConfigurationBuilder configBuild(){
         //Setting OAuth Configurations
@@ -51,7 +44,7 @@ public class CrawlerStream extends javax.swing.JFrame {
     }
     
     /**
-     * Start streaming from Twitter
+     * Start streaming from Twitter.
      */
     public void startStream() {
         startBtn.setEnabled(false);
@@ -141,6 +134,9 @@ public class CrawlerStream extends javax.swing.JFrame {
         System.out.println(TITLE + " " + VERSION);
     }
     
+    /**
+     * Set Manila Streamer Boundary Box.
+     */
     private static void ManilaStreamer(TwitterStream twitterStream){
         //Setting Location Coordinates and Retrieving Tweets
         double[][] manilaBox = new double[][]{

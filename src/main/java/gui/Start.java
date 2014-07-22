@@ -31,7 +31,7 @@ import twitter4j.VersionStream;
  * @author Nancy
  */
 public class Start extends javax.swing.JFrame {
-    private final String TABLE_NAME = "tweets";
+    private String TABLE_NAME = "tweets";
     
     /**
      * Creates new form Start
@@ -47,6 +47,9 @@ public class Start extends javax.swing.JFrame {
         insertImportedTables();
     }
     
+    /**
+     * Sets initially disabled components.
+     */
     public void setDisabled(){
         filterCriteriaPanel.setEnabled(false);
         
@@ -74,6 +77,9 @@ public class Start extends javax.swing.JFrame {
         
     }
     
+    /**
+     * Enables date boxes.
+     */
     private void enableDateBoxes(){
         sDateLabel.setEnabled(true);
         eDateLabel.setEnabled(true);
@@ -86,6 +92,9 @@ public class Start extends javax.swing.JFrame {
         eyearMB.setEnabled(true);
     }
     
+    /**
+     * Insert imported tables into import combobox.
+     */
     private void insertImportedTables(){
         if(importCB.getItemCount() != 0){ importCB.removeAllItems(); }
         for(String s : TablesHandler.getAllImportTables()){
@@ -154,11 +163,13 @@ public class Start extends javax.swing.JFrame {
         progressBar = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Woodpecker");
         setBackground(new java.awt.Color(255, 255, 255));
         setResizable(false);
 
         tabPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "OUTPUT", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
         tabPane.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        tabPane.setOpaque(true);
         tabPane.addContainerListener(new java.awt.event.ContainerAdapter() {
             public void componentRemoved(java.awt.event.ContainerEvent evt) {
                 tabPaneComponentRemoved(evt);
@@ -334,15 +345,17 @@ public class Start extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(193, Short.MAX_VALUE))
+                .addContainerGap(163, Short.MAX_VALUE))
         );
 
         tabPane.addTab("TWEET CRAWLER", jPanel2);
 
         tweetSourcePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "TWEETS SOURCE", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        tweetSourcePanel.setOpaque(false);
 
         dataGrp.add(importBtn);
         importBtn.setText("IMPORT");
+        importBtn.setOpaque(false);
         importBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 importBtnActionPerformed(evt);
@@ -358,6 +371,7 @@ public class Start extends javax.swing.JFrame {
 
         dataGrp.add(locdbBtn);
         locdbBtn.setText("LOCAL DATABASE");
+        locdbBtn.setOpaque(false);
         locdbBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 locdbBtnActionPerformed(evt);
@@ -420,6 +434,7 @@ public class Start extends javax.swing.JFrame {
         );
 
         filterCriteriaPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "FILTER CRITERIA", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        filterCriteriaPanel.setOpaque(false);
 
         sDateLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         sDateLabel.setText("START DATE");
@@ -428,6 +443,7 @@ public class Start extends javax.swing.JFrame {
         eDateLabel.setText("END DATE");
 
         keywordCB.setText("KEYWORD/S");
+        keywordCB.setOpaque(false);
         keywordCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 keywordCBActionPerformed(evt);
@@ -435,6 +451,7 @@ public class Start extends javax.swing.JFrame {
         });
 
         dateCB.setText("DATE");
+        dateCB.setOpaque(false);
         dateCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 dateCBActionPerformed(evt);
@@ -443,6 +460,7 @@ public class Start extends javax.swing.JFrame {
 
         methodGrp.add(topicRB);
         topicRB.setText("Topic Modeler");
+        topicRB.setOpaque(false);
         topicRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 topicRBActionPerformed(evt);
@@ -451,6 +469,7 @@ public class Start extends javax.swing.JFrame {
 
         methodGrp.add(lmRB);
         lmRB.setText("Language Modeler");
+        lmRB.setOpaque(false);
         lmRB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 lmRBActionPerformed(evt);
@@ -541,7 +560,6 @@ public class Start extends javax.swing.JFrame {
                 .addComponent(dateCB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sDateLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
@@ -570,6 +588,7 @@ public class Start extends javax.swing.JFrame {
         );
 
         TDMethodPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
+        TDMethodPanel.setOpaque(false);
 
         jButton1.setText("START OVER");
         jButton1.setEnabled(false);
@@ -619,7 +638,7 @@ public class Start extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(25, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(tweetSourcePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -655,9 +674,9 @@ public class Start extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(22, 22, 22))
+                .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -920,6 +939,7 @@ public class Start extends javax.swing.JFrame {
             
             if(importBtn.isSelected()){
                 fillDateBoxes(importCB.getSelectedItem().toString());
+                TABLE_NAME = importCB.getSelectedItem().toString();
             }else{
                 fillDateBoxes(TABLE_NAME);
             }
@@ -1074,7 +1094,7 @@ public class Start extends javax.swing.JFrame {
                     }
                     else if(keywordCBselected && !keywordTFempty){
                         TweetCleaner tc = new TweetCleaner();
-                        LMDrillModel lmDrillModel = tc.cleanByKeyword(keywordTF.getText());
+                        LMDrillModel lmDrillModel = tc.cleanByKeyword(TABLE_NAME, keywordTF.getText());
 
                         if(lmDrillModel.getLevel() == -1){
                             JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);

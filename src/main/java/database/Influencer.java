@@ -1,17 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package database;
 
-import static database.tweetHandler.getAllRetweets;
 import static database.tweetHandler.getTweetlinks;
 import java.io.IOException;
-import java.net.HttpURLConnection;
-import java.net.Proxy;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -19,8 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import model.InfluenceModel;
 import model.InfluencerType;
-import tfidf.Tfidf;
-import tfidf.TfidfDriver;
 
 
 /**
@@ -39,6 +28,9 @@ public class Influencer {
       public static ArrayList<String> LinksName = new ArrayList();
       public static ArrayList<Integer> SocialCount = new ArrayList();
       
+    /**
+     * This method initializes the Influence Models for the Influencer module.
+     */
       public static void initializeInfluenceModels() {
           influencers = new ArrayList<>();
           ArrayList<String> linknames = new ArrayList<>();
@@ -220,6 +212,10 @@ public class Influencer {
           }
       }
       
+    /**
+     * This method expands the shortened links in tweets to their original form.  
+     * @throws IOException
+     */
       public static void linksExpander() throws IOException
       {
           for (int i = 0; i < getTweetlinks().size(); i++)
@@ -266,7 +262,10 @@ public class Influencer {
         return influencers;
     }
       
-      public static class MyComparator implements Comparator<InfluenceModel> {
+    /**
+     * Comparator method used for sorting links influence.
+     */
+    public static class MyComparator implements Comparator<InfluenceModel> {
    
         @Override
         public int compare(InfluenceModel o1, InfluenceModel o2) {
@@ -284,6 +283,9 @@ public class Influencer {
         }
     }
       
+    /**
+     * Comparator method used to sort aggregrated influencers.
+     */
     public static class MyComparatorInfluence implements Comparator<InfluenceModel> {
    
         @Override
@@ -302,6 +304,9 @@ public class Influencer {
         }
     }  
       
+    /**
+     * This method computes for the Influence ranking.
+     */
       public static void InfluenceComputer ()
       {
           int count = 0;
@@ -325,6 +330,9 @@ public class Influencer {
            }
       }
       
+      /**
+     * This method creates the rank of each influencer.
+     */
       public static void rankcreator()
       {
           int count = 0 ;

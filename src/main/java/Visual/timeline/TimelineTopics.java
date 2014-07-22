@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Visual.timeline;
 
@@ -16,6 +11,11 @@ public class TimelineTopics {
    private String topics;
    private ArrayList<KeywordOccurence> details;
    
+   /**
+     *
+     * @param topics
+     * @param details
+     */
     public TimelineTopics(String topics, ArrayList<KeywordOccurence> details)
     {
         this.topics = topics;

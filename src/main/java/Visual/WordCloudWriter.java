@@ -5,7 +5,6 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import model.LMDrillModel;
 import tfidf.Tfidf;
 
 
@@ -13,7 +12,13 @@ public class WordCloudWriter{
     
     
     
-    
+/**
+* This method writes the html file for the word clouds
+* @param filename
+* @param lmTopList
+* @return url
+* @throws IOException
+*/ 
 public static String write (String filename, ArrayList<Tfidf> lmTopList) throws IOException{
    //lmDM.getTopList();
   BufferedWriter outputWriter = null;

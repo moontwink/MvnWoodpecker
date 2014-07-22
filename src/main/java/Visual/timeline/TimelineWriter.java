@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package Visual.timeline;
 
@@ -10,15 +5,20 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import model.LMDrillModel;
-import tfidf.Tfidf;
 
 
 public class TimelineWriter{
     
     
     
-    
+/**
+* This method writes the html file for the timelines 
+* 
+* @param filename
+* @param topics
+* @return url
+* @throws IOException
+*/
 public static String write (String filename, ArrayList<TimelineTopics> topics) throws IOException{
    //lmDM.getTopList();
   BufferedWriter outputWriter = null;

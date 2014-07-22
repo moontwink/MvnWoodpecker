@@ -14,6 +14,10 @@ import java.util.logging.Logger;
  * @author Nancy
  */
 public class TablesHandler {
+    /**
+     * Drops specified tablename from database.
+     * @param tablename
+     **/
     public static void dropTable(String tablename){
         try{
             Connection c = DBFactory.getConnection();
@@ -28,6 +32,9 @@ public class TablesHandler {
         }
     }
     
+    /**
+     * Drops all temporary tables from database.
+     **/
     public static void dropAllTempTables(){
         System.out.println("---------- Closing Database Operation ----------");
         System.out.println("Operation: Drop all temporary tables");
@@ -55,6 +62,10 @@ public class TablesHandler {
         }
     }
     
+    /**
+     * Gets all import tables from database.
+     * @return ArrayList<String>
+     **/
     public static ArrayList<String> getAllImportTables(){
         System.out.println("---------- Closing Database Operation ----------");
         System.out.println("Operation: Drop all import tables");

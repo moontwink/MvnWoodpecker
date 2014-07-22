@@ -18,10 +18,16 @@ public class ImportHandler {
     static String importname = "import-x0";
     static int importNumber = 0;
 
+    /**
+     * ImportHandler constructor.
+     **/
     public ImportHandler() {
         importNumber += 1;
     }
     
+    /**
+     * Import CSV data into database.
+     **/
     public String importCSVData(String csvname, List<tweetModel> tweets) {
         String tablename = importname + importNumber + "-" + csvname;
         

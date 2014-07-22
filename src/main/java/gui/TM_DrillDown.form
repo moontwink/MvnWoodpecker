@@ -87,10 +87,6 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="venndiagrampanel" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -102,12 +98,17 @@
                               <Component id="drilldownBtn" min="-2" pref="431" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="drillkeyTF" min="-2" pref="396" max="-2" attributes="0"/>
-                              <EmptySpace pref="151" max="32767" attributes="0"/>
-                              <Component id="closetabBtn" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="venndiagrampanel" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="drillkeyTF" min="-2" pref="396" max="-2" attributes="0"/>
+                                      <EmptySpace pref="151" max="32767" attributes="0"/>
+                                      <Component id="closetabBtn" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -372,27 +373,25 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="saveBtn4" min="-2" pref="139" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Component id="drilldownBtn3" min="-2" pref="431" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="viewtweetsBtn2" min="-2" pref="139" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="drillkeyTF2" min="-2" pref="396" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
                                   <Component id="closetabBtn4" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="jScrollPane5" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane5" alignment="0" pref="750" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="15" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -418,7 +417,6 @@
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="viewtweetsBtn2" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           <Component id="saveBtn4" alignment="3" pref="33" max="32767" attributes="0"/>
                           <Component id="drilldownBtn3" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                       </Group>
@@ -437,14 +435,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="KEYWORD/S FOR DRILLDOWN :"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="viewtweetsBtn2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="View Tweet Data"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewtweetsBtn2ActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="drilldownBtn3">
               <Properties>
@@ -696,9 +686,7 @@
                       <Component id="saveBtn1" min="-2" pref="139" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="drilldownBtn2" min="-2" pref="431" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="viewtweetsBtn3" min="-2" pref="139" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
@@ -729,7 +717,6 @@
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="drilldownBtn2" alignment="3" min="-2" pref="33" max="-2" attributes="0"/>
                           <Component id="saveBtn1" alignment="3" pref="33" max="32767" attributes="0"/>
-                          <Component id="viewtweetsBtn3" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -828,14 +815,6 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Save..."/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JButton" name="viewtweetsBtn3">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="View Tweet Data"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="viewtweetsBtn3ActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>

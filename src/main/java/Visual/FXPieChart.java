@@ -2,12 +2,9 @@
 package Visual;
 
 
-import gui.LM_DrillDown;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.web.WebView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,15 +13,18 @@ import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import model.FeatureStatistics;
-import model.LMDrillModel;
 
 public class FXPieChart {
 
     static JFXPanel javafxPanel;
     static FeatureStatistics statistics;
 
+    /**
+     * Loads the JFXPanel for PieChart into the tabbed pane in the main gui
+     * @param panel
+     * @param stat
+     */
   public static void PieApplicationFrame(JPanel panel, FeatureStatistics stat){
 
     javafxPanel = new JFXPanel();

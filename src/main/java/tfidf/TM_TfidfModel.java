@@ -11,6 +11,11 @@ public class TM_TfidfModel {
     private TopicOutput topic;
     private double score;
 
+    /**
+     * General constructor of TM_TfidfModel.
+     * @param topic
+     * @param score
+     */
     public TM_TfidfModel(TopicOutput topic, double score) {
         this.topic = topic;
         this.score = score;

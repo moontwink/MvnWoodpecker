@@ -18,6 +18,12 @@ public class DBFactory {
     private static String username = "";
     private static String password = ""; //"p@ssword";
     
+    /**
+     *
+     * @return Connection
+     * @throws ClassNotFoundException
+     * @throws SQLException
+     */
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName(driver);
         initializeDBConnectionParameters();
@@ -26,6 +32,10 @@ public class DBFactory {
         return connection;
     }
     
+    /**
+     * Initializes the DB Connection Parameters from config file
+     * 
+     */
     private static void initializeDBConnectionParameters()
     {
         System.out.println("---------- Initializing Database Operation ----------");
@@ -66,6 +76,10 @@ public class DBFactory {
         System.out.println("---------- End of Database Operation ----------\n\n");
     }
     
+    /**
+     *
+     * @param c This is the connection.
+     */
     public static void closeConnection(Connection c) {
         try {
             c.close();

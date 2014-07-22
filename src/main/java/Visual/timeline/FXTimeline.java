@@ -2,8 +2,6 @@
 package Visual.timeline;
 
 
-import Visual.*;
-import gui.LM_DrillDown;
 import javafx.application.Platform;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -12,14 +10,6 @@ import javafx.scene.web.WebView;
 
 import javax.swing.*;
 import java.awt.*;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
-import javafx.scene.Group;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
-import model.FeatureStatistics;
-import model.LMDrillModel;
 
 public class FXTimeline {
 
@@ -27,6 +17,11 @@ public class FXTimeline {
     static WebView webComponent;
     static String htmlrelativeurl;
 
+    /**
+    * Loads the JFXPanel for timeline into the tabbed pane in the main gui
+    * @param panel
+    * @param url
+    */
   public static void TimelineApplicationFrame(JPanel panel, String url){
 
             javafxPanel = new JFXPanel();
