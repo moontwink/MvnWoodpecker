@@ -67,10 +67,6 @@ public class TablesHandler {
      * @return ArrayList<String>
      **/
     public static ArrayList<String> getAllImportTables(){
-        System.out.println("---------- Closing Database Operation ----------");
-        System.out.println("Operation: Drop all import tables");
-        System.out.println("Status: Beginning to drop all imported tables");
-        
         ArrayList<String> importtables = new ArrayList<>();
         try{
             Connection c = DBFactory.getConnection();
@@ -85,7 +81,6 @@ public class TablesHandler {
             while(rs.next()){
                 importtables.add(rs.getString("table_name"));
             }
-            System.out.println("---------- End of Database Operation ----------\n\n");
         }catch(ClassNotFoundException ex){
             Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }catch(SQLException ex){

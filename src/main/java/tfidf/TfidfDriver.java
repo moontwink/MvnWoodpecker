@@ -6,6 +6,7 @@ package tfidf;
  * @author Matt
  */
 
+import gui.Start;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,6 +23,7 @@ public class TfidfDriver {
      */
     public static void idfchecker(ArrayList<tweetModel> newList)//gets the idf element by checkin the ngram results against the filtered corpus
     {
+        Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
         int count=0;
         ngramlist = ngram.NGramDriver.getNgramlist();    //list of ngrams
             System.out.println("*****>>> " + ngramlist + "\n\t " + newList.size());

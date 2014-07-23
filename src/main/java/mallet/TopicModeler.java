@@ -10,10 +10,12 @@ import cc.mallet.types.*;
 import cc.mallet.pipe.*;
 import cc.mallet.pipe.iterator.*;
 import cc.mallet.topics.*;
+import gui.Start;
 
 import java.util.*;
 import java.util.regex.*;
 import java.io.*;
+import javax.swing.JOptionPane;
 import model.tweetModel;
 
 public class TopicModeler {
@@ -76,6 +78,7 @@ public class TopicModeler {
      * Trains topics using imported mallet file.
      */
     public void trainTopics(){
+        Start.systemOutArea.append("\tTraining Topics\n");
         // Begin by importing documents from text to feature sequences
         ArrayList<Pipe> pipeList = new ArrayList<Pipe>();
 
@@ -127,6 +130,8 @@ public class TopicModeler {
             model.estimate();
         } catch (IOException ex) {
             System.out.println("MODEL ESTIMATE EXCEPTION");
+        } catch(Exception ex) {
+            JOptionPane.showMessageDialog(null, "Mallet Overflow.\n Please press Begin again.", "Mallet", JOptionPane.ERROR_MESSAGE);
         }
 
         // Show the words and topics in the first instance

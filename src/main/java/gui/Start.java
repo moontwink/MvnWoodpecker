@@ -65,10 +65,8 @@ public class Start extends javax.swing.JFrame {
         emonthMB.setEnabled(false);
         edayMB.setEnabled(false);
         eyearMB.setEnabled(false);
-        resetCriteriaBtn.setEnabled(false);
         beginBtn.setEnabled(false);
         
-        TDMethodPanel.setEnabled(false);
         lmRB.setEnabled(false);
         topicRB.setEnabled(false);
         
@@ -80,16 +78,15 @@ public class Start extends javax.swing.JFrame {
     /**
      * Enables date boxes.
      */
-    private void enableDateBoxes(){
-        sDateLabel.setEnabled(true);
-        eDateLabel.setEnabled(true);
-        dateCB.setEnabled(true);
-        smonthMB.setEnabled(true);
-        sdayMB.setEnabled(true);
-        syearMB.setEnabled(true);
-        emonthMB.setEnabled(true);
-        edayMB.setEnabled(true);
-        eyearMB.setEnabled(true);
+    private void setDateBoxesEnabled(boolean status){
+        sDateLabel.setEnabled(status);
+        eDateLabel.setEnabled(status);
+        smonthMB.setEnabled(status);
+        sdayMB.setEnabled(status);
+        syearMB.setEnabled(status);
+        emonthMB.setEnabled(status);
+        edayMB.setEnabled(status);
+        eyearMB.setEnabled(status);
     }
     
     /**
@@ -157,10 +154,9 @@ public class Start extends javax.swing.JFrame {
         edayMB = new javax.swing.JComboBox();
         syearMB = new javax.swing.JComboBox();
         eyearMB = new javax.swing.JComboBox();
-        TDMethodPanel = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        resetCriteriaBtn = new javax.swing.JButton();
         progressBar = new javax.swing.JProgressBar();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        systemOutArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Woodpecker");
@@ -345,7 +341,7 @@ public class Start extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
         );
 
         tabPane.addTab("TWEET CRAWLER", jPanel2);
@@ -526,27 +522,23 @@ public class Start extends javax.swing.JFrame {
                         .addGap(86, 86, 86)
                         .addComponent(beginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
                         .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, filterCriteriaPanelLayout.createSequentialGroup()
-                                    .addGap(16, 16, 16)
-                                    .addComponent(sDateLabel))
-                                .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
-                                    .addContainerGap()
-                                    .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(eDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(smonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(eDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(sdayMB, 0, 40, Short.MAX_VALUE)
-                            .addComponent(edayMB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(syearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(eyearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(sDateLabel)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(smonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(sdayMB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(edayMB, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(syearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(eyearMB, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         filterCriteriaPanelLayout.setVerticalGroup(
@@ -560,21 +552,19 @@ public class Start extends javax.swing.JFrame {
                 .addComponent(dateCB)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sDateLabel)
-                .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(eDateLabel))
-                    .addGroup(filterCriteriaPanelLayout.createSequentialGroup()
-                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(smonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(sdayMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(syearMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(edayMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(eyearMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(smonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(sdayMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(syearMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(5, 5, 5)
+                .addComponent(eDateLabel)
+                .addGap(12, 12, 12)
+                .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(emonthMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(edayMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(eyearMB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addGroup(filterCriteriaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -587,65 +577,33 @@ public class Start extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        TDMethodPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 14))); // NOI18N
-        TDMethodPanel.setOpaque(false);
-
-        jButton1.setText("START OVER");
-        jButton1.setEnabled(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        resetCriteriaBtn.setText("RESET");
-        resetCriteriaBtn.setEnabled(false);
-        resetCriteriaBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                resetCriteriaBtnActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout TDMethodPanelLayout = new javax.swing.GroupLayout(TDMethodPanel);
-        TDMethodPanel.setLayout(TDMethodPanelLayout);
-        TDMethodPanelLayout.setHorizontalGroup(
-            TDMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TDMethodPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(resetCriteriaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        TDMethodPanelLayout.setVerticalGroup(
-            TDMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(TDMethodPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(TDMethodPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(resetCriteriaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         progressBar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         progressBar.setString(".....");
         progressBar.setStringPainted(true);
+
+        systemOutArea.setColumns(20);
+        systemOutArea.setRows(5);
+        systemOutArea.setWrapStyleWord(true);
+        jScrollPane2.setViewportView(systemOutArea);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(tweetSourcePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TDMethodPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tweetSourcePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(18, 18, 18))
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(71, 71, 71)
+                        .addGap(69, 69, 69)
                         .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(tabPane, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -655,16 +613,17 @@ public class Start extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(tabPane)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(tweetSourcePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(filterCriteriaPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(TDMethodPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(tabPane)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         tabPane.getAccessibleContext().setAccessibleName("VISUALIZATION");
@@ -719,8 +678,6 @@ public class Start extends javax.swing.JFrame {
             browseBtn.setEnabled(true);
             importCB.setEnabled(true);
         }
-        else
-        browseBtn.setEnabled(false);
     }//GEN-LAST:event_importBtnActionPerformed
 
     private void browseBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_browseBtnActionPerformed
@@ -728,194 +685,30 @@ public class Start extends javax.swing.JFrame {
     }//GEN-LAST:event_browseBtnActionPerformed
 
     private void locdbBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_locdbBtnActionPerformed
-        if(locdbBtn.isSelected())
-        browseBtn.setEnabled(false);
+        if(locdbBtn.isSelected()){
+            browseBtn.setEnabled(false);
+            importCB.setEnabled(false);
+        }
     }//GEN-LAST:event_locdbBtnActionPerformed
 
     private void beginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_beginBtnActionPerformed
         
-    System.out.println("THREAD START...........");
-    new Thread(new TweetpeckThread()).start();  
+        new Thread(new TweetpeckThread()).start();      
         
-//    //IF LANGUAGE MODELER IS SELECTED
-//    if(lmRB.isSelected()){
-//        String method = "LM";
-//        NGramDriver.emptyNgram();
-//        
-//        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) && dateCB.isSelected()){
-//            TweetCleaner tc = new TweetCleaner();
-//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-//            
-//            LMDrillModel lmDrillModel = tc.cleanByKeywordsAndDate(keywordTF.getText(), start, end);
-//            
-//            if(lmDrillModel.getLevel() == -1){
-//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-//            }else{
-//                String startMonth =  smonthMB.getSelectedItem().toString();
-//                String startDay = sdayMB.getSelectedItem().toString();
-//                String startYear = syearMB.getSelectedItem().toString();
-//                String endMonth =  emonthMB.getSelectedItem().toString();
-//                String endDay = edayMB.getSelectedItem().toString();
-//                String endYear = eyearMB.getSelectedItem().toString();
-//
-//                String keys = keywordTF.getText();
-//                keys = keys.replaceAll(",", " ");
-//                keys = keys.replaceAll(";", " ");
-//                String[] keywords = keys.split(" ");
-//                
-//                lmDrillModel.setKeywords(keywords);
-//                
-//                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
-//                tabPane.add(method + " - LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
-//                    + startMonth + "." + startDay + "." + startYear
-//                    + "-" + endMonth + "." + endDay + "." + endYear 
-//                    + "]", p);
-//                tabPane.setSelectedComponent(p);
-//            }
-//        }
-//        else if((keywordCB.isSelected() && !keywordTF.getText().isEmpty())){
-//            TweetCleaner tc = new TweetCleaner();
-//            LMDrillModel lmDrillModel = tc.cleanByKeyword(keywordTF.getText());
-//            
-//            if(lmDrillModel.getLevel() == -1){
-//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-//            }else{
-//                String keys = keywordTF.getText();
-//                keys = keys.replaceAll(",", " ");
-//                keys = keys.replaceAll(";", " ");
-//                String[] keywords = keys.split(" ");
-//                
-//                lmDrillModel.setKeywords(keywords);
-//                
-//                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
-//                tabPane.add("LV" + lmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
-//                tabPane.setSelectedComponent(p);
-//            }
-//        }
-////        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) || dateCB.isSelected()){
-//        else if(dateCB.isSelected()){
-//            TweetCleaner tc = new TweetCleaner();
-//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-//            
-//            LMDrillModel lmDrillModel = tc.cleanByDate(start, end);
-//            
-//            if(lmDrillModel.getLevel() == -1){
-//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-//            }else{
-//                LM_DrillDown p = new LM_DrillDown(lmDrillModel);
-//                tabPane.add("LV" + lmDrillModel.getLevel() + " - " + 
-//                    "[" + smonthMB.getSelectedItem().toString()
-//                    + "-" + emonthMB.getSelectedItem().toString() + " "
-//                    + syearMB.getSelectedItem().toString() + "] - " + method, p);
-//                tabPane.setSelectedComponent(p);
-//            }
-//            
-//        }else if((keywordCB.isSelected() && keywordTF.getText().isEmpty())){
-//            JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
-//        }
-//    }
-//    
-//    //IF TOPIC MODELLER IS SELECTED
-//    else if(topicRB.isSelected()){
-//        String method = "TM";
-//        
-//        if((keywordCB.isSelected() && !keywordTF.getText().isEmpty()) && dateCB.isSelected()){
-//            TweetCleaner tc = new TweetCleaner();
-//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-//            
-//            TMDrillModel tmDrillModel = tc.TMcleanByKeywordsAndDate(keywordTF.getText(), start, end);
-//            
-//            if(tmDrillModel.getLevel() == -1){
-//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-//            }else{
-//                String startMonth =  smonthMB.getSelectedItem().toString();
-//                String startDay = sdayMB.getSelectedItem().toString();
-//                String startYear = syearMB.getSelectedItem().toString();
-//                String endMonth =  emonthMB.getSelectedItem().toString();
-//                String endDay = edayMB.getSelectedItem().toString();
-//                String endYear = eyearMB.getSelectedItem().toString();
-//
-//                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
-//                tabPane.add(method + " - LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - [" 
-//                    + startMonth + "." + startDay + "." + startYear
-//                    + "-" + endMonth + "." + endDay + "." + endYear 
-//                    + "]", p);
-//                tabPane.setSelectedComponent(p);
-//            }
-//        }
-//        
-//        else if((keywordCB.isSelected() && !keywordTF.getText().isEmpty())){
-//            TweetCleaner tc = new TweetCleaner();
-//            TMDrillModel tmDrillModel = tc.TMcleanByKeyword(keywordTF.getText());
-//            
-//            if(tmDrillModel.getLevel() == -1){
-//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-//            }else{
-//                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
-//                tabPane.add("LV" + tmDrillModel.getLevel() + " - " + keywordTF.getText() + " - " + method, p);
-//                tabPane.setSelectedComponent(p);
-//            }
-//        }
-//        
-//        else if(dateCB.isSelected()){
-//            TweetCleaner tc = new TweetCleaner();
-//            String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
-//            String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
-//            
-//            TMDrillModel tmDrillModel = tc.TMcleanByDate(start, end);
-//            
-//            if(tmDrillModel.getLevel() == -1){
-//                JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
-//            }else{
-//                TM_DrillDown p = new TM_DrillDown(tmDrillModel);
-//                tabPane.add("LV" + tmDrillModel.getLevel() + " - " + 
-//                    "[" + smonthMB.getSelectedItem().toString()
-//                    + "-" + emonthMB.getSelectedItem().toString() + " "
-//                    + syearMB.getSelectedItem().toString() + "] - " + method, p);
-//                tabPane.setSelectedComponent(p);
-//            }
-//        }
-//        else if((keywordCB.isSelected() && keywordTF.getText().isEmpty())){
-//            JOptionPane.showMessageDialog(null, "Please input a keyword.", "Filter Criteria Requirement", JOptionPane.INFORMATION_MESSAGE);
-//        }
-//    }
-//    
-//    //IF NO METHOD SELECTED
-//    else {
-//        JOptionPane.showMessageDialog(null, "Please select a method.", "Woodpecker Requirement", JOptionPane.INFORMATION_MESSAGE);
-//    }
-      
     }//GEN-LAST:event_beginBtnActionPerformed
 
     private void keywordCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_keywordCBActionPerformed
-        if(keywordCB.isSelected())
-        keywordTF.setEnabled(true);
-        else
-        keywordTF.setEnabled(false);
+        if(keywordCB.isSelected()) {
+            keywordTF.setEnabled(true); }
+        else{
+            keywordTF.setEnabled(false); }
     }//GEN-LAST:event_keywordCBActionPerformed
 
     private void dateCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateCBActionPerformed
         if(dateCB.isSelected()){
-            sDateLabel.setEnabled(true);
-            eDateLabel.setEnabled(true);
-            smonthMB.setEnabled(true);
-            sdayMB.setEnabled(true);
-            syearMB.setEnabled(true);
-            emonthMB.setEnabled(true);
-            edayMB.setEnabled(true);
-            eyearMB.setEnabled(true);
+            setDateBoxesEnabled(true);
         }else{
-            sDateLabel.setEnabled(false);
-            eDateLabel.setEnabled(false);
-            smonthMB.setEnabled(false);
-            sdayMB.setEnabled(false);
-            syearMB.setEnabled(false);
-            emonthMB.setEnabled(false);
-            edayMB.setEnabled(false);
-            eyearMB.setEnabled(false);
+            setDateBoxesEnabled(false);
         }
     }//GEN-LAST:event_dateCBActionPerformed
 
@@ -931,8 +724,7 @@ public class Start extends javax.swing.JFrame {
         if(dataGrp.getSelection() != null){
             filterCriteriaPanel.setEnabled(true);
             keywordCB.setEnabled(true);
-            enableDateBoxes();
-            resetCriteriaBtn.setEnabled(true);
+            dateCB.setEnabled(true);
             beginBtn.setEnabled(true);
             lmRB.setEnabled(true);
             topicRB.setEnabled(true);
@@ -953,8 +745,9 @@ public class Start extends javax.swing.JFrame {
         String[] start = tweetHandler.getEarliestDate(tablename).split(" "); //[0] day, [1] month, [2] year
         String[] end = tweetHandler.getLatestDate(tablename).split(" ");
         
-        System.out.println("EARLIEST DATE --- "+start[0]+","+start[1]+","+start[2]);
-        System.out.println("LATEST DATE --- "+end[0]+","+end[1]+","+end[2] + "\n");
+        systemOutArea.append("EARLIEST DATE --- "+start[0]+","+start[1]+","+start[2]+"\n");
+        systemOutArea.append("LATEST DATE --- "+end[0]+","+end[1]+","+end[2] + "\n");
+        
         //Fills year boxes
         int firstYear = Integer.parseInt(start[2]);
         int lastYear = Integer.parseInt(end[2]);
@@ -970,21 +763,6 @@ public class Start extends javax.swing.JFrame {
         }
     }
     
-    private void resetCriteriaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetCriteriaBtnActionPerformed
-        keywordCB.setSelected(false);
-        keywordTF.setText("");
-        keywordTF.setEnabled(false);
-        dateCB.setSelected(false);
-        
-        TDMethodPanel.setEnabled(false);
-        lmRB.setEnabled(false);
-        topicRB.setEnabled(false);
-    }//GEN-LAST:event_resetCriteriaBtnActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        setDisabled();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void smonthMBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_smonthMBActionPerformed
         if(sdayMB.getItemCount() != 0)
             sdayMB.removeAllItems();
@@ -1064,7 +842,7 @@ public class Start extends javax.swing.JFrame {
                         String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
                         String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
 
-                        LMDrillModel lmDrillModel = tc.cleanByKeywordsAndDate(keywordTF.getText(), start, end);
+                        LMDrillModel lmDrillModel = tc.cleanByKeywordsAndDate(TABLE_NAME, keywordTF.getText(), start, end);
 
                         if(lmDrillModel.getLevel() == -1){
                             JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
@@ -1117,7 +895,7 @@ public class Start extends javax.swing.JFrame {
                         String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
                         String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
 
-                        LMDrillModel lmDrillModel = tc.cleanByDate(start, end);
+                        LMDrillModel lmDrillModel = tc.cleanByDate(TABLE_NAME, start, end);
 
                         if(lmDrillModel.getLevel() == -1){
                             JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
@@ -1160,7 +938,7 @@ public class Start extends javax.swing.JFrame {
                         String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
                         String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
 
-                        TMDrillModel tmDrillModel = tc.TMcleanByKeywordsAndDate(keywordTF.getText(), start, end);
+                        TMDrillModel tmDrillModel = tc.TMcleanByKeywordsAndDate(TABLE_NAME, keywordTF.getText(), start, end);
 
                         if(tmDrillModel.getLevel() == -1){
                             JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
@@ -1184,7 +962,7 @@ public class Start extends javax.swing.JFrame {
 
                     else if(keywordCBselected && !keywordTFempty) {
                         TweetCleaner tc = new TweetCleaner();
-                        TMDrillModel tmDrillModel = tc.TMcleanByKeyword(keywordTF.getText());
+                        TMDrillModel tmDrillModel = tc.TMcleanByKeyword(TABLE_NAME, keywordTF.getText());
 
                         if(tmDrillModel.getLevel() == -1){
                             JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
@@ -1201,7 +979,7 @@ public class Start extends javax.swing.JFrame {
                         String start = smonthMB.getSelectedItem().toString()+" "+sdayMB.getSelectedItem().toString()+" "+syearMB.getSelectedItem().toString();
                         String end = emonthMB.getSelectedItem().toString()+" "+edayMB.getSelectedItem().toString()+" "+eyearMB.getSelectedItem().toString();
 
-                        TMDrillModel tmDrillModel = tc.TMcleanByDate(start, end);
+                        TMDrillModel tmDrillModel = tc.TMcleanByDate(TABLE_NAME, start, end);
 
                         if(tmDrillModel.getLevel() == -1){
                             JOptionPane.showMessageDialog(null, "No Tweets Found.", "Tweet Data", JOptionPane.INFORMATION_MESSAGE);
@@ -1283,7 +1061,6 @@ public class Start extends javax.swing.JFrame {
 //        });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel TDMethodPanel;
     private javax.swing.JButton beginBtn;
     private javax.swing.JButton browseBtn;
     private javax.swing.JTextField counter;
@@ -1296,7 +1073,6 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JPanel filterCriteriaPanel;
     private javax.swing.JRadioButton importBtn;
     private javax.swing.JComboBox importCB;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
@@ -1305,6 +1081,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -1318,7 +1095,6 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JTextField longitudeField;
     private javax.swing.ButtonGroup methodGrp;
     public static javax.swing.JProgressBar progressBar;
-    private javax.swing.JButton resetCriteriaBtn;
     private javax.swing.JLabel sDateLabel;
     private javax.swing.JComboBox sdayMB;
     private javax.swing.JButton selectSourceBtn;
@@ -1326,6 +1102,7 @@ public class Start extends javax.swing.JFrame {
     private javax.swing.JButton startBtn;
     private javax.swing.JButton stopBtn;
     private javax.swing.JComboBox syearMB;
+    public static javax.swing.JTextArea systemOutArea;
     private javax.swing.JTabbedPane tabPane;
     private javax.swing.JLabel titleVersion;
     private javax.swing.JRadioButton topicRB;

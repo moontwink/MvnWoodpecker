@@ -1,6 +1,7 @@
 
 package tfidf;
 
+import gui.Start;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -22,6 +23,7 @@ public class TM_TfidfDriver {
      */
     public static void idfChecker(ArrayList<tweetModel> tweetList, ArrayList<TopicOutput> allTopics)
     {
+        Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
         int count = 0;
         topTopics = new ArrayList<>();
         

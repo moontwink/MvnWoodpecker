@@ -83,7 +83,7 @@ public class NGramDriver{
      */
    public static void removeOutliers(){
         double trim = ngramlist.size() * 0.20;
-        System.out.print("********************trim**** " + trim);
+//        System.out.print("********************trim**** " + trim);
         for(int top = 0; top < trim; top++){
             ngramlist.remove(ngramlist.get(top));
             ngramlist.remove(ngramlist.get(ngramlist.size()-1-top));
@@ -134,7 +134,7 @@ public class NGramDriver{
 	    System.err.println(e.toString());
 	}
          for (String s : getNgrams()){
-		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
+//		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
                 NGramList(s, extractor.getNGramFrequency(s));
          }
         //return ngrams;

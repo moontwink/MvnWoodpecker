@@ -5,7 +5,9 @@ import au.com.bytecode.opencsv.CSVReader;
 import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 import database.ImportHandler;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -35,7 +37,7 @@ public class ImportFiles {
                 System.out.println("---------- Initializing Database Operation ----------");
                 System.out.println("Operation: Import CSV file into database");
                 System.out.println("Status: Reading CSV file");
-                CSVReader reader = new CSVReader(new FileReader(chooser.getSelectedFile()));
+                CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(chooser.getSelectedFile()), "UTF-8"));
                 String filename = chooser.getSelectedFile().getName();
 
                 ColumnPositionMappingStrategy<tweetModel> strat = new ColumnPositionMappingStrategy<>();

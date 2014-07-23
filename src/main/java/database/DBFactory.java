@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.*;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,9 +39,9 @@ public class DBFactory {
      */
     private static void initializeDBConnectionParameters()
     {
-        System.out.println("---------- Initializing Database Operation ----------");
-        System.out.println("Operation: Read database connection parameters from database configuration file");
-        System.out.println("Status: Reading database configuration file");
+//        System.out.println("---------- Initializing Database Operation ----------");
+//        System.out.println("Operation: Read database connection parameters from database configuration file");
+//        System.out.println("Status: Reading database configuration file");
         
         File dbConfigFile= new File(DB_CONFIG_FILE_PATH);
         
@@ -52,28 +53,29 @@ public class DBFactory {
                 String temp=scanner.nextLine();
                 
                 url = temp;
-                System.out.println("URL: " + url);
+//                System.out.println("URL: " + url);
                 
                 if (scanner.hasNextLine())
                 {
                     username=scanner.nextLine();
-                    System.out.println("Username: " + username);
+//                    System.out.println("Username: " + username);
                     
                     if (scanner.hasNextLine())
                     {
                         password=scanner.nextLine();
-                        System.out.println("Password: " + password);
+//                        System.out.println("Password: " + password);
                     }
                 }
             }           
         }
         catch (FileNotFoundException fnfex)
         {
-            System.out.println("Error: DB.conf cannot be found in the specified file path");
-            System.out.println(fnfex);
+            JOptionPane.showMessageDialog(null, "DB.conf cannot be found in the specified file path.", "Database Requirement", JOptionPane.ERROR_MESSAGE);
+//            System.out.println("Error: DB.conf cannot be found in the specified file path");
+//            System.out.println(fnfex);
         }
         
-        System.out.println("---------- End of Database Operation ----------\n\n");
+//        System.out.println("---------- End of Database Operation ----------\n\n");
     }
     
     /**
