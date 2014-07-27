@@ -23,6 +23,9 @@ public class TM_SelectSave extends javax.swing.JFrame {
     public TM_SelectSave(TMDrillModel tmDM) {
         this.tmDM = tmDM;
         initComponents();
+        visualCB.setSelected(true);
+        rawDataCB.setSelected(true);
+        timelineCB.setSelected(true);
     }
 
     /**

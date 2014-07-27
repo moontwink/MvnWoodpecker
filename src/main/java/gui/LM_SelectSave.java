@@ -22,6 +22,9 @@ public class LM_SelectSave extends javax.swing.JFrame {
     public LM_SelectSave(LMDrillModel lmDM) {
         this.lmDM = lmDM;
         initComponents();
+        visualCB.setSelected(true);
+        rawDataCB.setSelected(true);
+        timelineCB.setSelected(true);
     }
 
     /**

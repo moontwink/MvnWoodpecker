@@ -36,7 +36,7 @@ public class TopicModeler {
                 System.out.println("~~!!! FILE EXISTS.. now deleting"); file.delete(); }
             database.Writer write = new database.Writer(filePath, true);
             for(tweetModel tm : tweets){
-                write.writeToFile("TWEET-00"+dataSize + " 	X	"+tm.getMessage());
+                write.writeToFile("TWEET-00"+dataSize + " 	X	"+tm.getMessage().replaceAll("\n", " "));
                 dataSize++;
             }
         }catch(IOException ex){

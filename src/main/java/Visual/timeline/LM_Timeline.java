@@ -2,6 +2,7 @@
 package Visual.timeline;
 
 
+import database.CalendarHandler;
 import static database.tweetHandler.cleanTweet;
 import static database.tweetHandler.getAllTweets;
 import java.io.IOException;
@@ -198,10 +199,17 @@ public class LM_Timeline {
         String[] temp= null;       
         String dates= null; 
         
-         temp = date.split(" ");
-         dates = temp[2]+", "+monthNumber(temp[1])+", "+temp[0];
+        switch(CalendarHandler.identifyDateType(date)){
+            case GMT:
+                temp = date.split(" ");
+                dates = temp[2]+", "+monthNumber(temp[1])+", "+temp[0];
+                break;
+            case CST:
+                temp = CalendarHandler.getDateFormatted(date);
+                dates = temp[2]+", "+monthNumber(temp[1])+", "+temp[0];
+                break;
       
-      
+        }
         return dates;
     }
     // [Date.UTC(year,  month, day), frequency ]

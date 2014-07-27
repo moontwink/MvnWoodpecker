@@ -25,6 +25,10 @@ public class TablesHandler {
                 "drop table `" + tablename + "`;"
                 );
             ps.execute();
+            
+            ps.close();
+            c.close();
+            
         }catch(ClassNotFoundException ex){
             Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }catch(SQLException ex){
@@ -55,6 +59,10 @@ public class TablesHandler {
                 System.out.println("drop table `" + rs.getString("table_name") + "`;");
             }
             System.out.println("---------- End of Database Operation ----------\n\n");
+            rs.close();
+            ps.close();
+            c.close();
+            
         }catch(ClassNotFoundException ex){
             Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }catch(SQLException ex){
@@ -81,6 +89,10 @@ public class TablesHandler {
             while(rs.next()){
                 importtables.add(rs.getString("table_name"));
             }
+            
+            rs.close();
+            ps.close();
+            c.close();
         }catch(ClassNotFoundException ex){
             Logger.getLogger(TablesHandler.class.getName()).log(Level.SEVERE, null, ex);
         }catch(SQLException ex){

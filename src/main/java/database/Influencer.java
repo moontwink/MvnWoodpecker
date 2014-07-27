@@ -176,7 +176,7 @@ public class Influencer {
           
           linknames = new ArrayList<>();
           linknames.add("dotc.gov.ph");
-          getInfluencers().add(new InfluenceModel("DOTC", InfluencerType.SOCIALMEDIA, linknames,30));
+          getInfluencers().add(new InfluenceModel("DOTC", InfluencerType.NEWS, linknames,30));
           
           linknames = new ArrayList<>();
           linknames.add("Instagram");
@@ -205,18 +205,18 @@ public class Influencer {
           linknames.add("tmblr");
           getInfluencers().add(new InfluenceModel("TUMBLER", InfluencerType.SOCIALMEDIA, linknames,36));
           
-          try {
-              linksExpander();
-          } catch (IOException ex) {
-              Logger.getLogger(Influencer.class.getName()).log(Level.SEVERE, null, ex);
-          }
+//          try {
+//              indexLinks();
+//          } catch (IOException ex) {
+//              Logger.getLogger(Influencer.class.getName()).log(Level.SEVERE, null, ex);
+//          }
       }
       
     /**
-     * This method expands the shortened links in tweets to their original form.  
+     * This method categorizes and indexes the links into their Influencer.  
      * @throws IOException
      */
-      public static void linksExpander() throws IOException
+      public static void indexLinks() throws IOException
       {
           for (int i = 0; i < getTweetlinks().size(); i++)
           {

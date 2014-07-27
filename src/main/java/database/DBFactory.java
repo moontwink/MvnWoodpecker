@@ -41,7 +41,7 @@ public class DBFactory {
     {
 //        System.out.println("---------- Initializing Database Operation ----------");
 //        System.out.println("Operation: Read database connection parameters from database configuration file");
-//        System.out.println("Status: Reading database configuration file");
+        System.out.println("Status: Accessing the database");
         
         File dbConfigFile= new File(DB_CONFIG_FILE_PATH);
         

@@ -1,0 +1,58 @@
+***************************************
+				TASKS
+***************************************
+
+[x] CHECK IF NGRAM IS CHECKED FOR TF-IDF BEFORE REMOVING STOPWORDS
+	TEST FOR WITH OUTLIERS
+	AND WITHOUT
+[] CHECK IF TIMELINE CHECKS FOR ACTUAL KEYWORD IN TEXTBOX (not from tablename)
+	CHECK FOR UPDATES FROM GRACE
+[x] UPDATE INFLUENCERS TAB FROM MATTHEW
+
+[x] FIX TEMP TABLES NAMES
+
+[x] FIX IMPORT SYSOUTS
+	Status: Dropping existing table from database
+	Status: Creating table [import-x01-pdafscam.csv] in database
+	Status: Inserting CSV entries into database
+
+[x] SELECTSOURCE BUTTON
+[x] CHECK IF CB IS EMPTY AND NULL
+
+[x] DRILLDOWN SYSOUTS
+
+[] COMBINE DATABASES
+	exported schema
+	exported mar30-present [insert]
+
+[] FIX TWITTER4J CRAWLER
+[] UPDATE OAUTH CONFIG TO TEXT FILE
+
+[] UPDATE USER MANUAL WITH THE FOLLOWING:
+	-- CSV FILE FORMAT MUST HAVE THE FF: DATA
+		[STATUSID, USERNAME, MESSAGE, DATE, LATITUDE, LONGITUDE]
+		without FIRST ROW LABELS (DATA ONLY)
+		DATE MUST BE IN EITHER GMT OR CST FORMAT
+	-- SAVING FILES INTO ZIP FILE INCLUDES:
+		VISUAL (VENN OR WORDCLOUD)
+		RAW DATA (LM OR TM)
+		TIMELINE
+
+***************************************
+				CHANGES
+***************************************
+Changed tablecellrenderer for TOPICSTABLE AND TWEETSTABLE
+
+Changed temp table names for drilling down
+	temp-dd-keywords-TMx(drilldownlevel)
+	temp-dd-keywords-LMx(drilldownlevel)
+	
+Fixed repeated indexing of influencers
+
+Updated tabs with close buttons
+
+Removed unneccessary sysouts
+
+Can handle CST date format (with Timeline)
+
+Fixed Mallet importData (removed \n during import)

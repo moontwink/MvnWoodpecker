@@ -1,6 +1,7 @@
 
 package tweets;
 
+import database.CalendarType;
 import database.tweetHandler;
 import model.tweetModel;
 import java.util.ArrayList;
@@ -52,8 +53,8 @@ public class TweetCleaner {
      * @param end
      * @return LMDrillModel
      */
-    public LMDrillModel cleanByDate(String dbtablename, String start, String end){
-        LMDrillModel lmDrillModel = tweetHandler.getAllTweetsByDate(dbtablename, start, end);
+    public LMDrillModel cleanByDate(String dbtablename, String start, String end, CalendarType format){
+        LMDrillModel lmDrillModel = tweetHandler.getAllTweetsByDate(dbtablename, start, end, format);
 //        writeTweets(tweets);
         return lmDrillModel;
     }
@@ -65,8 +66,8 @@ public class TweetCleaner {
      * @param end
      * @return TMDrillModel
      */
-    public TMDrillModel TMcleanByDate(String dbtablename, String start, String end){
-        TMDrillModel tmDrillModel = tweetHandler.TMgetAllTweetsByDate(dbtablename, start, end);
+    public TMDrillModel TMcleanByDate(String dbtablename, String start, String end, CalendarType format){
+        TMDrillModel tmDrillModel = tweetHandler.TMgetAllTweetsByDate(dbtablename, start, end, format);
         return tmDrillModel;
     }
     
@@ -78,8 +79,8 @@ public class TweetCleaner {
      * @param end
      * @return LMDrillModel
      */
-    public LMDrillModel cleanByKeywordsAndDate(String dbtablename, String keywords, String start, String end){
-        LMDrillModel lmDrillModel = tweetHandler.getAllTweetsByKeywordAndDate(dbtablename, keywords, start, end);
+    public LMDrillModel cleanByKeywordsAndDate(String dbtablename, String keywords, String start, String end, CalendarType format){
+        LMDrillModel lmDrillModel = tweetHandler.getAllTweetsByKeywordAndDate(dbtablename, keywords, start, end, format);
 //        writeTweets(tweets);
         return lmDrillModel;
     }
@@ -92,8 +93,8 @@ public class TweetCleaner {
      * @param end
      * @return TMDrillModel
      */
-    public TMDrillModel TMcleanByKeywordsAndDate(String dbtablename, String keywords, String start, String end){
-        TMDrillModel tmDrillModel = tweetHandler.TMgetAllTweetsByKeywordAndDate(dbtablename, keywords, start, end);
+    public TMDrillModel TMcleanByKeywordsAndDate(String dbtablename, String keywords, String start, String end, CalendarType format){
+        TMDrillModel tmDrillModel = tweetHandler.TMgetAllTweetsByKeywordAndDate(dbtablename, keywords, start, end, format);
         return tmDrillModel;
     }
 }

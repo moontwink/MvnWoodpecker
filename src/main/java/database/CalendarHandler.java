@@ -1,6 +1,10 @@
 
 package database;
 
+import static database.CalendarType.CST;
+import static database.CalendarType.GMT;
+import static database.CalendarType.OTHER;
+
 /**
  *
  * @author Nancy
@@ -15,19 +19,19 @@ public class CalendarHandler {
     public static int monthNumber(String month){
         int monthnum = 0;
         
-        switch(month){
-            case "Jan": return 1;
-            case "Feb":return 2;
-            case "Mar":return 3;
-            case "Apr":return 4;
-            case "May":return 5;
-            case "Jun":return 6;
-            case "Jul":return 7;
-            case "Aug":return 8;
-            case "Sep":return 9;
-            case "Oct":return 10;
-            case "Nov":return 11;
-            case "Dec":return 12;
+        switch(month.toUpperCase()){
+            case "JAN": return 1;
+            case "FEB":return 2;
+            case "MAR":return 3;
+            case "APR":return 4;
+            case "MAY":return 5;
+            case "JUN":return 6;
+            case "JUL":return 7;
+            case "AUG":return 8;
+            case "SEPT":return 9;
+            case "OCT":return 10;
+            case "NOV":return 11;
+            case "DEC":return 12;
             default: return monthnum;
         }
     }
@@ -110,5 +114,45 @@ public class CalendarHandler {
             case "DEC":return 31;
             default: return numdays;
         }
+    }
+    
+    /**
+     * This method identifies the type of date (GMT or CST).
+     * @param date
+     * @return CalendarType
+     */
+    public static CalendarType identifyDateType(String date){
+        if(date.contains("GMT")){
+            //[0] day, [1] month, [2] year
+            return GMT; }
+        else if(date.contains("CST")){
+            //Wed May 01 14:34:14 CST 2013
+            return CST; }
+        else
+            return OTHER;
+    }
+    
+    /**
+     * This method return an array of Strings with the date formatted by DAY-MONTH-YEAR.
+     * @param date
+     * @return String[]
+     */
+    public static String[] getDateFormatted(String date){
+        String[] newdate = new String[3];
+        String[] splitted = date.split(" ");
+        switch(identifyDateType(date)){
+            case GMT:
+                newdate[0] = splitted[0];   //day
+                newdate[1] = splitted[1];   //month
+                newdate[2] = splitted[2];   //year
+                break;
+            case CST:
+                //Wed May 01 14:34:14 CST 2013
+                newdate[0] = splitted[2];   //day
+                newdate[1] = splitted[1];   //month
+                newdate[2] = splitted[5];   //year
+                break;
+        }
+        return newdate;
     }
 }
