@@ -6,7 +6,7 @@ package database;
  * @author Nancy
  */
 public enum CalendarType {
-    GMT, CST, OTHER;
+    GMT, CST, SGT, OTHER;
     
     
     

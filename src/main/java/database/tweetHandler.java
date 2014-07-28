@@ -165,7 +165,7 @@ public class tweetHandler {
            try {
                expandedLinks = expandShortURL(shortenedLinks);
            } catch (IOException ex) {
-               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+//               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
            }
             
             if(expandedLinks != null)
@@ -246,7 +246,7 @@ public class tweetHandler {
         Start.systemOutArea.append("\tSorting Ngrams\n");
         NGramDriver.sortngramlist(NGramDriver.getNgramlist());
         Start.systemOutArea.append("\tRemoving Outliers\n");
-        NGramDriver.removeOutliers();
+//        NGramDriver.removeOutliers();
     }
     
     /**
@@ -268,7 +268,7 @@ public class tweetHandler {
         String tablename = "temp-"+keywords+"-"+start[0]+"."+start[1]+"."+start[2]+"-"+end[0]+"."+end[1]+"."+end[2];;
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
-        tablename = tablename.replaceAll(" ", "");
+        tablename = tablename.replaceAll(" ", "_");
             Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
@@ -359,7 +359,7 @@ public class tweetHandler {
         String tablename = "temp-"+keywords+"-"+start[0]+"."+start[1]+"."+start[2]+"-"+end[0]+"."+end[1]+"."+end[2];;
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
-        tablename = tablename.replaceAll(" ", "");
+        tablename = tablename.replaceAll(" ", "_");
             Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
@@ -446,7 +446,7 @@ public class tweetHandler {
         String tablename = "temp-"+keywords;
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
-        tablename = tablename.replaceAll(" ", "");
+        tablename = tablename.replaceAll(" ", "_");
            Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
@@ -527,7 +527,7 @@ public class tweetHandler {
         String tablename = "temp-"+keywords;
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
-        tablename = tablename.replaceAll(" ", "");
+        tablename = tablename.replaceAll(" ", "_");
            Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         

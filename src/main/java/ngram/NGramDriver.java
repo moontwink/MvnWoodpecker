@@ -128,15 +128,17 @@ public class NGramDriver{
             for(int ng=1;ng<5;ng++){
 	    extractor.extract(tweet , ng, false, true);
 	    setNgrams(extractor.getNGrams());
+            
+            for (String s : getNgrams()){
+//		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
+                NGramList(s, extractor.getNGramFrequency(s));
+            }
 	   }
 	}
 	catch (Exception e){
 	    System.err.println(e.toString());
 	}
-         for (String s : getNgrams()){
-//		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
-                NGramList(s, extractor.getNGramFrequency(s));
-         }
+         
         //return ngrams;
     }
     

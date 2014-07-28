@@ -68,7 +68,7 @@ public static String write (String filename, ArrayList<TimelineTopics> topics) t
 "            },\n" +
 "            tooltip: {\n" +
 "                headerFormat: '<b>{series.name}</b><br>',\n" +
-"                pointFormat: '{point.x:%e. %b}: {point.y}'\n" +
+"                pointFormat: '{point.x:%b. %e}: tweet frequency: {point.y}'\n" +
 "            },\n" +
 "\n" +
 "            series: [");

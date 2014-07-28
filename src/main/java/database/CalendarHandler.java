@@ -1,9 +1,7 @@
 
 package database;
 
-import static database.CalendarType.CST;
-import static database.CalendarType.GMT;
-import static database.CalendarType.OTHER;
+import static database.CalendarType.*;
 
 /**
  *
@@ -117,7 +115,7 @@ public class CalendarHandler {
     }
     
     /**
-     * This method identifies the type of date (GMT or CST).
+     * This method identifies the type of date (GMT,CST,SGT).
      * @param date
      * @return CalendarType
      */
@@ -128,6 +126,9 @@ public class CalendarHandler {
         else if(date.contains("CST")){
             //Wed May 01 14:34:14 CST 2013
             return CST; }
+        else if(date.contains("SGT")){
+            //Mon Jul 28 23:05:32 SGT 2014
+            return SGT; }
         else
             return OTHER;
     }
@@ -148,6 +149,12 @@ public class CalendarHandler {
                 break;
             case CST:
                 //Wed May 01 14:34:14 CST 2013
+                newdate[0] = splitted[2];   //day
+                newdate[1] = splitted[1];   //month
+                newdate[2] = splitted[5];   //year
+                break;
+            case SGT:
+                //Mon Jul 28 23:05:32 SGT 2014
                 newdate[0] = splitted[2];   //day
                 newdate[1] = splitted[1];   //month
                 newdate[2] = splitted[5];   //year

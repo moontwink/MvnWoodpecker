@@ -183,6 +183,12 @@ public class TM_Timeline {
                 return temp;
             }
         }
+        
+        for(int x = 0; x < temp2.length; x++){
+            if(temp2[x].contains("_")){
+                temp2[x] = temp2[x].replaceAll("_", " "); }
+        }
+        
         return temp2;
     }
     //17 Oct 2013 10:01:19 GMT

@@ -10,6 +10,8 @@ import gui.Start;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import model.tweetModel;
 import ngram.NGramDriver;
 
@@ -26,7 +28,7 @@ public class TfidfDriver {
         Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
         int count=0;
         ngramlist = ngram.NGramDriver.getNgramlist();    //list of ngrams
-            System.out.println("*****>>> " + ngramlist + "\n\t " + newList.size());
+//            System.out.println("*****>>> " + ngramlist + "\n\t " + newList.size());
         toplist = new ArrayList<>();
         String tweet = "";
         
@@ -39,12 +41,12 @@ public class TfidfDriver {
 //                    System.out.println("$$$ " + tweet);
                     
                 if(tweet.contains(ngramlist.get(i).getTweet()))
-                {
-                        System.out.println("%%%%%%%%%%%%% " + tweet);
+                { 
                     count++;
-                        System.out.println("_______>>> " + count + "\n\t[" + ngramlist.get(i).getTweet() +"]" +
-                            "\n\t " + newList.get(j).getMessage());
                 }
+                System.out.println("%%%%%%%%%%%%% " + tweet);
+                System.out.println("_______>>> " + count + "\n\t[" + ngramlist.get(i).getTweet() +"]" +
+                            "\n\t " + newList.get(j).getMessage());
             }
             tfidfscore(i, count,newList.size());
             count = 0;
@@ -62,24 +64,31 @@ public class TfidfDriver {
     public static void tfidfscore(int ngramindex, int count, int tweetListCount) //compute for the tf-idf scores
     {
 //        tf * log(idf)
-        ngramlist = ngram.NGramDriver.getNgramlist();    //list of ngrams
+        
         String tweet = NGramDriver.cleanFunctionWordsFromTweet(ngramlist.get(ngramindex).getTweet());
-        
-        if(tweet.length()==0);
-        else{
-            double tfscore = 0;
-            if(count == 0) count = 1;
-        
-            //System.out.println("\t\t___tweetlistcount______ "+tweetListCount);
+        //If tweet contains at least one alphanumeric character
+        Pattern p = Pattern.compile("[a-zA-Z0-9]+");
+        Matcher m = p.matcher(tweet);
+        if (m.find()) {
+            ngramlist = ngram.NGramDriver.getNgramlist();    //list of ngrams
+            if(tweet.length()==0);
+            else{
+                double tfscore = 0;
+                if(count == 0) count = 1;
 
-            tfscore = ngramlist.get(ngramindex).getFrequency()*java.lang.Math.log10(tweetListCount/count);
-                System.out.println("\t\t[["+ngramlist.get(ngramindex).getTweet()+"]] has "+count);
-                System.out.println("\t\t_frequency_ "+ngramlist.get(ngramindex).getFrequency());
-                System.out.println("\t\t_tweetlistcount_ "+tweetListCount);
-                System.out.println("\t\t___tfscore___ "+tfscore);
+                //System.out.println("\t\t___tweetlistcount______ "+tweetListCount);
 
-            Tfidf newtf = new Tfidf(tweet, tfscore);
-            getToplist().add(newtf);
+                tfscore = ngramlist.get(ngramindex).getFrequency()*java.lang.Math.log10(tweetListCount/count);
+                    System.out.println("\t\t[["+ngramlist.get(ngramindex).getTweet()+"]] has "+count);
+                    System.out.println("\t\t_frequency_ "+ngramlist.get(ngramindex).getFrequency());
+                    System.out.println("\t\t_tweetlistcount_ "+tweetListCount);
+                    System.out.println("\t\t___tfscore___ "+tfscore);
+
+                if(tfscore > 0){
+                    Tfidf newtf = new Tfidf(tweet, tfscore);
+                    getToplist().add(newtf);
+                }
+            }
         }
     }
     

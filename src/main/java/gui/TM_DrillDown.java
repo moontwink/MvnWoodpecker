@@ -21,6 +21,7 @@ import mallet.TopicOutput;
 import model.InfluenceModel;
 import model.InfluencerType;
 import model.TMDrillModel;
+import tfidf.TM_TfidfDriver;
 import tfidf.TM_TfidfModel;
 import tweets.DDTweetCleaner;
 
@@ -61,7 +62,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
         /*Creates and Places Venn Diagram in Panel*/
         try {
             VennDiagramFX.VennApplicationFrame(venndiagrampanel, write(tmDM.getTablename()+".html",tmDM));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "There has been an error loading the venn diagram.", "Venn Diagram Construction", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -72,7 +73,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
                 timelineInput.add(tmtf.getTopic());
             }
             FXTimeline.TimelineApplicationFrame(timelinePanel, timelineTopics(tmDM.getTablename(), timelineInput));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "There has been an error loading the timeline.", "Timeline Construction", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -157,7 +158,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
         
         for(InfluenceModel im : influencerList) {
             if(InfluencerType.SOCIALMEDIA==im.getType())
-                model.addRow(new Object[]{im.getTwitter_account(), im.getFollower_rank(), im.getLink_rank(), im.getInfluence_rank()});
+                model.addRow(new Object[]{im.getTwitter_account(), im.getLink_rank()});
         }
     }
     
@@ -181,6 +182,32 @@ public class TM_DrillDown extends javax.swing.JPanel {
            if( !drillkeyTF.getText().isEmpty()){
 //                JTabbedPane tabPane = (JTabbedPane)this.getParent();
                 String DDkeywords = drillkeyTF.getText();
+
+                DDTweetCleaner ddTC = new DDTweetCleaner();
+                TMDrillModel DDtmDrillModel = ddTC.TMcleanByKeyword(DDkeywords, tmDM);
+
+                TM_DrillDown p = new TM_DrillDown(DDtmDrillModel, tabPane);
+                String method = "TM";
+
+                tabPane.add(method + " - LV" + DDtmDrillModel.getLevel() + " - " + DDkeywords, p);
+                tabPane.setSelectedComponent(p);
+                tabPane.setTabComponentAt(tabPane.getSelectedIndex(), new ButtonTabComponent(tabPane));
+                Start.setProgressToComplete();
+            }
+        }
+    
+    }
+    
+    /**
+     * Thread class for Drilling down.
+     */
+    public class DrilldownThread2 implements Runnable { 
+
+        @Override
+        public void run() {
+           if( !drillkeyTF1.getText().isEmpty()){
+//                JTabbedPane tabPane = (JTabbedPane)this.getParent();
+                String DDkeywords = drillkeyTF1.getText();
 
                 DDTweetCleaner ddTC = new DDTweetCleaner();
                 TMDrillModel DDtmDrillModel = ddTC.TMcleanByKeyword(DDkeywords, tmDM);
@@ -546,27 +573,30 @@ public class TM_DrillDown extends javax.swing.JPanel {
             }
         });
         jScrollPane4.setViewportView(influencerTableNews);
+        if (influencerTableNews.getColumnModel().getColumnCount() > 0) {
+            influencerTableNews.getColumnModel().getColumn(0).setPreferredWidth(300);
+        }
 
         influencerTableSocial.setAutoCreateRowSorter(true);
         influencerTableSocial.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         influencerTableSocial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Influencer", "Follower Rank", "Link Rank", "Aggregate Rank"
+                "Influencer", "Link Rank"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {

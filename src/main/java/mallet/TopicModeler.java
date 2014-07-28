@@ -102,10 +102,9 @@ public class TopicModeler {
             System.out.println("FILE NOT FOUND EXCEPTION");
         }
         
-
-        // Create a model with 100 topics, alpha_t = 0.01, beta_w = 0.01
+         // Create a model with 10 topics, alpha_t = 0.01, beta_w = 0.01
         //  Note that the first parameter is passed as the sum over topics, while
-        //  the second is 
+        //  the second is the parameter for a single dimension of the Dirichlet prior.
         int numTopics = 10;
         ParallelTopicModel model = new ParallelTopicModel(numTopics, 1.0, 0.01);
 
@@ -138,18 +137,15 @@ public class TopicModeler {
 
         // The data alphabet maps word IDs to strings
         Alphabet dataAlphabet = instances.getDataAlphabet();
-
+        
         FeatureSequence tokens = (FeatureSequence) model.getData().get(0).instance.getData();
         LabelSequence topics = model.getData().get(0).topicSequence;
-
         
         Formatter out = new Formatter(new StringBuilder(), Locale.US);
-        /*
         for (int position = 0; position < tokens.getLength(); position++) {
-                out.format("%s-%d ", dataAlphabet.lookupObject(tokens.getIndexAtPosition(position)), topics.getIndexAtPosition(position));
+            out.format("%s-%d ", dataAlphabet.lookupObject(tokens.getIndexAtPosition(position)), topics.getIndexAtPosition(position));
         }
         System.out.println(out);
-        */
 
         // Estimate the topic distribution of the first instance, 
         //  given the current Gibbs state.

@@ -14,6 +14,7 @@ import org.apache.commons.lang.StringUtils;
  * @author Nancy
  */
 public class TM_TfidfDriver {
+    private static ArrayList<TM_TfidfModel> approxTopics;
     private static ArrayList<TM_TfidfModel> topTopics;
     
     /**
@@ -43,6 +44,7 @@ public class TM_TfidfDriver {
             tfidfscore(currentTopic, keywordFreq, count, tweetList.size());
             count = 0;
         }
+        approxTopics = topTopics;
         sortTopicsList(topTopics);
         printTopList();
     }
@@ -118,6 +120,13 @@ public class TM_TfidfDriver {
      */
     public static void sortTopicsList(ArrayList<TM_TfidfModel> list){
         Collections.sort(list, new MyComparator());
+    }
+
+    /**
+     * @return the approxTopics
+     */
+    public static ArrayList<TM_TfidfModel> getApproxTopics() {
+        return approxTopics;
     }
     
     /**

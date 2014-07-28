@@ -5,8 +5,8 @@
 [x] CHECK IF NGRAM IS CHECKED FOR TF-IDF BEFORE REMOVING STOPWORDS
 	TEST FOR WITH OUTLIERS
 	AND WITHOUT
-[] CHECK IF TIMELINE CHECKS FOR ACTUAL KEYWORD IN TEXTBOX (not from tablename)
-	CHECK FOR UPDATES FROM GRACE
+[x] CHECK IF TIMELINE CHECKS FOR ACTUAL KEYWORD IN TEXTBOX (not from tablename)
+	FIX: replaced spaces with _ (underscores) in tablename
 [x] UPDATE INFLUENCERS TAB FROM MATTHEW
 
 [x] FIX TEMP TABLES NAMES
@@ -21,7 +21,7 @@
 
 [x] DRILLDOWN SYSOUTS
 
-[] COMBINE DATABASES
+[x] COMBINE DATABASES
 	exported schema
 	exported mar30-present [insert]
 
@@ -32,7 +32,7 @@
 	-- CSV FILE FORMAT MUST HAVE THE FF: DATA
 		[STATUSID, USERNAME, MESSAGE, DATE, LATITUDE, LONGITUDE]
 		without FIRST ROW LABELS (DATA ONLY)
-		DATE MUST BE IN EITHER GMT OR CST FORMAT
+		DATE MUST BE IN EITHER GMT,CST,SGT FORMAT
 	-- SAVING FILES INTO ZIP FILE INCLUDES:
 		VISUAL (VENN OR WORDCLOUD)
 		RAW DATA (LM OR TM)
@@ -56,3 +56,14 @@ Removed unneccessary sysouts
 Can handle CST date format (with Timeline)
 
 Fixed Mallet importData (removed \n during import)
+
+Changed the accepted keyword to not null, not empty
+
+[x] Added raw ngram output to LM tabs
+
+[x] Removed pure stopwords from LM output
+[x] Removed ngrams with 0 TFIDF score
+
+Can handle SGT date format
+
+Removed Follower rank and Aggregate Rank in Influencers Index

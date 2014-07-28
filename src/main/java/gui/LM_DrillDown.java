@@ -21,6 +21,7 @@ import model.InfluenceModel;
 import model.InfluencerType;
 import model.LMDrillModel;
 import ngram.NGramDriver;
+import static ngram.NGramDriver.getNgramlist;
 import tweets.DDTweetCleaner;
 
 /**
@@ -47,6 +48,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         
         /* Inserts NGRAM data to Table */
         insertNgram();
+        insertRawNgram();
         
         /* Inserts Tweet List to Table */
         insertTweetsList();
@@ -62,14 +64,14 @@ public class LM_DrillDown extends javax.swing.JPanel {
         /*Creates and Places Wordcloud in Panel*/
         try {
             WordCloudFX.ApplicationFrame(wcPanel, write(lmDM.getTablename()+".html",lmDM.getTopList()));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
            JOptionPane.showMessageDialog(null, "There has been an error loading the wordcloud.", "Wordcloud Construction", JOptionPane.ERROR_MESSAGE);
         }
         
         /*Creates and Places Timeline in Panel*/
         try {
             FXTimeline.TimelineApplicationFrame(timelinePanel, timelineTopics(lmDM.getTablename(), lmDM.getTopList()));
-        } catch (IOException ex) {
+        } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "There has been an error loading the timeline.", "Timeline Construction", JOptionPane.ERROR_MESSAGE);
         }
         
@@ -104,6 +106,21 @@ public class LM_DrillDown extends javax.swing.JPanel {
             }
                 
     }
+    
+    private void insertRawNgram(){
+       model = (DefaultTableModel)rawngramtweetTable.getModel();
+       model.setRowCount(0);
+       
+        String t;
+        double i;
+            for(int num = 0; num < getNgramlist().size(); num++){
+               t= getNgramlist().get(num).getTweet();
+               i= getNgramlist().get(num).getFrequency();
+                     model.addRow(new Object[]{t,i});
+            }
+                
+    }
+    
    
     /**
      * Inserts tweets into tweets table.
@@ -156,7 +173,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         
         for(InfluenceModel im : influencerList) {
             if(InfluencerType.SOCIALMEDIA==im.getType())
-                model.addRow(new Object[]{im.getTwitter_account(), im.getFollower_rank(), im.getLink_rank(), im.getInfluence_rank()});
+                model.addRow(new Object[]{im.getTwitter_account(), im.getLink_rank()});
         }
     }
     
@@ -170,6 +187,40 @@ public class LM_DrillDown extends javax.swing.JPanel {
             if( !drillkeyTF.getText().isEmpty()){
 //                JTabbedPane tabPane = (JTabbedPane)this.getParent();
                 String DDkeywords = drillkeyTF.getText();
+
+                NGramDriver.emptyNgram();
+                DDTweetCleaner ddTC = new DDTweetCleaner();
+                LMDrillModel DDlmDrillModel = ddTC.cleanByKeyword(DDkeywords, lmDM);
+
+                String keys = DDkeywords;
+                keys = keys.replaceAll(",", " ");
+                keys = keys.replaceAll(";", " ");
+                String[] keywords = keys.split(" ");
+
+                DDlmDrillModel.setKeywords(keywords);
+                LM_DrillDown p = new LM_DrillDown(DDlmDrillModel, tabPane);
+                String method = "LM";
+
+    //            p.setLmDM(DDlmDrillModel);
+                tabPane.add(method + " - LV" + DDlmDrillModel.getLevel() + " - " + DDkeywords + " - " + method, p);
+                tabPane.setSelectedComponent(p);
+                tabPane.setTabComponentAt(tabPane.getSelectedIndex(), new ButtonTabComponent(tabPane));
+                Start.setProgressToComplete();
+            }
+        }
+    
+    }
+    
+    /**
+     * Thread class for Drilling down.
+     */
+    public class DrilldownThread2 implements Runnable { 
+
+        @Override
+        public void run() {
+            if( !drillkeyTF1.getText().isEmpty()){
+//                JTabbedPane tabPane = (JTabbedPane)this.getParent();
+                String DDkeywords = drillkeyTF1.getText();
 
                 NGramDriver.emptyNgram();
                 DDTweetCleaner ddTC = new DDTweetCleaner();
@@ -220,6 +271,9 @@ public class LM_DrillDown extends javax.swing.JPanel {
         drilldownBtn1 = new javax.swing.JButton();
         ngramTableScrollPane = new javax.swing.JScrollPane();
         ngramtweetTable = new javax.swing.JTable();
+        rawDataTabPanel2 = new javax.swing.JPanel();
+        rawngramTableScrollPane = new javax.swing.JScrollPane();
+        rawngramtweetTable = new javax.swing.JTable();
         timelineTabPanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -399,10 +453,10 @@ public class LM_DrillDown extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(drillkeyTF1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(saveBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(saveBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
                         .addGap(57, 57, 57))
-                    .addComponent(ngramTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
-                    .addComponent(drilldownBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(drilldownBtn1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ngramTableScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE))
                 .addContainerGap())
         );
         rawDataTabPanelLayout.setVerticalGroup(
@@ -415,11 +469,62 @@ public class LM_DrillDown extends javax.swing.JPanel {
                     .addComponent(saveBtn3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(drilldownBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ngramTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 436, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ngramTableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         RawData.addTab("Raw Data", rawDataTabPanel);
+
+        rawngramTableScrollPane.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Language Modeller Output", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Trebuchet MS", 1, 12), java.awt.Color.black)); // NOI18N
+
+        rawngramtweetTable.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
+        rawngramtweetTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Tweet Message"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        rawngramtweetTable.setRowHeight(20);
+        rawngramTableScrollPane.setViewportView(rawngramtweetTable);
+
+        javax.swing.GroupLayout rawDataTabPanel2Layout = new javax.swing.GroupLayout(rawDataTabPanel2);
+        rawDataTabPanel2.setLayout(rawDataTabPanel2Layout);
+        rawDataTabPanel2Layout.setHorizontalGroup(
+            rawDataTabPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rawDataTabPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rawngramTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        rawDataTabPanel2Layout.setVerticalGroup(
+            rawDataTabPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(rawDataTabPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(rawngramTableScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 356, Short.MAX_VALUE))
+        );
+
+        RawData.addTab("N-Gram Raw Data", rawDataTabPanel2);
 
         javax.swing.GroupLayout timelinePanelLayout = new javax.swing.GroupLayout(timelinePanel);
         timelinePanel.setLayout(timelinePanelLayout);
@@ -537,27 +642,30 @@ public class LM_DrillDown extends javax.swing.JPanel {
             }
         });
         jScrollPane4.setViewportView(influencerTableNews);
+        if (influencerTableNews.getColumnModel().getColumnCount() > 0) {
+            influencerTableNews.getColumnModel().getColumn(0).setPreferredWidth(300);
+        }
 
         influencerTableSocial.setAutoCreateRowSorter(true);
         influencerTableSocial.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
         influencerTableSocial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Influencer", "Follower Rank", "Link Rank", "Aggregate Rank"
+                "Influencer", "Link Rank"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -671,10 +779,6 @@ public class LM_DrillDown extends javax.swing.JPanel {
         new Thread(new DrilldownThread()).start();
     }//GEN-LAST:event_drilldownBtnActionPerformed
 
-    private void drilldownBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drilldownBtn1ActionPerformed
-        new Thread(new DrilldownThread()).start();
-    }//GEN-LAST:event_drilldownBtn1ActionPerformed
-
     private void RawDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RawDataMouseClicked
       
     }//GEN-LAST:event_RawDataMouseClicked
@@ -687,6 +791,10 @@ public class LM_DrillDown extends javax.swing.JPanel {
         LM_SelectSave selectsavemenu = new LM_SelectSave(lmDM);
         selectsavemenu.setVisible(true);
     }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void drilldownBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drilldownBtn1ActionPerformed
+        new Thread(new DrilldownThread2()).start();
+    }//GEN-LAST:event_drilldownBtn1ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane RawData;
@@ -713,6 +821,9 @@ public class LM_DrillDown extends javax.swing.JPanel {
     private javax.swing.JTable ngramtweetTable;
     private javax.swing.JPanel pieChartPanel;
     private javax.swing.JPanel rawDataTabPanel;
+    private javax.swing.JPanel rawDataTabPanel2;
+    private javax.swing.JScrollPane rawngramTableScrollPane;
+    private javax.swing.JTable rawngramtweetTable;
     private javax.swing.JTextArea retweetsArea;
     private javax.swing.JScrollPane retweetsScrollPane;
     private javax.swing.JButton saveBtn;
