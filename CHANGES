@@ -1,5 +1,5 @@
 ***************************************
-				TASKS
+		TASKS
 ***************************************
 
 [x] CHECK IF NGRAM IS CHECKED FOR TF-IDF BEFORE REMOVING STOPWORDS
@@ -39,7 +39,7 @@
 		TIMELINE
 
 ***************************************
-				CHANGES
+		CHANGES
 ***************************************
 Changed tablecellrenderer for TOPICSTABLE AND TWEETSTABLE
 
@@ -55,20 +55,18 @@ Removed unneccessary sysouts
 
 Can handle CST date format (with Timeline)
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>> AS OF JULY 30, 2014
+>>>>>>>>>>>>>>>>>>>>>>>>>>
+
 Fixed Mallet importData (removed \n during import)
-
-Changed the accepted keyword to not null, not empty
-
-[x] Added raw ngram output to LM tabs
-
-[x] Removed pure stopwords from LM output
-[x] Removed ngrams with 0 TFIDF score
-
+Changed the accepted keyword to not null and not empty
 Can handle SGT date format
-
 Removed Follower rank and Aggregate Rank in Influencers Index
 
+[x] Added raw ngram output to LM tabs
+[x] Removed pure stopwords from LM output
+[x] Removed ngrams with 0 TFIDF score
 [x] Changed ngram analyzer from SIMPLE to STANDARD (to include apostrophe/s mid-word)
 [x] Corrected comparison of TF-IDF modules
-
-
+[x] Fixed TF-IDF for LM (updating of frequency had an error)

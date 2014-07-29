@@ -6,8 +6,9 @@ package ngram;
  * @author JOY
  */
 public class NGram {
-     String tweet;
-     int frequency;
+     private String tweet;
+     private int frequency;
+     private int tweetcount;
 
      /**
      *
@@ -17,6 +18,7 @@ public class NGram {
     public NGram(String tweet, int frequency){
      this.tweet = tweet;
      this.frequency = frequency;
+     this.tweetcount = 1;
     }
     /**
      * @return the tweet
@@ -46,7 +48,17 @@ public class NGram {
         this.frequency = frequency;
     }
 
-    public int size() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    /**
+     * @return the tweetcount
+     */
+    public int getTweetcount() {
+        return tweetcount;
+    }
+
+    /**
+     * @param tweetcount the tweetcount to set
+     */
+    public void setTweetcount(int tweetcount) {
+        this.tweetcount = tweetcount;
     }
 }

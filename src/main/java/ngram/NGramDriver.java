@@ -5,6 +5,13 @@ package ngram;
  *
  * @author JOY
  */
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,44 +21,28 @@ public class NGramDriver{
    private static  LinkedList<String> ngrams=null;
    private static ArrayList<NGram> ngramlist= new ArrayList<>();
    private static final Pattern englishfunctionwords = Pattern.compile("\\b(?:"
-        + "a|about|above|after|again|ago|all|almost|along|"
-        +"already|also|although|always|am|among|an|and|another|any|"
-        +"anybody|anything|anywhere|are|aren't|around|as|at|back|be|"
-        +"been|before|being|below|beneath|beside|between|beyond|both|but|"
-        +"by|can|can't|could|couldn't|did|didn't|do|does|doesn't|"
-        +"doing|don't|done|down|during|each|either|else|enough|even|"
-        +"ever|every|everybody|everyone|everything|everywhere|except|far|few|fewer|"
-        +"for|from|get|gets|getting|got|had|hadn't|has|hasn't|"
-        +"have|haven't|having|he|he'd|he'll|he's|hence|her|here|"
-        +"hers|herself|him|himself|his|hither|how|however|i|i'd|"
-        +"i'll|i'm|i've|if|in|into|is|isn't|it's|it|"
-        +"its|itself|less|many|may|me|might|mine|more|most|"
-        +"much|must|mustn't|my|myself|near|near|nearby|nearly|neither|"
-        +"never|no|nobody|none|noone|nor|not|nothing|now|nowhere|"
-        +"of|off|often|on|only|or|other|others|ought|oughtn't|"
-        +"our|ours|ourselves|out|over|quite|rather|round|shall|shan't|"
-        +"she|she'd|she'll|she's|should|shouldn't|since|so|some|somebody|"
-        +"someone|something|sometimes|somewhere|soon|still|such|than|that|that|"
-        +"that's|the|their|theirs|them|themselves|then|thence|there|therefore|"
-        +"these|they|they'd|they'll|they're|this|thither|those|though|through|"
-        +"thus|till|to|today|tomorrow|too|towards|under|underneath|unless|"
-        +"until|up|us|very|was|wasn't|we|we'd|we'll|we're|"
-        +"we've|were|weren't|what|when|whence|where|whereas|which|while|"
-        +"whither|who|whom|whose|why|will|with|within|without|won't|"
-        +"would|wouldn't|yes|yesterday|yet|you|you'd|you'll|you're|you've|"
-        +"your|yours|yourself|yourselves|s|t|re|ll|d|ve)\\b\\s*", Pattern.CASE_INSENSITIVE);
+        + "YOURSELVES|YOURSELF|YOURS|YOUR|YOU'VE|YOU'RE|YOU'LL|YOU'D|YOU|YET|YESTERDAY|YES|WOULDN'T|WOULD|WON'T|"
+           + "WITHOUT|WITHIN|WITH|WILL|WHY|WHOSE|WHOM|WHO|WHITHER|WHILE|WHICH|WHEREAS|WHERE|WHENCE|WHEN|WHAT|WEREN'T|"
+           + "WERE|WE'VE|WE'RE|WE'LL|WE'D|WE|WASN'T|WAS|VERY|US|UP|UNTIL|UNLESS|UNDERNEATH|UNDER|TOWARDS|TOO|TOMORROW|"
+           + "TODAY|TO|TILL|THUS|THROUGH|THOUGH|THOSE|THITHER|THIS|THEY'RE|THEY'LL|THEY'D|THEY|THESE|THEREFORE|THERE|"
+           + "THENCE|THEN|THEMSELVES|THEM|THEIRS|THEIR|THE|THAT'S|THAT|THAT|THAN|SUCH|STILL|SOON|SOMEWHERE|SOMETIMES|"
+           + "SOMETHING|SOMEONE|SOMEBODY|SOME|SO|SINCE|SHOULDN'T|SHOULD|SHE'S|SHE'LL|SHE'D|SHE|SHAN'T|SHALL|ROUND|"
+           + "RATHER|QUITE|OVER|OUT|OURSELVES|OURS|OUR|OUGHTN'T|OUGHT|OTHERS|OTHER|OR|ONLY|ON|OFTEN|OFF|OF|NOWHERE|NOW|"
+           + "NOTHING|NOT|NOR|NOONE|NONE|NOBODY|NO|NEVER|NEITHER|NEARLY|NEARBY|NEAR|NEAR|MYSELF|MY|MUSTN'T|MUST|MUCH|"
+           + "MOST|MORE|MINE|MIGHT|ME|MAY|MANY|LESS|ITSELF|ITS|IT'S|IT|ISN'T|IS|INTO|IN|IF|I'VE|I'M|I'LL|I'D|I|HOWEVER|"
+           + "HOW|HITHER|HIS|HIMSELF|HIM|HERSELF|HERS|HERE|HER|HENCE|HE'S|HE'LL|HE'D|HE|HAVING|HAVEN'T|HAVE|HASN'T|HAS|"
+           + "HADN'T|HAD|GOT|GETTING|GETS|GET|FROM|FOR|FEWER|FEW|FAR|EXCEPT|EVERYWHERE|EVERYTHING|EVERYONE|EVERYBODY|"
+           + "EVERY|EVER|EVEN|ENOUGH|ELSE|EITHER|EACH|DURING|DOWN|DONE|DON'T|DOING|DOESN'T|DOES|DO|DIDN'T|DID|COULDN'T|"
+           + "COULD|CAN'T|CAN|BY|BUT|BOTH|BEYOND|BETWEEN|BESIDE|BENEATH|BELOW|BEING|BEFORE|BEEN|BE|BACK|AT|AS|AROUND|"
+           + "AREN'T|ARE|ANYWHERE|ANYTHING|ANYBODY|ANY|ANOTHER|AND|AN|AMONG|AM|ALWAYS|ALTHOUGH|ALSO|ALREADY|ALONG|ALMOST|"
+           + "ALL|AGO|AGAIN|AFTER|ABOVE|ABOUT|A)\\b\\s*", Pattern.CASE_INSENSITIVE);
    
    private static final Pattern filipinofunctionwords = Pattern.compile("\\b(?:"
-        +"akin|aking|ako|akong|alin|aling|amin|aming|ang|"
-        +"ano|anong|at|atin|ating|ay|ayan|ayon|ayun|dahil|"
-        +"daw|di|din|dito|eto|ganito|ganiyan|ganon|ganoon|ganyan|"
-        +"hayan|hayun|heto|hindi|ikaw|inyo|ito|iyan|iyo|iyon|"
-        +"ka|kami|kanila|kaniya|kapag|kasi|kay|kayo|kina|ko|"
-        +"kung|mag|maging|mang|may|mga|mo|mong|na|namin|"
-        +"natin|ng|nga|nga|ngunit|nila|ninyo|nito|niya|niyon|"
-        +"nya|nyo|nyon|pa|pag|pala|para|pati|sa|saan|"
-        +"saka|samin|san|sapagkat|si|sila|sino|siya|subalit|sya|"
-        +"tayo|tungkol|ung|upang|yan|yun|yung|eh|ehh|lang|ba|ha|ah|lang|eh)\\b\\s*", Pattern.CASE_INSENSITIVE);
+        + "yung|yun|yan|upang|ung|tungkol|tayo|sya|subalit|siya|sino|sila|si|sapagkat|san|samin|saka|saan|sa|pati|para|"
+           + "pala|pag|pa|nyon|nyo|nya|niyon|niya|nito|ninyo|nila|ngunit|nga|nga|ng|natin|namin|na|mong|mo|mga|may|mang|"
+           + "maging|mag|kung|ko|kina|kayo|kay|kasi|kapag|kaniya|kanila|kami|ka|iyon|iyo|iyan|ito|inyo|ikaw|hindi|heto|"
+           + "hayun|hayan|ganyan|ganoon|ganon|ganiyan|ganito|eto|dito|din|di|daw|dahil|ayun|ayon|ayan|ay|ating|atin|at|"
+           + "anong|ano|ang|aming|amin|aling|alin|akong|ako|aking|akin)\\b\\s*", Pattern.CASE_INSENSITIVE);
     
    /**
      * This method removes the outliers from the NGramlist.
@@ -102,7 +93,7 @@ public class NGramDriver{
         try{
             for(int ng=1;ng<5;ng++){
 	    extractor.extract(tweet , ng, false, true);
-	    setNgrams(extractor.getNGrams());
+	    setNgrams(extractor.getUniqueNGrams());
             
             for (String s : getNgrams()){
 //		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
@@ -134,7 +125,7 @@ public class NGramDriver{
 	    System.err.println(e.toString());
 	}
          for (String s : getNgrams()){
-		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
+//		System.out.println("Ngram '" + s + "' occurs " + extractor.getNGramFrequency(s) + " times");
                 NGramList(s, extractor.getNGramFrequency(s));
          }
         //return ngrams;
@@ -165,9 +156,12 @@ public class NGramDriver{
         int fre = 0; 
    		for(int num = 0; num < list.size() ; num++){
                   if(tweet.compareTo( list.get(num).getTweet())==0){
-                    fre = list.get(num).getFrequency();
-                    fre += 1;
+                    fre = list.get(num).getFrequency() + frequency;
+//                    System.out.println("!! Ngram exists.. updating frequency from " + list.get(num).getFrequency() + " >>> " + fre);
                     list.get(num).setFrequency(fre);
+                    
+                    int tweetcount = list.get(num).getTweetcount() + 1;
+                    list.get(num).setTweetcount(tweetcount);
                     return false;
                   }
                        //  model.addRow(new Object[]{t,i});

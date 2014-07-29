@@ -25,15 +25,15 @@ public class TfidfDriver {
      */
     public static void idfchecker(ArrayList<tweetModel> newList)//gets the idf element by checkin the ngram results against the filtered corpus
     {
-//        Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
-        int count=0;
+        Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
+//        int count=0;
         ngramlist = ngram.NGramDriver.getNgramlist();    //list of ngrams
-//            System.out.println("*****>>> " + ngramlist + "\n\t " + newList.size());
         toplist = new ArrayList<>();
-        String tweet = "";
+//        String tweet = "";
         
         for (int i = 0; i< ngramlist.size(); i++)
         {
+            /*
             for(int j=0; j < newList.size(); j++)
             {
 //                tweet = newList.get(j).getMessage().replaceAll("[^a-zA-Z0-9]", " ");
@@ -48,10 +48,11 @@ public class TfidfDriver {
                 System.out.println("_______>>> " + count + "\n\t[" + ngramlist.get(i).getTweet() +"]" +
                             "\n\t " + newList.get(j).getMessage());
             }
-            tfidfscore(i, count,newList.size());
-            count = 0;
+            */
+            tfidfscore(i, ngramlist.get(i).getTweetcount(), newList.size());
+//            count = 0;
         }
-        printTopList();
+//        printTopList();
     }
     
     @SuppressWarnings("empty-statement")
@@ -74,11 +75,11 @@ public class TfidfDriver {
             if(tweet.length()==0);
             else{
                 double tfscore = 0;
+//                int count = ngramlist.get(ngramindex).getTweetcount();
                 if(count == 0) count = 1;
-
-                //System.out.println("\t\t___tweetlistcount______ "+tweetListCount);
-
+                
                 tfscore = ngramlist.get(ngramindex).getFrequency()*java.lang.Math.log10(tweetListCount/count);
+                System.out.println(count);
                     System.out.println("\t\t[["+ngramlist.get(ngramindex).getTweet()+"]] has "+count);
                     System.out.println("\t\t_frequency_ "+ngramlist.get(ngramindex).getFrequency());
                     System.out.println("\t\t_tweetlistcount_ "+tweetListCount);

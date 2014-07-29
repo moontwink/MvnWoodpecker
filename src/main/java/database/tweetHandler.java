@@ -91,6 +91,10 @@ public class tweetHandler {
         tweet = RemoveLinks(tweet);
         tweet = normalizeTweet(tweet);
         
+        if(tweet.startsWith("rt ")){
+            tweet = tweet.replaceFirst("rt ", "");
+        }
+        
         while(tweet.contains("@")){
             String mention = "";
             int atindex = tweet.indexOf("@");
@@ -174,7 +178,8 @@ public class tweetHandler {
                    try {
                        expandedLinks = expandShortURL(expandedLinks);
                 } catch (IOException ex) {
-                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+                       System.out.println("Unable to expand wrapped URL.");
+//                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 else {
                     getTweetlinks().add(expandedLinks);
@@ -246,7 +251,7 @@ public class tweetHandler {
         Start.systemOutArea.append("\tSorting Ngrams\n");
         NGramDriver.sortngramlist(NGramDriver.getNgramlist());
         Start.systemOutArea.append("\tRemoving Outliers\n");
-//        NGramDriver.removeOutliers();
+        NGramDriver.removeOutliers();
     }
     
     /**
