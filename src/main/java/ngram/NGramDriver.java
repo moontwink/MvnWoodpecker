@@ -24,7 +24,7 @@ public class NGramDriver{
         +"for|from|get|gets|getting|got|had|hadn't|has|hasn't|"
         +"have|haven't|having|he|he'd|he'll|he's|hence|her|here|"
         +"hers|herself|him|himself|his|hither|how|however|i|i'd|"
-        +"i'll|i'm|i've|if|in|into|is|isn't|it|it's|"
+        +"i'll|i'm|i've|if|in|into|is|isn't|it's|it|"
         +"its|itself|less|many|may|me|might|mine|more|most|"
         +"much|must|mustn't|my|myself|near|near|nearby|nearly|neither|"
         +"never|no|nobody|none|noone|nor|not|nothing|now|nowhere|"
@@ -53,33 +53,8 @@ public class NGramDriver{
         +"saka|samin|san|sapagkat|si|sila|sino|siya|subalit|sya|"
         +"tayo|tungkol|ung|upang|yan|yun|yung|eh|ehh|lang|ba|ha|ah|lang|eh)\\b\\s*", Pattern.CASE_INSENSITIVE);
     
-   /*
-    * 
-   public static void cleanFunctionWords(){
-       for(int n = 0; n < ngramlist.size(); n++){
-           NGram currentNgram = ngramlist.get(n);
-           String ngramtweet = currentNgram.getTweet();
-           System.out.println(ngramtweet +" *****************");
-           
-           Matcher matcher = englishfunctionwords.matcher(ngramtweet);
-           String clean = matcher.replaceAll("");
-           
-           ngramtweet = clean;
-           
-           matcher = filipinofunctionwords.matcher(ngramtweet);
-           clean = matcher.replaceAll("");
-           
-           ngramlist.get(n).setTweet(clean);
-           System.out.println("***************** "+ngramlist.get(n).getTweet());
-       }
-       System.out.println("CLEANED FUNCTION WORDS******************8");
-   }
-   * 
-   */
-   
    /**
      * This method removes the outliers from the NGramlist.
-     * 
      */
    public static void removeOutliers(){
         double trim = ngramlist.size() * 0.20;
@@ -98,11 +73,11 @@ public class NGramDriver{
    public static String cleanFunctionWordsFromTweet(String tweet){
            
         Matcher matcher = englishfunctionwords.matcher(tweet);
-        String clean = matcher.replaceAll(" _ ");
+        String clean = matcher.replaceAll("_ ");
         tweet = clean;
 
         matcher = filipinofunctionwords.matcher(tweet);
-        clean = matcher.replaceAll(" # ");
+        clean = matcher.replaceAll("# ");
         tweet = clean;
        
         return tweet;
@@ -171,10 +146,10 @@ public class NGramDriver{
      * @param frequency
      */
     public static void NGramList(String tweet, int frequency){
-        System.out.println(tweet + " [" + frequency + "]");
+//        System.out.println(tweet + " [" + frequency + "]");
         if(CompareMessage(ngramlist,tweet, frequency)){
-        NGram n= new NGram(tweet, frequency);
-        getNgramlist().add(n);
+            NGram n= new NGram(tweet, frequency);
+            getNgramlist().add(n);
         }
     }
     
@@ -190,8 +165,8 @@ public class NGramDriver{
         int fre = 0; 
    		for(int num = 0; num < list.size() ; num++){
                   if(tweet.compareTo( list.get(num).getTweet())==0){
-                    fre=list.get(num).getFrequency();
-                    fre++;
+                    fre = list.get(num).getFrequency();
+                    fre += 1;
                     list.get(num).setFrequency(fre);
                     return false;
                   }

@@ -25,7 +25,7 @@ public class TfidfDriver {
      */
     public static void idfchecker(ArrayList<tweetModel> newList)//gets the idf element by checkin the ngram results against the filtered corpus
     {
-        Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
+//        Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
         int count=0;
         ngramlist = ngram.NGramDriver.getNgramlist();    //list of ngrams
 //            System.out.println("*****>>> " + ngramlist + "\n\t " + newList.size());
@@ -36,11 +36,11 @@ public class TfidfDriver {
         {
             for(int j=0; j < newList.size(); j++)
             {
-                tweet = newList.get(j).getMessage().replaceAll("[^a-zA-Z0-9]", " ");
+//                tweet = newList.get(j).getMessage().replaceAll("[^a-zA-Z0-9]", " ");
+                tweet = newList.get(j).getMessage();
                 tweet = tweet.replaceAll("\\s+", " ");
-//                    System.out.println("$$$ " + tweet);
                     
-                if(tweet.contains(ngramlist.get(i).getTweet()))
+                if(tweet.matches(".*\\b" + ngramlist.get(i).getTweet() + "\\b.*"))
                 { 
                     count++;
                 }
@@ -66,7 +66,7 @@ public class TfidfDriver {
 //        tf * log(idf)
         
         String tweet = NGramDriver.cleanFunctionWordsFromTweet(ngramlist.get(ngramindex).getTweet());
-        //If tweet contains at least one alphanumeric character
+        //If tweet contains at least one alphanumeric character (removes ngrams containing only stopwords)
         Pattern p = Pattern.compile("[a-zA-Z0-9]+");
         Matcher m = p.matcher(tweet);
         if (m.find()) {
@@ -84,6 +84,7 @@ public class TfidfDriver {
                     System.out.println("\t\t_tweetlistcount_ "+tweetListCount);
                     System.out.println("\t\t___tfscore___ "+tfscore);
 
+                //Removes ngrams with TF-IDF scores of 0
                 if(tfscore > 0){
                     Tfidf newtf = new Tfidf(tweet, tfscore);
                     getToplist().add(newtf);

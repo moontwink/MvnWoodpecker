@@ -67,3 +67,8 @@ Changed the accepted keyword to not null, not empty
 Can handle SGT date format
 
 Removed Follower rank and Aggregate Rank in Influencers Index
+
+[x] Changed ngram analyzer from SIMPLE to STANDARD (to include apostrophe/s mid-word)
+[x] Corrected comparison of TF-IDF modules
+
+

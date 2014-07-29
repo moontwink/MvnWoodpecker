@@ -31,7 +31,7 @@ public class TM_TfidfDriver {
         for(int i = 0; i < allTopics.size(); i++){
             for(String s : allTopics.get(i).getKeywords()){
                 for(tweetModel tm : tweetList){
-                    if(tm.getMessage().contains(s)){
+                    if(tm.getMessage().matches(".*\\b" + s + "\\b.*")){
                         System.out.println("___############## " + tm.getMessage());
                         count++;
                         System.out.println("__>>[" + i + "]>>> " + count + "\n\t[" + s +"]" +

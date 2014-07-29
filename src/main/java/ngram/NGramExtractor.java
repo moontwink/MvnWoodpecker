@@ -28,6 +28,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.io.StringReader;
+import java.util.Collections;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,6 +40,7 @@ import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.analysis.shingle.ShingleAnalyzerWrapper;
 
 import org.apache.lucene.analysis.TokenStream;
+import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.OffsetAttribute;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 
@@ -127,7 +129,7 @@ public class NGramExtractor {
                 analyzer = new StandardAnalyzer(Version.LUCENE_36);
             }
             else {
-                analyzer = new SimpleAnalyzer(Version.LUCENE_36);
+                analyzer = new StandardAnalyzer(Version.LUCENE_36, Collections.EMPTY_SET); //Changed from simple to standard to include apostrophe/s
             }
         }
         else { //Bigger than unigrams so use ShingleAnalyzerWrapper. Once again, different analyzers depending on stop word removal
@@ -135,7 +137,7 @@ public class NGramExtractor {
                 analyzer = new ShingleAnalyzerWrapper(new StopAnalyzer(Version.LUCENE_24), length, length, " ", false, false); //This is a hack to use Lucene 2.4 since in 2.4 position increments weren't preserved by default. Using a later version puts underscores (_) in the place of removed stop words.
             }
             else {
-                analyzer = new ShingleAnalyzerWrapper(new SimpleAnalyzer(Version.LUCENE_36), length, length, " ", false, false);
+                analyzer = new ShingleAnalyzerWrapper(new StandardAnalyzer(Version.LUCENE_36, Collections.EMPTY_SET), length, length, " ", false, false); //Changed from simple to standard to include apostrophe/s
             }
         }
 
