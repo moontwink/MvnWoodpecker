@@ -52,7 +52,7 @@ public class TfidfDriver {
             tfidfscore(i, ngramlist.get(i).getTweetcount(), newList.size());
 //            count = 0;
         }
-//        printTopList();
+        printTopList();
     }
     
     @SuppressWarnings("empty-statement")

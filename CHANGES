@@ -38,6 +38,9 @@
 		RAW DATA (LM OR TM)
 		TIMELINE
 
+BUG:
+    outliers not removed
+
 ***************************************
 		CHANGES
 ***************************************

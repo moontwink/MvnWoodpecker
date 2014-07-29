@@ -82,7 +82,7 @@ public class TablesHandler {
                 "select table_name " +
                 "from information_schema.tables " +
                 "where table_name like 'import-%' " +
-                "and table_schema = 'tweetdb'; "
+                "and table_schema = 'finaltweetsdb'; "
                 );
             ResultSet rs = ps.executeQuery();
             
