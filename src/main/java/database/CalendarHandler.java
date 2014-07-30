@@ -30,7 +30,7 @@ public class CalendarHandler {
             case "OCT":return 10;
             case "NOV":return 11;
             case "DEC":return 12;
-            default: return monthnum;
+            default: return -1;
         }
     }
     

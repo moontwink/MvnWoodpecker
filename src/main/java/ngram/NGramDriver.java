@@ -51,8 +51,8 @@ public class NGramDriver{
         double trim = ngramlist.size() * 0.20;
 //        System.out.print("********************trim**** " + trim);
         for(int top = 0; top < trim; top++){
-            ngramlist.remove(ngramlist.get(top));
-            ngramlist.remove(ngramlist.get(ngramlist.size()-1-top));
+            ngramlist.remove(top);
+            ngramlist.remove(ngramlist.size()-1);
         }
    }
    

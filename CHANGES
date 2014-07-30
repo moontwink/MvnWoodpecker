@@ -73,3 +73,7 @@ Removed Follower rank and Aggregate Rank in Influencers Index
 [x] Changed ngram analyzer from SIMPLE to STANDARD (to include apostrophe/s mid-word)
 [x] Corrected comparison of TF-IDF modules
 [x] Fixed TF-IDF for LM (updating of frequency had an error)
+
+[x] Fixed Timeline errors
+[x] Fixed GMT date fill error
+[x] Fixed tweethandler for GMT dates

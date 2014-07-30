@@ -705,16 +705,16 @@ public class tweetHandler {
         String whereCondition = "";
         
         if(format == CalendarType.GMT){
-            start[0] = Integer.toString(CalendarHandler.monthNumber(start[0]));
-            end[0] = Integer.toString(CalendarHandler.monthNumber(start[0]));
+//            start[0] = Integer.toString(CalendarHandler.monthNumber(start[0]));
+//            end[0] = Integer.toString(CalendarHandler.monthNumber(end[0]));
 //            whereCondition = "STR_TO_DATE(SUBSTR(date,1,12), '%d %M %Y') "
 //                    + "BETWEEN '" + start[2] + "-" + start[0] + "-" + start[1] + "' "
 //                    + "AND '" + end[2] + "-" + end[0] + "-" + end[1] + "' ";
-            whereCondition = "date BETWEEN " + "'" + start[1] + " " + start[0] + " " + start[2] + "%' "
-                    + "AND " + "'" + end[1] + " " + end[0] + " " + end[2] + "%' ";
-//            whereCondition = "DATE_FORMAT(STR_TO_DATE(date, '%e %b %Y %T GMT'), '%e %b %Y') "
-//                    + "BETWEEN " + "'" + start[1] + " " + start[0] + " " + start[2] + "' "
-//                    + "AND " + "'" + end[1] + " " + end[0] + " " + end[2] + "' ";
+//            whereCondition = "date BETWEEN " + "'" + start[1] + " " + start[0] + " " + start[2] + "%' "
+//                    + "AND " + "'" + end[1] + " " + end[0] + " " + end[2] + "%' ";
+            whereCondition = "DATE_FORMAT(STR_TO_DATE(date, '%e %b %Y %T GMT'), '%e %b %Y') "
+                    + "BETWEEN " + "'" + start[1] + " " + start[0] + " " + start[2] + "' "
+                    + "AND " + "'" + end[1] + " " + end[0] + " " + end[2] + "' ";
         }else if(format == CalendarType.CST){
             int day = Integer.parseInt(start[1]);
             if(day <= 9) {
@@ -726,6 +726,19 @@ public class tweetHandler {
             }
             
             whereCondition = "DATE_FORMAT(STR_TO_DATE(date, '%a %b %d %T CST %Y'), '%d %b %Y') "
+                    + "BETWEEN " + "'" + start[1] + " " + start[0] + " " + start[2] + "' "
+                    + "AND " + "'" + end[1] + " " + end[0] + " " + end[2] + "' ";
+        }else if(format == CalendarType.SGT){
+            int day = Integer.parseInt(start[1]);
+            if(day <= 9) {
+                start[1] = "0"+start[1];
+            }
+            day = Integer.parseInt(end[1]);
+            if(day <= 9) {
+                end[1] = "0"+end[1];
+            }
+            
+            whereCondition = "DATE_FORMAT(STR_TO_DATE(date, '%a %b %d %T SGT %Y'), '%d %b %Y') "
                     + "BETWEEN " + "'" + start[1] + " " + start[0] + " " + start[2] + "' "
                     + "AND " + "'" + end[1] + " " + end[0] + " " + end[2] + "' ";
         }
