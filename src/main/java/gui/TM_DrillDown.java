@@ -11,7 +11,10 @@ import components.ButtonTabComponent;
 import database.Influencer;
 
 import database.tweetHandler;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import model.tweetModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -21,7 +24,6 @@ import mallet.TopicOutput;
 import model.InfluenceModel;
 import model.InfluencerType;
 import model.TMDrillModel;
-import tfidf.TM_TfidfDriver;
 import tfidf.TM_TfidfModel;
 import tweets.DDTweetCleaner;
 
@@ -33,6 +35,8 @@ public class TM_DrillDown extends javax.swing.JPanel {
  private static DefaultTableModel model;
  private TMDrillModel tmDM;
  private JTabbedPane tabPane;
+ private String vennurl;
+ private String timelineurl;
  
  String title = null; 
          int i=1;
@@ -61,7 +65,8 @@ public class TM_DrillDown extends javax.swing.JPanel {
         
         /*Creates and Places Venn Diagram in Panel*/
         try {
-            VennDiagramFX.VennApplicationFrame(venndiagrampanel, write(tmDM.getTablename()+".html",tmDM));
+            vennurl = write(tmDM.getTablename()+".html",tmDM);
+            VennDiagramFX.VennApplicationFrame(venndiagrampanel, vennurl);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "There has been an error loading the venn diagram.", "Venn Diagram Construction", JOptionPane.ERROR_MESSAGE);
         }
@@ -72,7 +77,8 @@ public class TM_DrillDown extends javax.swing.JPanel {
             for(TM_TfidfModel tmtf : tmDM.getTopics()){
                 timelineInput.add(tmtf.getTopic());
             }
-            FXTimeline.TimelineApplicationFrame(timelinePanel, timelineTopics(tmDM.getTablename(), timelineInput));
+            timelineurl = timelineTopics(tmDM.getTablename(), timelineInput);
+            FXTimeline.TimelineApplicationFrame(timelinePanel, timelineurl);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "There has been an error loading the timeline.", "Timeline Construction", JOptionPane.ERROR_MESSAGE);
         }
@@ -158,7 +164,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
         
         for(InfluenceModel im : influencerList) {
             if(InfluencerType.SOCIALMEDIA==im.getType())
-                model.addRow(new Object[]{im.getTwitter_account(), im.getLink_rank()});
+                model.addRow(new Object[]{im.getTwitter_account(), im.getLinks_count()});
         }
     }
     
@@ -243,6 +249,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
         drilldownBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         venndiagrampanel = new javax.swing.JPanel();
+        vennOpenBtn = new javax.swing.JButton();
         rawDataTabPanel = new javax.swing.JPanel();
         drillkeyTF1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -254,6 +261,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         timelinePanel = new javax.swing.JPanel();
+        timelineOpenBtn = new javax.swing.JButton();
         featureStatTabPanel = new javax.swing.JPanel();
         pieChartPanel = new javax.swing.JPanel();
         retweetsScrollPane = new javax.swing.JScrollPane();
@@ -330,6 +338,13 @@ public class TM_DrillDown extends javax.swing.JPanel {
             .addGap(0, 266, Short.MAX_VALUE)
         );
 
+        vennOpenBtn.setText("Open");
+        vennOpenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vennOpenBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout vennDiaTabPanelLayout = new javax.swing.GroupLayout(vennDiaTabPanel);
         vennDiaTabPanel.setLayout(vennDiaTabPanelLayout);
         vennDiaTabPanelLayout.setHorizontalGroup(
@@ -349,9 +364,10 @@ public class TM_DrillDown extends javax.swing.JPanel {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(drillkeyTF, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(saveBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vennOpenBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())))
         );
         vennDiaTabPanelLayout.setVerticalGroup(
@@ -361,7 +377,8 @@ public class TM_DrillDown extends javax.swing.JPanel {
                 .addGroup(vennDiaTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(drillkeyTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vennOpenBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -377,6 +394,11 @@ public class TM_DrillDown extends javax.swing.JPanel {
         jLabel5.setText("KEYWORD/S FOR DRILLDOWN :");
 
         saveBtn3.setText("Save...");
+        saveBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtn3ActionPerformed(evt);
+            }
+        });
 
         drilldownBtn1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         drilldownBtn1.setText("DRILLDOWN");
@@ -470,6 +492,13 @@ public class TM_DrillDown extends javax.swing.JPanel {
 
         jScrollPane5.setViewportView(timelinePanel);
 
+        timelineOpenBtn.setText("Open in Browser");
+        timelineOpenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timelineOpenBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout timelineTabPanelLayout = new javax.swing.GroupLayout(timelineTabPanel);
         timelineTabPanel.setLayout(timelineTabPanelLayout);
         timelineTabPanelLayout.setHorizontalGroup(
@@ -481,7 +510,11 @@ public class TM_DrillDown extends javax.swing.JPanel {
                     .addGroup(timelineTabPanelLayout.createSequentialGroup()
                         .addGap(754, 754, 754)
                         .addComponent(jLabel2)))
-                .addGap(9, 9, 9))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(timelineTabPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(timelineOpenBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         timelineTabPanelLayout.setVerticalGroup(
             timelineTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,7 +524,10 @@ public class TM_DrillDown extends javax.swing.JPanel {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(timelineTabPanelLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(timelineOpenBtn)
+                .addContainerGap())
         );
 
         RawData.addTab("Timeline", timelineTabPanel);
@@ -589,7 +625,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Influencer", "Link Rank"
+                "Influencer", "Links Count"
             }
         ) {
             Class[] types = new Class [] {
@@ -707,7 +743,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void drilldownBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_drilldownBtn1ActionPerformed
-        new Thread(new DrilldownThread()).start();
+        new Thread(new DrilldownThread2()).start();
     }//GEN-LAST:event_drilldownBtn1ActionPerformed
 
     private void RawDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RawDataMouseClicked
@@ -726,6 +762,49 @@ public class TM_DrillDown extends javax.swing.JPanel {
         TM_SelectSave selectsavemenu = new TM_SelectSave(tmDM);
         selectsavemenu.setVisible(true);
     }//GEN-LAST:event_saveBtnActionPerformed
+
+    private void saveBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtn3ActionPerformed
+        TM_SelectSave selectsavemenu = new TM_SelectSave(tmDM);
+        selectsavemenu.setVisible(true);
+    }//GEN-LAST:event_saveBtn3ActionPerformed
+
+    private void vennOpenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vennOpenBtnActionPerformed
+        Desktop desktop = null;
+        if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+        }
+        if(desktop.isSupported(Desktop.Action.BROWSE)) {
+            String dir = System.getProperty("user.dir");
+            dir = dir.replace("\\", "/");
+            String url = "file:///" + dir + "/" + vennurl;
+            try {
+                desktop.browse(new URI(url));
+            } catch (URISyntaxException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_vennOpenBtnActionPerformed
+
+    private void timelineOpenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timelineOpenBtnActionPerformed
+        Desktop desktop = null;
+        if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+        }
+        if(desktop.isSupported(Desktop.Action.BROWSE)) {
+            String dir = System.getProperty("user.dir");
+            dir = dir.replace("\\", "/");
+            String url = "file:///" + dir + "/" + timelineurl;
+            try {
+                desktop.browse(new URI(url));
+            } catch (URISyntaxException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_timelineOpenBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane RawData;
@@ -754,6 +833,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
     private javax.swing.JScrollPane retweetsScrollPane;
     private javax.swing.JButton saveBtn;
     private javax.swing.JButton saveBtn3;
+    private javax.swing.JButton timelineOpenBtn;
     private javax.swing.JPanel timelinePanel;
     private javax.swing.JPanel timelineTabPanel;
     private javax.swing.JScrollPane topicsTableScrollPane;
@@ -761,6 +841,7 @@ public class TM_DrillDown extends javax.swing.JPanel {
     private javax.swing.JPanel tweetDataTabPanel;
     private javax.swing.JTable tweetTable;
     private javax.swing.JPanel vennDiaTabPanel;
+    private javax.swing.JButton vennOpenBtn;
     public static javax.swing.JPanel venndiagrampanel;
     // End of variables declaration//GEN-END:variables
 

@@ -77,7 +77,7 @@ public class TopicModeler {
     /**
      * Trains topics using imported mallet file.
      */
-    public void trainTopics(){
+    public void trainTopics() throws ArrayIndexOutOfBoundsException {
         Start.systemOutArea.append("\tTraining Topics\n");
         // Begin by importing documents from text to feature sequences
         ArrayList<Pipe> pipeList = new ArrayList<Pipe>();
@@ -130,7 +130,7 @@ public class TopicModeler {
         } catch (IOException ex) {
             System.out.println("MODEL ESTIMATE EXCEPTION");
         } catch(Exception ex) {
-            JOptionPane.showMessageDialog(null, "Mallet Overflow.\n Please press Begin again.", "Mallet", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Mallet Overflow.\n Please Wait.", "Mallet", JOptionPane.ERROR_MESSAGE);
         }
 
         // Show the words and topics in the first instance

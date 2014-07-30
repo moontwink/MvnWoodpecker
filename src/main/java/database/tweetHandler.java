@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import mallet.TopicModeler;
 import model.FeatureStatistics;
 import model.LMDrillModel;
@@ -166,6 +167,7 @@ public class tweetHandler {
             shortenedLinks=message;
             tweet = tweet.replace(message, "").trim();
            
+            
            try {
                expandedLinks = expandShortURL(shortenedLinks);
            } catch (IOException ex) {
@@ -585,7 +587,13 @@ public class tweetHandler {
                 tmDrillModel = new TMDrillModel(-1);
             }else{
                 tm.importData(results);
+                try{
                 tm.trainTopics();
+                }catch(ArrayIndexOutOfBoundsException ex){
+                    JOptionPane.showMessageDialog(null, "Mallet Index Out of Bounds.", "Mallet", JOptionPane.ERROR_MESSAGE);
+                }catch(Exception ex){
+                    JOptionPane.showMessageDialog(null, "Mallet Exception.", "Mallet", JOptionPane.ERROR_MESSAGE);
+                }
                 TM_TfidfDriver.idfChecker(results, tm.getAllTopics());
                 
                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));

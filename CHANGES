@@ -77,3 +77,7 @@ Removed Follower rank and Aggregate Rank in Influencers Index
 [x] Fixed Timeline errors
 [x] Fixed GMT date fill error
 [x] Fixed tweethandler for GMT dates
+
+[x] Updated all buttons
+Added Button for open in browser for visuals
+[x] Changed links rank of social media to links count

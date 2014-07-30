@@ -11,7 +11,10 @@ import components.ButtonTabComponent;
 import database.Influencer;
 
 import database.tweetHandler;
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import model.tweetModel;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
@@ -32,6 +35,8 @@ public class LM_DrillDown extends javax.swing.JPanel {
  private static DefaultTableModel model;
  private LMDrillModel lmDM;
  private JTabbedPane tabPane;
+ private String wordcloudurl;
+ private String timelineurl;
  
  String title = null; 
          int i=1;
@@ -63,14 +68,16 @@ public class LM_DrillDown extends javax.swing.JPanel {
         
         /*Creates and Places Wordcloud in Panel*/
         try {
-            WordCloudFX.ApplicationFrame(wcPanel, write(lmDM.getTablename()+".html",lmDM.getTopList()));
+            wordcloudurl = write(lmDM.getTablename()+".html",lmDM.getTopList());
+            WordCloudFX.ApplicationFrame(wcPanel, wordcloudurl);
         } catch (Exception ex) {
            JOptionPane.showMessageDialog(null, "There has been an error loading the wordcloud.", "Wordcloud Construction", JOptionPane.ERROR_MESSAGE);
         }
         
         /*Creates and Places Timeline in Panel*/
         try {
-            FXTimeline.TimelineApplicationFrame(timelinePanel, timelineTopics(lmDM.getTablename(), lmDM.getTopList()));
+            timelineurl = timelineTopics(lmDM.getTablename(), lmDM.getTopList());
+            FXTimeline.TimelineApplicationFrame(timelinePanel, timelineurl);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "There has been an error loading the timeline.", "Timeline Construction", JOptionPane.ERROR_MESSAGE);
         }
@@ -173,7 +180,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         
         for(InfluenceModel im : influencerList) {
             if(InfluencerType.SOCIALMEDIA==im.getType())
-                model.addRow(new Object[]{im.getTwitter_account(), im.getLink_rank()});
+                model.addRow(new Object[]{im.getTwitter_account(), im.getLinks_count()});
         }
     }
     
@@ -202,7 +209,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
                 String method = "LM";
 
     //            p.setLmDM(DDlmDrillModel);
-                tabPane.add(method + " - LV" + DDlmDrillModel.getLevel() + " - " + DDkeywords + " - " + method, p);
+                tabPane.add(method + " - LV" + DDlmDrillModel.getLevel() + " - " + DDkeywords, p);
                 tabPane.setSelectedComponent(p);
                 tabPane.setTabComponentAt(tabPane.getSelectedIndex(), new ButtonTabComponent(tabPane));
                 Start.setProgressToComplete();
@@ -236,7 +243,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
                 String method = "LM";
 
     //            p.setLmDM(DDlmDrillModel);
-                tabPane.add(method + " - LV" + DDlmDrillModel.getLevel() + " - " + DDkeywords + " - " + method, p);
+                tabPane.add(method + " - LV" + DDlmDrillModel.getLevel() + " - " + DDkeywords, p);
                 tabPane.setSelectedComponent(p);
                 tabPane.setTabComponentAt(tabPane.getSelectedIndex(), new ButtonTabComponent(tabPane));
                 Start.setProgressToComplete();
@@ -264,6 +271,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         drilldownBtn = new javax.swing.JButton();
         saveBtn = new javax.swing.JButton();
         wcPanel = new javax.swing.JPanel();
+        wordcloudOpenBtn = new javax.swing.JButton();
         rawDataTabPanel = new javax.swing.JPanel();
         drillkeyTF1 = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -278,6 +286,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         timelinePanel = new javax.swing.JPanel();
+        timelineOpenBtn = new javax.swing.JButton();
         featureStatTabPanel = new javax.swing.JPanel();
         pieChartPanel = new javax.swing.JPanel();
         retweetsScrollPane = new javax.swing.JScrollPane();
@@ -347,12 +356,19 @@ public class LM_DrillDown extends javax.swing.JPanel {
         wcPanel.setLayout(wcPanelLayout);
         wcPanelLayout.setHorizontalGroup(
             wcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 755, Short.MAX_VALUE)
         );
         wcPanelLayout.setVerticalGroup(
             wcPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 272, Short.MAX_VALUE)
         );
+
+        wordcloudOpenBtn.setText("Open");
+        wordcloudOpenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                wordcloudOpenBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout wordCloudTabPanelLayout = new javax.swing.GroupLayout(wordCloudTabPanel);
         wordCloudTabPanel.setLayout(wordCloudTabPanelLayout);
@@ -372,9 +388,10 @@ public class LM_DrillDown extends javax.swing.JPanel {
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(drillkeyTF, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-                                .addGap(57, 57, 57)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(wordcloudOpenBtn)))
                         .addContainerGap())))
         );
         wordCloudTabPanelLayout.setVerticalGroup(
@@ -384,7 +401,8 @@ public class LM_DrillDown extends javax.swing.JPanel {
                 .addGroup(wordCloudTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(drillkeyTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(saveBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(wordcloudOpenBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(drilldownBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -400,6 +418,11 @@ public class LM_DrillDown extends javax.swing.JPanel {
         jLabel5.setText("KEYWORD/S FOR DRILLDOWN :");
 
         saveBtn3.setText("Save...");
+        saveBtn3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveBtn3ActionPerformed(evt);
+            }
+        });
 
         drilldownBtn1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         drilldownBtn1.setText("DRILLDOWN");
@@ -539,6 +562,13 @@ public class LM_DrillDown extends javax.swing.JPanel {
 
         jScrollPane5.setViewportView(timelinePanel);
 
+        timelineOpenBtn.setText("Open in Browser");
+        timelineOpenBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timelineOpenBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout timelineTabPanelLayout = new javax.swing.GroupLayout(timelineTabPanel);
         timelineTabPanel.setLayout(timelineTabPanelLayout);
         timelineTabPanelLayout.setHorizontalGroup(
@@ -550,7 +580,11 @@ public class LM_DrillDown extends javax.swing.JPanel {
                     .addGroup(timelineTabPanelLayout.createSequentialGroup()
                         .addGap(754, 754, 754)
                         .addComponent(jLabel2)))
-                .addGap(9, 9, 9))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(timelineTabPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(timelineOpenBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         timelineTabPanelLayout.setVerticalGroup(
             timelineTabPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,7 +594,10 @@ public class LM_DrillDown extends javax.swing.JPanel {
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(timelineTabPanelLayout.createSequentialGroup()
                         .addGap(46, 46, 46)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(timelineOpenBtn)
+                .addContainerGap())
         );
 
         RawData.addTab("Timeline", timelineTabPanel);
@@ -658,7 +695,7 @@ public class LM_DrillDown extends javax.swing.JPanel {
                 {null, null}
             },
             new String [] {
-                "Influencer", "Link Rank"
+                "Influencer", "Links Count"
             }
         ) {
             Class[] types = new Class [] {
@@ -796,6 +833,49 @@ public class LM_DrillDown extends javax.swing.JPanel {
         new Thread(new DrilldownThread2()).start();
     }//GEN-LAST:event_drilldownBtn1ActionPerformed
 
+    private void saveBtn3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveBtn3ActionPerformed
+        LM_SelectSave selectsavemenu = new LM_SelectSave(lmDM);
+        selectsavemenu.setVisible(true);
+    }//GEN-LAST:event_saveBtn3ActionPerformed
+
+    private void wordcloudOpenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_wordcloudOpenBtnActionPerformed
+        Desktop desktop = null;
+        if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+        }
+        if(desktop.isSupported(Desktop.Action.BROWSE)) {
+            String dir = System.getProperty("user.dir");
+            dir = dir.replace("\\", "/");
+            String url = "file:///" + dir + "/" + wordcloudurl;
+            try {
+                desktop.browse(new URI(url));
+            } catch (URISyntaxException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_wordcloudOpenBtnActionPerformed
+
+    private void timelineOpenBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timelineOpenBtnActionPerformed
+        Desktop desktop = null;
+        if (Desktop.isDesktopSupported()) {
+            desktop = Desktop.getDesktop();
+        }
+        if(desktop.isSupported(Desktop.Action.BROWSE)) {
+            String dir = System.getProperty("user.dir");
+            dir = dir.replace("\\", "/");
+            String url = "file:///" + dir + "/" + timelineurl;
+            try {
+                desktop.browse(new URI(url));
+            } catch (URISyntaxException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            } catch (IOException ex) {
+                JOptionPane.showMessageDialog(null, "Cannot open file.", "Open in Browser", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_timelineOpenBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTabbedPane RawData;
     private javax.swing.JButton drilldownBtn;
@@ -828,12 +908,14 @@ public class LM_DrillDown extends javax.swing.JPanel {
     private javax.swing.JScrollPane retweetsScrollPane;
     private javax.swing.JButton saveBtn;
     private javax.swing.JButton saveBtn3;
+    private javax.swing.JButton timelineOpenBtn;
     private javax.swing.JPanel timelinePanel;
     private javax.swing.JPanel timelineTabPanel;
     private javax.swing.JPanel tweetDataTabPanel;
     private javax.swing.JTable tweetTable;
     private javax.swing.JPanel wcPanel;
     private javax.swing.JPanel wordCloudTabPanel;
+    private javax.swing.JButton wordcloudOpenBtn;
     // End of variables declaration//GEN-END:variables
 
     private Iterable<String> read() {

@@ -190,6 +190,7 @@ public class Influencer {
           
           linknames = new ArrayList<>();
           linknames.add("4sq");
+          linknames.add("foursquare");
           getInfluencers().add(new InfluenceModel("FOURSQUARE", InfluencerType.SOCIALMEDIA, linknames,33)); 
           
           linknames = new ArrayList<>();

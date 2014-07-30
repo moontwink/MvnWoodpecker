@@ -5,13 +5,6 @@ package ngram;
  *
  * @author JOY
  */
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,9 +32,9 @@ public class NGramDriver{
    
    private static final Pattern filipinofunctionwords = Pattern.compile("\\b(?:"
         + "yung|yun|yan|upang|ung|tungkol|tayo|sya|subalit|siya|sino|sila|si|sapagkat|san|samin|saka|saan|sa|pati|para|"
-           + "pala|pag|pa|nyon|nyo|nya|niyon|niya|nito|ninyo|nila|ngunit|nga|nga|ng|natin|namin|na|mong|mo|mga|may|mang|"
-           + "maging|mag|kung|ko|kina|kayo|kay|kasi|kapag|kaniya|kanila|kami|ka|iyon|iyo|iyan|ito|inyo|ikaw|hindi|heto|"
-           + "hayun|hayan|ganyan|ganoon|ganon|ganiyan|ganito|eto|dito|din|di|daw|dahil|ayun|ayon|ayan|ay|ating|atin|at|"
+           + "pala|pag|pa|nyon|nyo|nya|niyon|niya|nito|ninyo|nila|ni|ngunit|nga|nga|ng|natin|namin|naman|na|mong|mo|mga|may|mang|"
+           + "maging|mag|lang|kung|ko|kina|kayo|kay|kasi|kapag|kaniya|kanila|kami|ka|iyon|iyo|iyan|ito|inyo|ikaw|hindi|heto|"
+           + "hayun|hayan|ganyan|ganoon|ganon|ganiyan|ganito|eto|eh|dito|din|di|daw|dahil|ayun|ayon|ayan|ay|ating|atin|at|"
            + "anong|ano|ang|aming|amin|aling|alin|akong|ako|aking|akin)\\b\\s*", Pattern.CASE_INSENSITIVE);
     
    /**
