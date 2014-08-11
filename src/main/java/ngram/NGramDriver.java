@@ -5,6 +5,7 @@ package ngram;
  *
  * @author JOY
  */
+import gui.Start;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,7 +23,7 @@ public class NGramDriver{
            + "SOMETHING|SOMEONE|SOMEBODY|SOME|SO|SINCE|SHOULDN'T|SHOULD|SHE'S|SHE'LL|SHE'D|SHE|SHAN'T|SHALL|ROUND|"
            + "RATHER|QUITE|OVER|OUT|OURSELVES|OURS|OUR|OUGHTN'T|OUGHT|OTHERS|OTHER|OR|ONLY|ON|OFTEN|OFF|OF|NOWHERE|NOW|"
            + "NOTHING|NOT|NOR|NOONE|NONE|NOBODY|NO|NEVER|NEITHER|NEARLY|NEARBY|NEAR|NEAR|MYSELF|MY|MUSTN'T|MUST|MUCH|"
-           + "MOST|MORE|MINE|MIGHT|ME|MAY|MANY|LESS|ITSELF|ITS|IT'S|IT|ISN'T|IS|INTO|IN|IF|I'VE|I'M|I'LL|I'D|I|HOWEVER|"
+           + "MOST|MORE|MINE|MIGHT|ME|MAY|MANY|LESS|ITSELF|ITS|IT'S|IT’S|IT|ISN'T|IS|INTO|IN|IF|I'VE|I'M|I'LL|I'D|I|HOWEVER|"
            + "HOW|HITHER|HIS|HIMSELF|HIM|HERSELF|HERS|HERE|HER|HENCE|HE'S|HE'LL|HE'D|HE|HAVING|HAVEN'T|HAVE|HASN'T|HAS|"
            + "HADN'T|HAD|GOT|GETTING|GETS|GET|FROM|FOR|FEWER|FEW|FAR|EXCEPT|EVERYWHERE|EVERYTHING|EVERYONE|EVERYBODY|"
            + "EVERY|EVER|EVEN|ENOUGH|ELSE|EITHER|EACH|DURING|DOWN|DONE|DON'T|DOING|DOESN'T|DOES|DO|DIDN'T|DID|COULDN'T|"
@@ -42,6 +43,7 @@ public class NGramDriver{
      */
    public static void removeOutliers(){
         double trim = ngramlist.size() * 0.20;
+        Start.systemOutArea.append("\t" + (int) trim + " Outliers Removed\n");
 //        System.out.print("********************trim**** " + trim);
         for(int top = 0; top < trim; top++){
             ngramlist.remove(top);
@@ -167,16 +169,19 @@ public class NGramDriver{
         * @param list
         */
       public static void sortngramlist(ArrayList<NGram> list){
-        
-        //Collections.sort(list, Collections.reverseOrder());
-           
-
+        Start.systemOutArea.append("\t" + list.size() + " Ngrams Sorted\n");
         Collections.sort(list, new MyComparator());
-
-//         System.out.println("Arraylist in descending order: " + list);
-    
-
       }
+
+    /**
+     * This method sorts the Ngram list and removes outliers.
+     **/
+    public static void sortNgramAndRemoveOutliers() {
+        Start.systemOutArea.append("\tSorting Ngrams\n");
+        NGramDriver.sortngramlist(NGramDriver.getNgramlist());
+        Start.systemOutArea.append("\tRemoving Outliers\n");
+        NGramDriver.removeOutliers();
+    }
       
        /**
         * Comparator used by sortngramlist to sort list

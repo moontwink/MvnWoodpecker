@@ -49,7 +49,6 @@ public class tweetHandler {
             ps.setString(1, tm.getStatusId());
             ps.setString(2, tm.getUsername());
             ps.setString(3, tm.getMessage());
-            ps.setString(4, tm.getRetweetCount());
             ps.setDouble(5, tm.getLatitude());
             ps.setDouble(6, tm.getLongitude());
             ps.setString(7, tm.getDate());
@@ -166,30 +165,30 @@ public class tweetHandler {
             
             shortenedLinks=message;
             tweet = tweet.replace(message, "").trim();
-           
-            
-           try {
-               expandedLinks = expandShortURL(shortenedLinks);
-           } catch (IOException ex) {
-//               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
-           }
-            
-            if(expandedLinks != null)
-            {
-                if(expandedLinks.contains("bit.ly")||expandedLinks.contains("fb"))
-                   try {
-                       expandedLinks = expandShortURL(expandedLinks);
-                } catch (IOException ex) {
-                       System.out.println("Unable to expand wrapped URL.");
-//                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                else {
-                    getTweetlinks().add(expandedLinks);
-                }
-            }
-            
-            System.out.println("Short link " +shortenedLinks+ " -->  Expanded Link " +expandedLinks );
-          
+//           
+//            
+//           try {
+//               expandedLinks = expandShortURL(shortenedLinks);
+//           } catch (IOException ex) {
+////               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+//           }
+//            
+//            if(expandedLinks != null)
+//            {
+//                if(expandedLinks.contains("bit.ly")||expandedLinks.contains("fb"))
+//                   try {
+//                       expandedLinks = expandShortURL(expandedLinks);
+//                } catch (IOException ex) {
+//                       System.out.println("Unable to expand wrapped URL.");
+////                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//                else {
+//                    getTweetlinks().add(expandedLinks);
+//                }
+//            }
+//            
+//            System.out.println("Short link " +shortenedLinks+ " -->  Expanded Link " +expandedLinks );
+//          
        }
        return tweet;
    }
@@ -244,16 +243,6 @@ public class tweetHandler {
         }
         
         return results;
-    }
-    
-    /**
-     * This method sorts the Ngram list and removes outliers.
-     **/
-    private static void sortNgramAndRemoveOutliers(){
-        Start.systemOutArea.append("\tSorting Ngrams\n");
-        NGramDriver.sortngramlist(NGramDriver.getNgramlist());
-        Start.systemOutArea.append("\tRemoving Outliers\n");
-        NGramDriver.removeOutliers();
     }
     
     /**
@@ -331,7 +320,7 @@ public class tweetHandler {
             if(results.isEmpty()){
                 lmDrillModel = new LMDrillModel(-1);
             }else{
-                sortNgramAndRemoveOutliers();
+                NGramDriver.sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
                
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
@@ -487,6 +476,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
 
+            Start.systemOutArea.append("\t" + rs.getFetchSize() + " tweets retrieved");
             Start.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
             while(rs.next()){
                 t = new tweetModel();
@@ -497,6 +487,7 @@ public class tweetHandler {
                 results.add(t);
             }
             
+            
             rs.close();
             ps.close();
             c.close();
@@ -504,7 +495,7 @@ public class tweetHandler {
             if(results.isEmpty()){
                 lmDrillModel = new LMDrillModel(-1);
             }else{
-                sortNgramAndRemoveOutliers();
+                NGramDriver.sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
                
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
@@ -685,7 +676,7 @@ public class tweetHandler {
             if(results.isEmpty()){
                 lmDrillModel = new LMDrillModel(-1);
             }else{
-                sortNgramAndRemoveOutliers();
+                NGramDriver.sortNgramAndRemoveOutliers();
                 TfidfDriver.idfchecker(results);
                
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
@@ -1073,7 +1064,7 @@ public class tweetHandler {
             c.close();
 
             System.out.println("******************************* ");
-            sortNgramAndRemoveOutliers();
+            NGramDriver.sortNgramAndRemoveOutliers();
             TfidfDriver.idfchecker(results);
            
             FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));

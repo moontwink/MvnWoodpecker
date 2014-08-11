@@ -81,3 +81,19 @@ Removed Follower rank and Aggregate Rank in Influencers Index
 [x] Updated all buttons
 Added Button for open in browser for visuals
 [x] Changed links rank of social media to links count
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>> AS OF AUG 10, 2014
+>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+* temporarily disabled expanding urls module.
+necessary to update:
+    ** import tables db
+    ** update default date of local db
+
+Updated import module
+    Can opt to exclude headers prior import
+    Updated error message to contain entry where error occurred
+
+Added system out for outliers removed
+Added system out for time elapsed

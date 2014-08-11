@@ -12,6 +12,7 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import model.tweetModel;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
@@ -386,38 +387,34 @@ public class Start extends javax.swing.JFrame {
         tweetSourcePanel.setLayout(tweetSourcePanelLayout);
         tweetSourcePanelLayout.setHorizontalGroup(
             tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(tweetSourcePanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tweetSourcePanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(selectSourceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(84, 84, 84))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tweetSourcePanelLayout.createSequentialGroup()
-                        .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tweetSourcePanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(selectSourceBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, tweetSourcePanelLayout.createSequentialGroup()
+                .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(tweetSourcePanelLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(locdbBtn)
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(tweetSourcePanelLayout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(locdbBtn)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tweetSourcePanelLayout.createSequentialGroup()
                                 .addComponent(importBtn)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(importCB, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(tweetSourcePanelLayout.createSequentialGroup()
-                                        .addComponent(browseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE)))))
-                        .addContainerGap())))
+                                .addComponent(browseBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, tweetSourcePanelLayout.createSequentialGroup()
+                        .addGap(73, 73, 73)
+                        .addComponent(importCB, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         tweetSourcePanelLayout.setVerticalGroup(
             tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(tweetSourcePanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(14, 14, 14)
                 .addGroup(tweetSourcePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(browseBtn)
                     .addComponent(importBtn))
-                .addGap(10, 10, 10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(importCB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(locdbBtn)
@@ -739,8 +736,10 @@ public class Start extends javax.swing.JFrame {
             }else if(locdbBtn.isSelected()){
                 TABLE_NAME = "tweets";
                 TABLE_CALENDAR_FORMAT = CalendarType.GMT;
-//                fillDateBoxes(TABLE_NAME);
+                fillDateBoxes(TABLE_NAME);
+                
                 //Fills year boxes (fpr demo purposes)
+                /*
                 int firstYear = 2013;
                 int lastYear = 2014;
 
@@ -753,6 +752,7 @@ public class Start extends javax.swing.JFrame {
                     syearMB.addItem(y);
                     eyearMB.addItem(y);
                 }
+                */
             }
         }else{
             JOptionPane.showMessageDialog(null, "Must select tweet data source.", "Tweets Source Requirement", JOptionPane.ERROR_MESSAGE);
@@ -799,34 +799,34 @@ public class Start extends javax.swing.JFrame {
             edayMB.addItem(x);
         }
     }//GEN-LAST:event_emonthMBActionPerformed
-
-    private void setProgressToZero() {
-//        progressBar.setValue(0);
-        progressBar.setString(".....");
-        progressBar.setIndeterminate(false);
-    }
-    
+ 
+    /**
+     * Sets Progress Bar to "Woodpecking"
+     */
     public static void setProgressToWork() {
 //        progressBar.setValue(0);
         progressBar.setString("Woodpecking...");
         progressBar.setIndeterminate(true);
     }
     
+    /**
+     * Sets Progress Bar to "Complete"
+     */
     public static void setProgressToComplete() {
 //        progressBar.setValue(100);
         progressBar.setString("Complete!");
         progressBar.setIndeterminate(false);
     }
     
+    /**
+     * Thread for Importing CSV Files.
+     */
     public class ImportThread implements Runnable {
 
         @Override
         public void run() {
-            progressBar.setString("Importing...");
             String tablename = ImportFiles.importCSVFile();
-            importCB.addItem(tablename);
-            progressBar.setString("Finished!");
-            progressBar.setIndeterminate(false);
+            insertImportedTables();
         }
         
     }
@@ -845,6 +845,9 @@ public class Start extends javax.swing.JFrame {
        return string == null || string.isEmpty() || string.trim().isEmpty();  
     } 
     
+    /**
+     * Thread for trend detection process.
+     */
     public class TweetpeckThread implements Runnable {
 
         @Override
@@ -1050,6 +1053,8 @@ public class Start extends javax.swing.JFrame {
 //                }catch(InterruptedException ex){
 //                }
 //            }
+            systemOutArea.append("\t* "+ TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS) + " Elapsed\n");
+            systemOutArea.append("\t* "+ (double) System.nanoTime()/1000000000 + " Elapsed\n");
         }
     
     }

@@ -6,28 +6,12 @@ package model;
  * @author Nancy
  */
 public class tweetModel {
-    private int idTweets;
     private String statusId;
     private String username;
     private String message;
-    private String retweetCount;
+    private String date;
     private double latitude;
     private double longitude;
-    private String date;
-
-    /**
-     * @return the idTweets
-     */
-    public int getIdTweets() {
-        return idTweets;
-    }
-
-    /**
-     * @param idTweets the idTweets to set
-     */
-    public void setIdTweets(int idTweets) {
-        this.idTweets = idTweets;
-    }
 
     /**
      * @return the username
@@ -55,20 +39,6 @@ public class tweetModel {
      */
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    /**
-     * @return the retweetCount
-     */
-    public String getRetweetCount() {
-        return retweetCount;
-    }
-
-    /**
-     * @param retweetCount the retweetCount to set
-     */
-    public void setRetweetCount(String retweetCount) {
-        this.retweetCount = retweetCount;
     }
 
     /**

@@ -6,7 +6,6 @@ import au.com.bytecode.opencsv.bean.ColumnPositionMappingStrategy;
 import au.com.bytecode.opencsv.bean.CsvToBean;
 import database.ImportHandler;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.List;
 import javax.swing.JFileChooser;
@@ -37,7 +36,14 @@ public class ImportFiles {
                 System.out.println("---------- Initializing Database Operation ----------");
                 System.out.println("Operation: Import CSV file into database");
                 System.out.println("Status: Reading CSV file");
-                CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(chooser.getSelectedFile()), "UTF-8"));
+                
+                int option = JOptionPane.showConfirmDialog(chooser, "Would you like to skip the first line?", "CSV Import Question", JOptionPane.YES_NO_OPTION);
+                CSVReader reader = new CSVReader(new InputStreamReader(new FileInputStream(chooser.getSelectedFile()), "UTF-8"));; 
+                
+                if(option == 0) { //FIRST LINE IS SKIPPED
+                    reader = new CSVReader(new InputStreamReader(new FileInputStream(chooser.getSelectedFile()), "UTF-8"), ',', '"', 1);
+                }
+                
                 String filename = chooser.getSelectedFile().getName();
 
                 ColumnPositionMappingStrategy<tweetModel> strat = new ColumnPositionMappingStrategy<>();
@@ -48,14 +54,6 @@ public class ImportFiles {
                 CsvToBean<tweetModel> csv = new CsvToBean<>();
                 List<tweetModel> list = csv.parse(strat, reader);
                 
-//                for(tweetModel t : list){
-//                    System.out.println(t.getStatusId());
-//                    System.out.println("\t" + t.getUsername());
-//                    System.out.println("\t" + t.getMessage());
-//                    System.out.println("\t" + t.getDate());
-//                    System.out.println("\t" + t.getLatitude());
-//                    System.out.println("\t" + t.getLongitude());
-//                }
                 reader.close();
                 
                 System.out.println("Status: Storing CSV entries into database");
@@ -65,10 +63,12 @@ public class ImportFiles {
                 System.out.println("---------- End of Database Operation ----------\n\n");
                 
             }catch(Exception ex){
+                ex.printStackTrace();
                 JOptionPane.showMessageDialog(null, "There's seems to be an error in your CSV File caused by any of the following: \n"
                         + "(1) You are not following the REQUIRED format \n"
                         + "(2) You are MISSING some data \n"
-                        + "(3) You are trying to import a CORRUPTED file", "Import CSV Error", JOptionPane.ERROR_MESSAGE);
+                        + "(3) You are trying to import a CORRUPTED file \n\n"
+                        + "Error found: " + ex.getCause().getMessage(), "Import CSV Error", JOptionPane.ERROR_MESSAGE);
             }
         }
         return tablename;
