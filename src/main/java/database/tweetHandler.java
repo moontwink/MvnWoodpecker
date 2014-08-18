@@ -34,45 +34,6 @@ public class tweetHandler {
     private static String shortenedLinks = " ";
     
     /**
-     * Adds tweet to database.
-     * @param tm this is the tweet model
-     * @return String This is if the message is saved
-     */
-    public static String addTweet(tweetModel tm){
-        String message = "* Saving Failed.";
-        
-        try{
-            Connection c = DBFactory.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO `Tweets` "
-                    + "(statusId, username, message, retweetcount, latitude, longhitude, date) VALUES (?,?,?,?,?,?,?)"); 
-            
-            ps.setString(1, tm.getStatusId());
-            ps.setString(2, tm.getUsername());
-            ps.setString(3, tm.getMessage());
-            ps.setDouble(5, tm.getLatitude());
-            ps.setDouble(6, tm.getLongitude());
-            ps.setString(7, tm.getDate());
-            
-            int i = ps.executeUpdate();
-            
-            if (i == 1) {
-                message = "* Saving successful.";
-            }
-            
-            ps.close();
-            c.close();
-            
-        }catch(ClassNotFoundException ex){
-            Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }catch(SQLException ex){
-            Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return message;
-        
-    }
-    
-    /**
      * This method makes the tweet messages to lower case.
      * @param tweet
      * @return String
@@ -824,81 +785,6 @@ public class tweetHandler {
         }
          
         return tmDrillModel;
-    }
-    
-    /**
-     * This method converts month to its Number Equivalent.
-     * @param month
-     * @return int
-     */   
-    private static int monthNumber(String month){
-        int monthnum = 0;
-        
-        switch(month){
-            case "Jan": return 1;
-            case "Feb":return 2;
-            case "Mar":return 3;
-            case "Apr":return 4;
-            case "May":return 5;
-            case "Jun":return 6;
-            case "Jul":return 7;
-            case "Aug":return 8;
-            case "Sep":return 9;
-            case "Oct":return 10;
-            case "Nov":return 11;
-            case "Dec":return 12;
-            default: return monthnum;
-        }
-    }
-    
-    /**
-     * This method converts the number equivalent of month to its word equivalent.
-     * @param month
-     * @return String
-     */  
-    private static String monthName(int month){
-        String name = " ";
-        
-        switch(month){
-            case 1: return "Jan";
-            case 2: return "Feb";
-            case 3: return "Mar";
-            case 4: return "Apr";
-            case 5: return "May";
-            case 6: return "Jun";
-            case 7: return "Jul";
-            case 8: return "Aug";
-            case 9: return "Sep";
-            case 10: return "Oct";
-            case 11: return "Nov";
-            case 12: return "Dec";
-            default: return name;
-        }
-    }
-    
-    /**
-     * This returns the number of days in a month.
-     * @param month
-     * @return int 
-     */
-    private static int numDaysinMonth(int month){
-        int numdays = 30;
-        
-        switch(month){
-            case 1: return 31;
-            case 2: return 28;
-            case 3: return 31;
-            case 4: return 30;
-            case 5: return 31;
-            case 6: return 30;
-            case 7: return 31;
-            case 8: return 31;
-            case 9: return 30;
-            case 10: return 31;
-            case 11: return 30;
-            case 12: return 31;
-            default: return numdays;
-        }
     }
     
     /**
