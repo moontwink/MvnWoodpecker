@@ -14,7 +14,7 @@ import model.tweetModel;
 import ngram.NGram;
 import ngram.NGramDriver;
 import static ngram.NGramDriver.sortngramlist;
-import tfidf.Tfidf;
+import tfidf.LM_TfidfModel;
 
 /**
  *
@@ -29,15 +29,15 @@ public class LM_Timeline {
      * @return url
      * @throws IOException
      */
-    public static String timelineTopics(String filename, ArrayList<Tfidf> lmDM) throws IOException{
+    public static String timelineTopics(String filename, ArrayList<LM_TfidfModel> lmDM) throws IOException{
          String[] keywords= splitTableName(filename);
          ArrayList<tweetModel> tweets =  getAllTweets(filename);
          ArrayList<TimelineTopics> topics = new ArrayList<TimelineTopics>();
       
-         if(keywords!=null)
-        for(int i =0; i<keywords.length;i++){
-            System.out.println("keywords: "+ keywords[i]);
-        }
+//         if(keywords!=null)
+//        for(int i =0; i<keywords.length;i++){
+//            System.out.println("keywords: "+ keywords[i]);
+//        }
          
         
        if(keywords==null){
@@ -48,11 +48,11 @@ public class LM_Timeline {
        
        //   sortDate(topics);
        for(int i=0;i<topics.size();i++){
-            System.out.println("sort me out: " + i);
+//            System.out.println("sort me out: " + i);
        Collections.sort(topics.get(i).getDetails(),new MyComparator() );
        }
-       for(int index=0;index<topics.get(0).getDetails().size();index++)
-            System.out.println("sorted dates: " + topics.get(0).getDetails().get(index).getDate());
+//       for(int index=0;index<topics.get(0).getDetails().size();index++)
+//            System.out.println("sorted dates: " + topics.get(0).getDetails().get(index).getDate());
        
        
        String url = TimelineWriter.write(filename+".html", topics);
@@ -65,14 +65,14 @@ public class LM_Timeline {
      * @param topics
      * @param lmDM
      */
-     public static void withoutKeywords(ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics, ArrayList<Tfidf> lmDM){
+     public static void withoutKeywords(ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics, ArrayList<LM_TfidfModel> lmDM){
          NGramDriver grammy = new NGramDriver();
          NGramDriver.setNgramlist(new ArrayList<NGram>());
           ArrayList<NGram> keywords = new ArrayList<NGram>();          
           ArrayList<NGram> keywords2 = new ArrayList<NGram>();
           
          for(int i=0;i<lmDM.size();i++){
-             System.out.println("lmdm ___ ->"+lmDM.get(i).getTweet());
+//             System.out.println("lmdm ___ ->"+lmDM.get(i).getTweet());
             grammy.TimelineNGramTweet(cleanTweet(lmDM.get(i).getTweet()));
         }
           
@@ -89,7 +89,7 @@ public class LM_Timeline {
            }
          for(int i= 0;i<keywords.size();i++){
              String key = keywords.get(i).getTweet();
-             System.out.println("topic key: "+key);
+//             System.out.println("topic key: "+key);
          
              TimelineTopics ttops = new TimelineTopics(key,new ArrayList<KeywordOccurence>());
            topics.add(ttops);
@@ -102,7 +102,7 @@ public class LM_Timeline {
                 String key = keywords.get(j).getTweet();
              if(tweets.get(i).getMessage().matches("(.*)"+key+"(.*)")){
                  int test = (topics.get(j).getDetails().size());
-                 System.out.println("Get topic "+test);
+//                 System.out.println("Get topic "+test);
                  
                  if(i!=0 && !topics.get(j).getDetails().isEmpty()&& topics.get(j).getDetails()!= null ){
                      checker= false;
@@ -116,7 +116,7 @@ public class LM_Timeline {
                  }
                  if(i==0 || checker==false){
                       KeywordOccurence data = new KeywordOccurence(splitDate(tweets.get(i).getDate()),1);
-                      System.out.println(data.getDate());
+//                      System.out.println(data.getDate());
                       topics.get(j).getDetails().add(data);
                               //.get(i).setFrequency(1);
                    //   topics.get(0).getDetails().get(i).setDate(tweets.get(i).getDate());
@@ -164,7 +164,7 @@ public class LM_Timeline {
         
          for(int i= 0;i<keywords.length;i++){
              String key = keywords[i];
-             System.out.println("topic key: "+key);
+//             System.out.println("topic key: "+key);
          
              TimelineTopics ttops = new TimelineTopics(key,new ArrayList<KeywordOccurence>());
            topics.add(ttops);
@@ -177,7 +177,7 @@ public class LM_Timeline {
                 
              if(tweets.get(i).getMessage().matches("(.*)"+keywords[j]+"(.*)")){
                  int test = (topics.get(j).getDetails().size());
-                 System.out.println("Get topic "+test);
+//                 System.out.println("Get topic "+test);
                  
                  if(i!=0 && !topics.get(j).getDetails().isEmpty()&& topics.get(j).getDetails()!= null ){
                      checker= false;
@@ -191,7 +191,7 @@ public class LM_Timeline {
                  }
                  if(i==0 || checker==false){
                       KeywordOccurence data = new KeywordOccurence(splitDate(tweets.get(i).getDate()),1);
-                      System.out.println(data.getDate());
+//                      System.out.println(data.getDate());
                       topics.get(j).getDetails().add(data);
                               //.get(i).setFrequency(1);
                    //   topics.get(0).getDetails().get(i).setDate(tweets.get(i).getDate());
@@ -343,7 +343,7 @@ public class LM_Timeline {
           int d= o1.getDate().compareTo(o2.getDate());
              //  d = -1;
           
-            System.out.println("sorting dates!! ");
+//            System.out.println("sorting dates!! ");
             
              if(sam[0].compareTo(sam2[0])==0){
              if(sam[1].compareTo(sam2[1])!=0) 

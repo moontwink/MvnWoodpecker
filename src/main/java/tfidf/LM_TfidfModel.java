@@ -5,7 +5,7 @@ package tfidf;
  *
  * @author Matt
  */
-public class Tfidf {
+public class LM_TfidfModel {
     private double score;
     private String tweet;
 
@@ -14,7 +14,7 @@ public class Tfidf {
      * @param tweet
      * @param score
      */
-    public Tfidf(String tweet, double score)
+    public LM_TfidfModel(String tweet, double score)
     {
         this.score = score;
         this.tweet = tweet;

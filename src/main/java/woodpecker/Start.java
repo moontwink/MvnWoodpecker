@@ -1,5 +1,5 @@
 
-package gui;
+package woodpecker;
 
 import components.ButtonTabComponent;
 import database.CalendarHandler;
@@ -8,11 +8,16 @@ import database.TablesHandler;
 import database.tweetHandler;
 import filemanagement.FilesCleaner;
 import filemanagement.ImportFiles;
+import gui.CrawlerStream;
+import gui.LM_DrillDown;
+import gui.TM_DrillDown;
+import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import model.tweetModel;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.text.DefaultCaret;
@@ -37,6 +42,7 @@ public class Start extends javax.swing.JFrame {
     
     public Start() {
         initComponents();
+        initialize();
         setDisabled();
         this.setVisible(true);
         this.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
@@ -44,6 +50,10 @@ public class Start extends javax.swing.JFrame {
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         insertImportedTables();
 //        tabPane = new ClosableTabbedPane();
+    }
+    
+    private void initialize() {
+        this.setIconImage(Toolkit.getDefaultToolkit().getImage("iconwoodpecker.png"));
     }
     
     /**

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import tfidf.TM_TfidfModel;
-import tfidf.Tfidf;
+import tfidf.LM_TfidfModel;
 
 /**
  *
@@ -51,13 +51,13 @@ public class FileDataWriter {
      * @param toplist 
      * @return String the url of the txt file written
      */
-    public static String writeLMToplist(String tablename, ArrayList<Tfidf> toplist) {
+    public static String writeLMToplist(String tablename, ArrayList<LM_TfidfModel> toplist) {
         BufferedWriter outputWriter = null;
         String url = ngramsUrl + "lm-"+tablename+".txt";
         try {
             outputWriter = new BufferedWriter(new FileWriter(url));
             
-            for(Tfidf entry : toplist) {
+            for(LM_TfidfModel entry : toplist) {
                 outputWriter.write(entry.getTweet()+"\n");
             }
             

@@ -10,7 +10,7 @@ import cc.mallet.types.*;
 import cc.mallet.pipe.*;
 import cc.mallet.pipe.iterator.*;
 import cc.mallet.topics.*;
-import gui.Start;
+import gui.Woodpecker;
 
 import java.util.*;
 import java.util.regex.*;
@@ -78,7 +78,7 @@ public class TopicModeler {
      * Trains topics using imported mallet file.
      */
     public void trainTopics() throws ArrayIndexOutOfBoundsException {
-        Start.systemOutArea.append("\tTraining Topics\n");
+        Woodpecker.systemOutArea.append("\tTraining Topics\n");
         // Begin by importing documents from text to feature sequences
         ArrayList<Pipe> pipeList = new ArrayList<Pipe>();
 

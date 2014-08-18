@@ -37,14 +37,14 @@ public class VennDiagramWriter {
    ArrayList<VennTopicModel> vennuniquetopics = new ArrayList<>();
     for(int i = 0 ; i < tmDM.getTopics().size(); i++) //for all topics
     {			
-        System.out.println("Hello!");
+//        System.out.println("Hello!");
         
         VennTopicModel vtm = new VennTopicModel(i, tmDM.getTopics().get(i).getTopic().getKeywords());
         vennscore = 0;
         
 	for(int x = i+1 ; x < tmDM.getTopics().size(); x++)
         {	//iterator for x topic
-                System.out.println("Hello value of i " +i+ " value of x " +x);
+//                System.out.println("Hello value of i " +i+ " value of x " +x);
                 
                 VennScoreModel vennmodel = new VennScoreModel();
 //		for(String firstkey : tmDM.getTopics().get(i).getTopic().getKeywords())
@@ -57,10 +57,10 @@ public class VennDiagramWriter {
                             vennmodel.addSimilarWord(firstkey);
                             
                             //causing concurrentmodificationexception
-                            System.out.println(".."+vtm.findKeywordIndex(firstkey));
+//                            System.out.println(".."+vtm.findKeywordIndex(firstkey));
                             vtm.deleteKeyword(vtm.findKeywordIndex(firstkey));
                             
-                            System.out.println("Current word is " +firstkey+ "compared to word in " +x+ " which is " +tmDM.getTopics().get(x).getTopic().getKeywords());
+//                            System.out.println("Current word is " +firstkey+ "compared to word in " +x+ " which is " +tmDM.getTopics().get(x).getTopic().getKeywords());
 			}
 		}
 //              
@@ -106,10 +106,10 @@ public class VennDiagramWriter {
           + "var sets = [");
   
   for(VennTopicModel vtm : vennuniquetopics){
-        System.out.println("~~~~ UNIQUE TOPICS FOR " + (vtm.getTopicnumber()+1));
+//        System.out.println("~~~~ UNIQUE TOPICS FOR " + (vtm.getTopicnumber()+1));
         outputWriter.write("{\"label\" : \"Topic "+(vtm.getTopicnumber()+1)+"\" , \"size\" : 10, \"value\" : \"");
         for(String t : vtm.getUniquewords()){
-            System.out.println("----- "+t);
+//            System.out.println("----- "+t);
             outputWriter.write(t+" ");
         }
         outputWriter.write("\"},\n");
@@ -123,12 +123,12 @@ public class VennDiagramWriter {
 	String key = (String) it.next();
         VennScoreModel vennScoreModel = finalVennScores.get(key);
 //	int vennvalue = finalVennScores.get(key);
-	System.out.println("KEY: "+ key );
-	System.out.println("SCORE: "+ vennScoreModel.getVennscore() );
-        System.out.println("SIMILAR KEYWORDS: ");
+//	System.out.println("KEY: "+ key );
+//	System.out.println("SCORE: "+ vennScoreModel.getVennscore() );
+//        System.out.println("SIMILAR KEYWORDS: ");
         outputWriter.write("{\"sets\" : ["+key.charAt(0)+","+key.charAt(1)+"], \"size\": "+vennScoreModel.getVennscore()+", \"value\" : \"");
             for(String s : vennScoreModel.getSimilarwords()){
-                System.out.println("\t == " + s);
+//                System.out.println("\t == " + s);
                 outputWriter.write(s+"\\n");
             }
         outputWriter.write("\"},\n");

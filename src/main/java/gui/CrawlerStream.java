@@ -1,6 +1,7 @@
 
 package gui;
 
+import java.awt.Toolkit;
 import twitter4j.FilterQuery;
 import twitter4j.StallWarning;
 import twitter4j.Status;
@@ -25,6 +26,13 @@ public class CrawlerStream extends javax.swing.JFrame {
      */
     public CrawlerStream() {
         initComponents();
+        initialize();
+    }
+    
+    /**
+     * Initialize user interface.
+     */
+    private void initialize() {
         config = configBuild();
         titleVersion.setText(TITLE+ " " +VERSION);
     }
@@ -191,7 +199,13 @@ public class CrawlerStream extends javax.swing.JFrame {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator4 = new javax.swing.JSeparator();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Tweet Crawler");
+        setBackground(new java.awt.Color(255, 255, 255));
+        setResizable(false);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setOpaque(false);
 
         startBtn.setText("Start Crawling");
         startBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -366,6 +380,7 @@ public class CrawlerStream extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void startBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startBtnActionPerformed

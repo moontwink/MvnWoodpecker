@@ -1,5 +1,5 @@
 
-package model;
+package influencer;
 
 import java.util.ArrayList;
 

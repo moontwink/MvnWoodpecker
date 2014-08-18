@@ -2,7 +2,7 @@
 package tweets;
 
 import database.tweetHandler;
-import gui.Start;
+import gui.Woodpecker;
 import java.util.ArrayList;
 import model.LMDrillModel;
 import model.TMDrillModel;
@@ -27,8 +27,8 @@ public class DDTweetCleaner {
      * @return LMDrillModel
      */
     public LMDrillModel cleanByKeyword(String keyword, LMDrillModel currentlmDM){
-        Start.setProgressToWork();
-        Start.systemOutArea.append(">>> Drilling Down\n");
+        Woodpecker.setProgressToWork();
+        Woodpecker.systemOutArea.append(">>> Drilling Down\n");
         LMDrillModel DDlmDrillModel = tweetHandler.drillDownByLM(keyword, currentlmDM);
         return DDlmDrillModel;
     }
@@ -40,8 +40,8 @@ public class DDTweetCleaner {
      * @return LMDrillModel
      */
     public TMDrillModel TMcleanByKeyword(String keyword, TMDrillModel currenttmDM){
-        Start.setProgressToWork();
-        Start.systemOutArea.append(">>> Drilling Down\n");
+        Woodpecker.setProgressToWork();
+        Woodpecker.systemOutArea.append(">>> Drilling Down\n");
         TMDrillModel DDtmDrillModel = tweetHandler.drillDownByTM(keyword, currenttmDM);
         return DDtmDrillModel;
     }

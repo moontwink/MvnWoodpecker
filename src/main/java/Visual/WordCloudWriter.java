@@ -5,7 +5,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import tfidf.Tfidf;
+import tfidf.LM_TfidfModel;
 
 
 public class WordCloudWriter{
@@ -19,7 +19,7 @@ public class WordCloudWriter{
 * @return url
 * @throws IOException
 */ 
-public static String write (String filename, ArrayList<Tfidf> lmTopList) throws IOException{
+public static String write (String filename, ArrayList<LM_TfidfModel> lmTopList) throws IOException{
    //lmDM.getTopList();
   BufferedWriter outputWriter = null;
   String url = "src/visual/d3-wordcloud/wordcloud-"+filename;

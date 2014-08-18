@@ -2,7 +2,7 @@
 package model;
 
 import java.util.ArrayList;
-import tfidf.Tfidf;
+import tfidf.LM_TfidfModel;
 
 /**
  *
@@ -11,7 +11,7 @@ import tfidf.Tfidf;
 public class LMDrillModel {
     private int level;
     private String tablename;
-    private ArrayList<Tfidf> topList;
+    private ArrayList<LM_TfidfModel> topList;
     private String[] keywords;
     private FeatureStatistics statistics;
 
@@ -36,7 +36,7 @@ public class LMDrillModel {
      * @param topList
      * @param statistics
      */
-    public LMDrillModel(int level, String tablename, ArrayList<Tfidf> topList, FeatureStatistics statistics) {
+    public LMDrillModel(int level, String tablename, ArrayList<LM_TfidfModel> topList, FeatureStatistics statistics) {
         this.level = level;
         this.tablename = tablename;
         this.topList = topList;
@@ -74,14 +74,14 @@ public class LMDrillModel {
     /**
      * @return the topList
      */
-    public ArrayList<Tfidf> getTopList() {
+    public ArrayList<LM_TfidfModel> getTopList() {
         return topList;
     }
 
     /**
      * @param topList the topList to set
      */
-    public void setTopList(ArrayList<Tfidf> topList) {
+    public void setTopList(ArrayList<LM_TfidfModel> topList) {
         this.topList = topList;
     }
 

@@ -6,7 +6,7 @@ package tfidf;
  * @author Matt
  */
 
-import gui.Start;
+import gui.Woodpecker;
 import java.util.Comparator;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -15,9 +15,9 @@ import java.util.regex.Pattern;
 import model.tweetModel;
 import ngram.NGramDriver;
 
-public class TfidfDriver {
+public class LM_TfidfDriver {
     private static ArrayList<ngram.NGram> ngramlist; //contains the list of the ngrams and the frequency counts
-    private static ArrayList <Tfidf> toplist; // contains the list of the top ngrams given tf-idf scores
+    private static ArrayList <LM_TfidfModel> toplist; // contains the list of the top ngrams given tf-idf scores
     
     /**
      * This method computes the IDF value of all ngrams.
@@ -25,7 +25,7 @@ public class TfidfDriver {
      */
     public static void idfchecker(ArrayList<tweetModel> newList)//gets the idf element by checkin the ngram results against the filtered corpus
     {
-        Start.systemOutArea.append("\tComputing TF-IDF Scores\n");
+        Woodpecker.systemOutArea.append("\tComputing TF-IDF Scores\n");
 //        int count=0;
         ngramlist = ngram.NGramDriver.getNgramlist();    //list of ngrams
         toplist = new ArrayList<>();
@@ -87,7 +87,7 @@ public class TfidfDriver {
 
                 //Removes ngrams with TF-IDF scores of 0
                 if(tfscore > 0){
-                    Tfidf newtf = new Tfidf(tweet, tfscore);
+                    LM_TfidfModel newtf = new LM_TfidfModel(tweet, tfscore);
                     getToplist().add(newtf);
                 }
             }
@@ -100,7 +100,7 @@ public class TfidfDriver {
     private static void printTopList(){
         sorttoplist(getToplist());
         
-        for(Tfidf tf : getToplist()){
+        for(LM_TfidfModel tf : getToplist()){
             System.out.println("\t\t\t[[" + tf.getTweet() +"]] == " + tf.getScore());
         }
     }
@@ -109,7 +109,7 @@ public class TfidfDriver {
      * Sorts the list of ngrams in DESCENDING order by TF-IDF score
      * @param list
      */
-    public static void sorttoplist(ArrayList<Tfidf> list){
+    public static void sorttoplist(ArrayList<LM_TfidfModel> list){
 
         Collections.sort(list, new MyComparator());
 
@@ -118,17 +118,17 @@ public class TfidfDriver {
     /**
      * @return the toplist
      */
-    public static ArrayList <Tfidf> getToplist() {
+    public static ArrayList <LM_TfidfModel> getToplist() {
         return toplist;
     }
     
     /**
      * Comparator used by sorttoplist to sort
      */
-    public static class MyComparator implements Comparator<Tfidf> {
+    public static class MyComparator implements Comparator<LM_TfidfModel> {
    
         @Override
-        public int compare(Tfidf o1, Tfidf o2) {
+        public int compare(LM_TfidfModel o1, LM_TfidfModel o2) {
           
             try{
                 if (o1.getScore() > o2.getScore()) {

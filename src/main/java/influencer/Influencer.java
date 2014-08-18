@@ -1,15 +1,11 @@
 
-package database;
+package influencer;
 
 import static database.tweetHandler.getTweetlinks;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.InfluenceModel;
-import model.InfluencerType;
 
 
 /**
@@ -219,10 +215,10 @@ public class Influencer {
      */
       public static void indexLinks() throws IOException
       {
-          for (int i = 0; i < getTweetlinks().size(); i++)
-          {
-                  System.out.println("link ["+i+ "] "+ getTweetlinks().get(i));
-          }
+//          for (int i = 0; i < getTweetlinks().size(); i++)
+//          {
+//                  System.out.println("link ["+i+ "] "+ getTweetlinks().get(i));
+//          }
           
           for (int x = 0; x < getTweetlinks().size(); x++)
           {
@@ -233,9 +229,9 @@ public class Influencer {
                 {
                     if(getTweetlinks().get(x).contains(linkname))
                     {
-                        System.out.println("The value of get tweet is ->" +getTweetlinks().get(x)+ "The value of link name is ->" +linkname );
+//                        System.out.println("The value of get tweet is ->" +getTweetlinks().get(x)+ "The value of link name is ->" +linkname );
                         m.setLinks_count(m.getLinks_count()+1);
-                        System.out.println("###### "+m.getLinks_count());
+//                        System.out.println("###### "+m.getLinks_count());
                         linkIsCounted = true;
                         break;
                     }
@@ -248,9 +244,9 @@ public class Influencer {
       
           Collections.sort(getInfluencers(), new Influencer.MyComparator());
           
-          for(InfluenceModel f : getInfluencers()) {
-              System.out.println("The count of "+ f.getTwitter_account() + " links is "+ f.getLinks_count()+ " while the follower rank " +f.getFollower_rank());
-          }
+//          for(InfluenceModel f : getInfluencers()) {
+//              System.out.println("The count of "+ f.getTwitter_account() + " links is "+ f.getLinks_count()+ " while the follower rank " +f.getFollower_rank());
+//          }
           
           InfluenceComputer();
 
@@ -322,12 +318,12 @@ public class Influencer {
            
           Collections.sort(getInfluencers(), new Influencer.MyComparatorInfluence());
           
-          System.out.println("--------------------------------");
+//          System.out.println("--------------------------------");
            for(int i = 0; i < getInfluencers().size(); i++) 
            {
               getInfluencers().get(i).setInfluence_rank((i+1));
-              System.out.println("Twitter account -> "+getInfluencers().get(i).getTwitter_account() +" link rank is " +getInfluencers().get(i).getLink_rank()+ " follower rank is " +getInfluencers().get(i).getFollower_rank()+ " = Aggregate Influence Rank " + (i+1) );
-              System.out.println("--------------");
+//              System.out.println("Twitter account -> "+getInfluencers().get(i).getTwitter_account() +" link rank is " +getInfluencers().get(i).getLink_rank()+ " follower rank is " +getInfluencers().get(i).getFollower_rank()+ " = Aggregate Influence Rank " + (i+1) );
+//              System.out.println("--------------");
            }
       }
       

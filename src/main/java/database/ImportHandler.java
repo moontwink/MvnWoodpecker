@@ -1,16 +1,13 @@
 
 package database;
 
-import gui.Start;
-import static gui.Start.progressBar;
+import static gui.Woodpecker.progressBar;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -87,8 +84,8 @@ public class ImportHandler {
                     ps.setDouble(6, tweets.get(i).getLongitude());
                     ps.executeUpdate();
 //                    System.out.println(ps);
-                Start.progressBar.setMaximum(tweets.size());
-                Start.progressBar.setValue(i);
+                progressBar.setMaximum(tweets.size());
+                progressBar.setValue(i);
             }
             
             ps.close();

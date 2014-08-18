@@ -22,7 +22,7 @@ import org.apache.lucene.analysis.shingle.ShingleFilter;
 import org.apache.lucene.analysis.standard.StandardTokenizer;
 import org.apache.lucene.analysis.tokenattributes.CharTermAttribute;
 import org.apache.lucene.util.Version;
-import tfidf.TfidfDriver;
+import tfidf.LM_TfidfDriver;
 
 /**
  *
@@ -100,7 +100,7 @@ public class Woodpecker {
         tm = new tweetModel();
         tm.setMessage("it's new year 2014");
         results.add(tm);
-        TfidfDriver.idfchecker(results);
+        LM_TfidfDriver.idfchecker(results);
         */
     }
 }

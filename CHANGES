@@ -28,7 +28,7 @@
 [] FIX TWITTER4J CRAWLER
 [] UPDATE OAUTH CONFIG TO TEXT FILE
 
-[] UPDATE USER MANUAL WITH THE FOLLOWING:
+[x] UPDATE USER MANUAL WITH THE FOLLOWING:
 	-- CSV FILE FORMAT MUST HAVE THE FF: DATA
 		[STATUSID, USERNAME, MESSAGE, DATE, LATITUDE, LONGITUDE]
 		without FIRST ROW LABELS (DATA ONLY)
@@ -97,3 +97,10 @@ Updated import module
 
 Added system out for outliers removed
 Added system out for time elapsed
+
+>>>>>>>>>>>>>>>>>>>>>>>>>>
+>>> AS OF AUG 18, 2014
+>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+Updated Main from Start to Woodpecker
+Fixed packages and classes relationships

@@ -5,7 +5,7 @@ package ngram;
  *
  * @author JOY
  */
-import gui.Start;
+import gui.Woodpecker;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,7 +43,7 @@ public class NGramDriver{
      */
    public static void removeOutliers(){
         double trim = ngramlist.size() * 0.20;
-        Start.systemOutArea.append("\t" + (int) trim + " Outliers Removed\n");
+        Woodpecker.systemOutArea.append("\t" + (int) trim + " Outliers Removed\n");
 //        System.out.print("********************trim**** " + trim);
         for(int top = 0; top < trim; top++){
             ngramlist.remove(top);
@@ -169,7 +169,7 @@ public class NGramDriver{
         * @param list
         */
       public static void sortngramlist(ArrayList<NGram> list){
-        Start.systemOutArea.append("\t" + list.size() + " Ngrams Sorted\n");
+        Woodpecker.systemOutArea.append("\t" + list.size() + " Ngrams Sorted\n");
         Collections.sort(list, new MyComparator());
       }
 
@@ -177,9 +177,9 @@ public class NGramDriver{
      * This method sorts the Ngram list and removes outliers.
      **/
     public static void sortNgramAndRemoveOutliers() {
-        Start.systemOutArea.append("\tSorting Ngrams\n");
+        Woodpecker.systemOutArea.append("\tSorting Ngrams\n");
         NGramDriver.sortngramlist(NGramDriver.getNgramlist());
-        Start.systemOutArea.append("\tRemoving Outliers\n");
+        Woodpecker.systemOutArea.append("\tRemoving Outliers\n");
         NGramDriver.removeOutliers();
     }
       

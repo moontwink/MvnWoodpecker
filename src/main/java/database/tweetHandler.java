@@ -1,7 +1,7 @@
 
 package database;
 
-import gui.Start;
+import gui.Woodpecker;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
@@ -21,7 +21,7 @@ import model.LMDrillModel;
 import model.TMDrillModel;
 import ngram.NGramDriver;
 import tfidf.TM_TfidfDriver;
-import tfidf.TfidfDriver;
+import tfidf.LM_TfidfDriver;
 
 /**
  *
@@ -165,29 +165,29 @@ public class tweetHandler {
             
             shortenedLinks=message;
             tweet = tweet.replace(message, "").trim();
-//           
-//            
-//           try {
-//               expandedLinks = expandShortURL(shortenedLinks);
-//           } catch (IOException ex) {
-////               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
-//           }
-//            
-//            if(expandedLinks != null)
-//            {
-//                if(expandedLinks.contains("bit.ly")||expandedLinks.contains("fb"))
-//                   try {
-//                       expandedLinks = expandShortURL(expandedLinks);
-//                } catch (IOException ex) {
-//                       System.out.println("Unable to expand wrapped URL.");
-////                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//                else {
-//                    getTweetlinks().add(expandedLinks);
-//                }
-//            }
-//            
-//            System.out.println("Short link " +shortenedLinks+ " -->  Expanded Link " +expandedLinks );
+           
+            
+           try {
+               expandedLinks = expandShortURL(shortenedLinks);
+           } catch (IOException ex) {
+//               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+           }
+            
+            if(expandedLinks != null)
+            {
+                if(expandedLinks.contains("bit.ly")||expandedLinks.contains("fb"))
+                   try {
+                       expandedLinks = expandShortURL(expandedLinks);
+                } catch (IOException ex) {
+                       System.out.println("Unable to expand wrapped URL.");
+//                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                else {
+                    getTweetlinks().add(expandedLinks);
+                }
+            }
+            
+            System.out.println("Short link " +shortenedLinks+ " -->  Expanded Link " +expandedLinks );
 //          
        }
        return tweet;
@@ -265,7 +265,7 @@ public class tweetHandler {
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "_");
-            Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+            Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
            
@@ -303,7 +303,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
             
-            Start.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
@@ -321,10 +321,10 @@ public class tweetHandler {
                 lmDrillModel = new LMDrillModel(-1);
             }else{
                 NGramDriver.sortNgramAndRemoveOutliers();
-                TfidfDriver.idfchecker(results);
+                LM_TfidfDriver.idfchecker(results);
                
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
+                lmDrillModel = new LMDrillModel(0, tablename, LM_TfidfDriver.getToplist(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -356,7 +356,7 @@ public class tweetHandler {
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "_");
-            Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+            Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
            
@@ -393,7 +393,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
             
-            Start.systemOutArea.append("\tCleaning tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
@@ -443,7 +443,7 @@ public class tweetHandler {
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "_");
-           Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+           Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
         keywords = keywords.replaceAll(",", "%\' and message like \'%");  
@@ -476,8 +476,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
 
-            Start.systemOutArea.append("\t" + rs.getFetchSize() + " tweets retrieved");
-            Start.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
@@ -496,10 +495,10 @@ public class tweetHandler {
                 lmDrillModel = new LMDrillModel(-1);
             }else{
                 NGramDriver.sortNgramAndRemoveOutliers();
-                TfidfDriver.idfchecker(results);
+                LM_TfidfDriver.idfchecker(results);
                
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
+                lmDrillModel = new LMDrillModel(0, tablename, LM_TfidfDriver.getToplist(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -526,7 +525,7 @@ public class tweetHandler {
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "_");
-           Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+           Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
         keywords = keywords.replaceAll(",", "%\' and message like \'%");  
@@ -559,7 +558,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
 
-            Start.systemOutArea.append("\tCleaning tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
@@ -616,7 +615,7 @@ public class tweetHandler {
         tweetModel t;
         
         String tablename = "temp-" + start[0]+"."+start[1]+"."+start[2]+"-"+end[0]+"."+end[1]+"."+end[2];
-          Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+          Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //        System.out.println(tablename);
         String whereCondition = buildDateWhereCondition(start, end, format);
         
@@ -646,7 +645,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
             
-            Start.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
@@ -664,23 +663,23 @@ public class tweetHandler {
 //                lmDrillModel = new LMDrillModel(-1);
 //            }else{
 //                sortNgramAndRemoveOutliers();
-//                TfidfDriver.idfchecker(results);
+//                LM_TfidfDriver.idfchecker(results);
 //                /* 
 //                * Initialize Influence Models
 //                */
 //               Influencer.initializeInfluenceModels();
 //               
 //                FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-//                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
+//                lmDrillModel = new LMDrillModel(0, tablename, LM_TfidfDriver.getToplist(), stat);
 //            }
             if(results.isEmpty()){
                 lmDrillModel = new LMDrillModel(-1);
             }else{
                 NGramDriver.sortNgramAndRemoveOutliers();
-                TfidfDriver.idfchecker(results);
+                LM_TfidfDriver.idfchecker(results);
                
                 FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-                lmDrillModel = new LMDrillModel(0, tablename, TfidfDriver.getToplist(), stat);
+                lmDrillModel = new LMDrillModel(0, tablename, LM_TfidfDriver.getToplist(), stat);
             }
             
         }catch(ClassNotFoundException ex){
@@ -761,7 +760,7 @@ public class tweetHandler {
         tweetModel t;
         
         String tablename = "temp-" + start[0]+"."+start[1]+"."+start[2]+"-"+end[0]+"."+end[1]+"."+end[2];
-        Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+        Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //        System.out.println(tablename);
         
         String whereCondition = buildDateWhereCondition(start, end, format);
@@ -792,7 +791,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
             
-            Start.systemOutArea.append("\tCleaning tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
@@ -1016,7 +1015,7 @@ public class tweetHandler {
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
-            Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+            Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
         keywords = keywords.replaceAll(",", "%\' and message like \'%");  
@@ -1049,7 +1048,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
 
-            Start.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));
@@ -1065,10 +1064,10 @@ public class tweetHandler {
 
             System.out.println("******************************* ");
             NGramDriver.sortNgramAndRemoveOutliers();
-            TfidfDriver.idfchecker(results);
+            LM_TfidfDriver.idfchecker(results);
            
             FeatureStatistics stat = new FeatureStatistics(results.size(), tweetlinks.size(), getAllRetweets(tablename));
-            lmDrillModel = new LMDrillModel(currentlmDM.getLevel()+1, tablename, TfidfDriver.getToplist(), stat);
+            lmDrillModel = new LMDrillModel(currentlmDM.getLevel()+1, tablename, LM_TfidfDriver.getToplist(), stat);
             
         }catch(ClassNotFoundException ex){
             Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
@@ -1094,7 +1093,7 @@ public class tweetHandler {
         tablename = tablename.replaceAll(",", "~");
         tablename = tablename.replaceAll(";", "~");
         tablename = tablename.replaceAll(" ", "");
-            Start.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
+            Woodpecker.systemOutArea.append("--- Creating subcorpus --- \n\t["+tablename+"]\n");
 //           System.out.println(tablename);
         
         keywords = keywords.replaceAll(",", "%\' and message like \'%");  
@@ -1127,7 +1126,7 @@ public class tweetHandler {
             ps = c.prepareStatement("SELECT * from `" + tablename + "`;");
             ResultSet rs = ps.executeQuery();
 
-            Start.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
+            Woodpecker.systemOutArea.append("\tCleaning tweets\n\tN-gram Tweets\n");
             while(rs.next()){
                 t = new tweetModel();
                 t.setUsername(rs.getString("username"));

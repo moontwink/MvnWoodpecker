@@ -64,11 +64,11 @@ import javafx.application.Platform;
 	        webComponent = new WebView();
 	 
                 String dir = System.getProperty("user.dir");
-                    System.out.println("//current dir =  " + dir);
+//                    System.out.println("//current dir =  " + dir);
                 dir = dir.replace("\\", "/");
-                    System.out.println("//replaced dir = " + dir);
+//                    System.out.println("//replaced dir = " + dir);
                 String url = "file:///" + dir + "/" + vennurl;
-                    System.out.println("//-url = " + url);
+//                    System.out.println("//-url = " + url);
                 
 //	        webComponent.getEngine().load("file:///C:/Users/Nancy/Desktop/MvnWoodpecker-master/src/main/java/Visual/d3/temp-oscars.html");
                 webComponent.getEngine().load(url);
