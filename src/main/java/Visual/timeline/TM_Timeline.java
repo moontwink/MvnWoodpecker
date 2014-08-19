@@ -60,7 +60,7 @@ public class TM_Timeline {
      * @param topics
      * @param tmDM
      */
-     public static void withoutKeywords(ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics, ArrayList<TopicOutput> tmDM){
+     private static void withoutKeywords(ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics, ArrayList<TopicOutput> tmDM){
          NGramDriver grammy = new NGramDriver();
          NGramDriver.setNgramlist(new ArrayList<NGram>());
           ArrayList<NGram> keywords = new ArrayList<NGram>();          
@@ -156,7 +156,7 @@ public class TM_Timeline {
      * @param tweets
      * @param topics
      */
-     public static void  withKeywords(String[] keywords, ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics){
+     private static void  withKeywords(String[] keywords, ArrayList<tweetModel> tweets,ArrayList<TimelineTopics> topics){
          
         
          for(int i= 0;i<keywords.length;i++){
@@ -229,7 +229,7 @@ public class TM_Timeline {
      * @param filename
      * @return String[] 
      */
-     public static String[] splitTableName(String filename){
+     private static String[] splitTableName(String filename){
         String[] temp;       
         String[] temp2;       
         String[] temp3; 
@@ -270,7 +270,7 @@ public class TM_Timeline {
      * @param date
      * @return String
      */
-      public static String splitDate(String date){
+      private static String splitDate(String date){
         String[] temp= null;       
         String dates= null; 
       
