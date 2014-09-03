@@ -1,1 +1,1 @@
-START cmd.exe /k "mvn exec:java -Dexec.mainClass=gui.Start"
+START cmd.exe /k "mvn exec:java -Dexec.mainClass=gui.Woodpecker"

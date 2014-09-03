@@ -7,13 +7,45 @@
     <packaging>jar</packaging>
     <name>MvnWoodpecker</name>
     <description>A Java Tool for Discovering Trends in Twitter Data</description>
-    <repositories>
-        <repository>
-            <id>unknown-jars-temp-repo</id>
-            <name>A temporary repository created by NetBeans for libraries and jars it could not identify. Please replace the dependencies in this repository with correct ones and delete this repository.</name>
-            <url>file:${project.basedir}/lib</url>
-        </repository>
-    </repositories>
+    
+    <scm>
+        <url>https://github.com/moontwink/MvnWoodpecker</url>
+        <connection>scm:git:git://github.com/moontwink/MvnWoodpecker.git</connection>
+        <developerConnection>scm:git:git://github.com/moontwink/MvnWoodpecker.git
+        </developerConnection>
+    </scm>
+    
+    <developers>
+        <developer>
+            <name>Nancy Reena Naval</name>
+            <email>nancee.naval@gmail.com</email>
+            <roles>
+                <role>lead</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        
+        <developer>
+            <name>Matthew Michael Rapes</name>
+            <email>matthewrapes@yahoo.com.ph</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+        
+        <developer>
+            <name>Grace Joy Chua</name>
+            <email>gracej.chua@gmail.com</email>
+            <roles>
+                <role>developer</role>
+            </roles>
+            <timezone>+8</timezone>
+        </developer>
+    </developers>
+    
     <dependencies>
         <dependency>
             <groupId>net.sf.opencsv</groupId>

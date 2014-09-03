@@ -6,7 +6,6 @@
 
 package gui;
 
-import woodpecker.Start;
 import components.ButtonTabComponent;
 import database.CalendarHandler;
 import database.CalendarType;
@@ -17,7 +16,6 @@ import filemanagement.ImportFiles;
 import java.awt.Toolkit;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.util.concurrent.TimeUnit;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -51,6 +49,10 @@ public class Woodpecker extends javax.swing.JFrame {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("iconwoodpecker.png"));
         ImageIcon bgimg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir")+"/src/main/java/gui/" + "clouds.jpg"));
         background.setIcon(bgimg);
+        
+        ImageIcon helpimg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir")+"/src/main/java/gui/" + "logo-highres_question-mark.png"));
+        helpBtn.setIcon(helpimg);
+        
         DefaultCaret caret = (DefaultCaret)systemOutArea.getCaret();
         caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
         setDisabled();
@@ -151,6 +153,7 @@ public class Woodpecker extends javax.swing.JFrame {
         tabPane = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         startBtn = new javax.swing.JButton();
+        helpBtn = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setTitle("Woodpecker");
@@ -427,6 +430,12 @@ public class Woodpecker extends javax.swing.JFrame {
             }
         });
 
+        helpBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                helpBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -435,13 +444,19 @@ public class Woodpecker extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addComponent(startBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(38, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(helpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(startBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(435, 435, 435))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 321, Short.MAX_VALUE)
+                .addComponent(helpBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         tabPane.addTab("TWEET CRAWLER", jPanel2);
@@ -577,6 +592,11 @@ public class Woodpecker extends javax.swing.JFrame {
     private void importCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importCBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_importCBActionPerformed
+
+    private void helpBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_helpBtnActionPerformed
+        HelpWindow helpwindow = new HelpWindow();
+        helpwindow.setVisible(true);
+    }//GEN-LAST:event_helpBtnActionPerformed
 
     /**
      * Fills date boxes with initial values
@@ -882,13 +902,13 @@ public class Woodpecker extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Woodpecker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Woodpecker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Woodpecker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Start.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Woodpecker.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
         /* Create and display the form */
@@ -925,6 +945,7 @@ public class Woodpecker extends javax.swing.JFrame {
     private javax.swing.JComboBox emonthMB;
     private javax.swing.JComboBox eyearMB;
     private javax.swing.JPanel filterCriteriaPanel;
+    private javax.swing.JButton helpBtn;
     private javax.swing.JRadioButton importBtn;
     private javax.swing.JComboBox importCB;
     private javax.swing.JPanel jPanel1;

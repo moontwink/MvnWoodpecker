@@ -8,11 +8,9 @@
  * Integrated Twitter Crawler (update: already connected with database)
  * Dependency Management
  * Integrated Pie Chart (still in JFrame)
-
+ * For future changes, refer to CHANGES FILE
 
 To run this, we'll have to do a number of stuff.
-
-Lookie heree ~~~
 
  1. Open project in Netbeans
  2. Yes, there will be exclamations and warning signs.
@@ -37,6 +35,7 @@ And just change the DBFactory password and it should work!
     static String password = ""; //"p@ssword";
 ```
 
-This is [on GitHub](https://github.com/moontwink/MvnWoodpecker) so let me know if something doesn't work with yours.
+This is [Woodpecker on GitHub](https://github.com/moontwink/MvnWoodpecker) so let me know if something doesn't work with yours.
+-- Nancy
 
 

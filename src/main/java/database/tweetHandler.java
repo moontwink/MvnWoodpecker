@@ -34,6 +34,70 @@ public class tweetHandler {
     private static String shortenedLinks = " ";
     
     /**
+     * This method writes the tweet in a text file.
+     * @param tweet
+     * @return utf-8 format string
+     */
+    public static String RewriteTweet(String tweet){
+        String filePath = "writetweet.txt";
+        String tweetLine = tweet;
+        
+        //Rewrites tweet to text file
+        try{
+            Writer write = new Writer(filePath, false);
+            write.writeToFile(tweet);
+        }catch(IOException ex){
+        }
+      
+        //Reades tweet as pure text
+        Reader read = new Reader(filePath);
+        read.OpenFile();
+        tweetLine = read.ReadFile();
+        
+        return tweetLine;
+    }
+    
+    /**
+     * Adds tweet to the database.
+     * @param tm
+     * @return success or failure message
+     */
+    public static String addTweet(tweetModel tm){
+        String message = "* Saving Failed.";
+        
+        try{
+            Connection c = DBFactory.getConnection();
+            PreparedStatement ps = c.prepareStatement("INSERT INTO `Tweets` "
+                    + "(statusId, username, message, latitude, longitude, date) VALUES (?,?,?,?,?,?)"); 
+            
+            ps.setString(1, tm.getStatusId());
+            ps.setString(2, tm.getUsername());
+            ps.setString(3, tm.getMessage());
+            ps.setDouble(5, tm.getLatitude());
+            ps.setDouble(6, tm.getLongitude());
+            ps.setString(7, tm.getDate());
+            
+            int i = ps.executeUpdate();
+            
+            if (i == 1) {
+                message = "* Saving successful.";
+            }
+            
+            ps.close();
+            c.close();
+            
+            
+        }catch(ClassNotFoundException ex){
+            Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }catch(SQLException ex){
+            Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return message;
+        
+    }
+    
+    /**
      * This method makes the tweet messages to lower case.
      * @param tweet
      * @return String
@@ -86,7 +150,6 @@ public class tweetHandler {
             String message = "";
             int indexhttp = tweet.indexOf("http");
             int indextco = tweet.indexOf("t.co");
-            int indexlinks = 0;
             if(tweet.contains("http"))
             {
                 while(tweet.charAt(indexhttp)!=' ')
@@ -131,7 +194,6 @@ public class tweetHandler {
            try {
                expandedLinks = expandShortURL(shortenedLinks);
            } catch (IOException ex) {
-//               Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
            }
             
             if(expandedLinks != null)
@@ -141,7 +203,6 @@ public class tweetHandler {
                        expandedLinks = expandShortURL(expandedLinks);
                 } catch (IOException ex) {
                        System.out.println("Unable to expand wrapped URL.");
-//                    Logger.getLogger(tweetHandler.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 else {
                     getTweetlinks().add(expandedLinks);
@@ -149,7 +210,6 @@ public class tweetHandler {
             }
             
             System.out.println("Short link " +shortenedLinks+ " -->  Expanded Link " +expandedLinks );
-//          
        }
        return tweet;
    }

@@ -1,7 +1,6 @@
 
 package gui;
 
-import woodpecker.Start;
 import components.TextAreaRenderer;
 import Visual.FXPieChart;
 import Visual.timeline.FXTimeline;

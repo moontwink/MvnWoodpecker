@@ -1,7 +1,13 @@
 
 package gui;
 
+import database.tweetHandler;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+import javax.swing.JOptionPane;
+import model.tweetModel;
 import twitter4j.FilterQuery;
 import twitter4j.StallWarning;
 import twitter4j.Status;
@@ -16,6 +22,8 @@ import twitter4j.conf.ConfigurationBuilder;
  * @author nannaval
  */
 public class CrawlerStream extends javax.swing.JFrame {
+    private static final String OAUTH_CONFIG_FILE_PATH="OAUTH.conf";
+    private static final String BOUNDARYBOX_CONFIG_FILE_PATH="BOUNDARYBOX.conf";
     private static final String VERSION = "4.0.1";
     private static final String TITLE = "Twitter4J Streaming API support";
     private static ConfigurationBuilder config;
@@ -42,12 +50,48 @@ public class CrawlerStream extends javax.swing.JFrame {
      */
     private ConfigurationBuilder configBuild(){
         //Setting OAuth Configurations
+        String OAuthConsumerKey = "";
+        String OAuthConsumerSecret = "";
+        String OAuthAccessToken = "";
+        String OAuthAccessTokenSecret = "";
+        
+        File dbConfigFile= new File(OAUTH_CONFIG_FILE_PATH);
+        
+        try
+        {
+            Scanner scanner=new Scanner(dbConfigFile);
+            if (scanner.hasNextLine())
+            {
+                String temp=scanner.nextLine();
+                
+                OAuthConsumerKey = temp;
+                
+                if (scanner.hasNextLine())
+                {
+                    OAuthConsumerSecret=scanner.nextLine();
+                    
+                    if (scanner.hasNextLine())
+                    {
+                        OAuthAccessToken=scanner.nextLine();
+                    }
+                    if (scanner.hasNextLine())
+                    {
+                        OAuthAccessTokenSecret=scanner.nextLine();
+                    }
+                }
+            }           
+        }
+        catch (FileNotFoundException fnfex)
+        {
+            JOptionPane.showMessageDialog(null, "OUATH.conf cannot be found in the specified file path.", "Database Requirement", JOptionPane.ERROR_MESSAGE);
+        }
+        
         config = new ConfigurationBuilder();
-        config.setDebugEnabled(true)
-            .setOAuthConsumerKey("sfiyyXHUfBqhqYJicvA")
-            .setOAuthConsumerSecret("qbYHDtWltMZ2pvYxCFlbOyvSDguO7mcFPEvrabaC5w")
-            .setOAuthAccessToken("16996040-Nv4YBi8m7HvR2Zfm0kUCuqCtceBHhVMuy8Eap94lJ")
-            .setOAuthAccessTokenSecret("XN2KBxAB74NL94jicyW2GYy0hIQzozCP5BqkxqtAqM");
+        config.setDebugEnabled(false)
+            .setOAuthConsumerKey(OAuthConsumerKey)
+            .setOAuthConsumerSecret(OAuthConsumerSecret)
+            .setOAuthAccessToken(OAuthAccessToken)
+            .setOAuthAccessTokenSecret(OAuthAccessTokenSecret);
         return config;
     }
     
@@ -67,46 +111,26 @@ public class CrawlerStream extends javax.swing.JFrame {
             public void onStatus(Status status) {
                 
                 //Store Tweet in Database
-                /*
                 tweetModel tw = new tweetModel();
                 tw.setStatusId(String.valueOf(status.getId()));
-                tw.setUsername(status.getUser().getScreenName());
-                tw.setMessage(status.getText().toString());
                 
-                if(status.isRetweet()){
-                    tw.setRetweetCount(status.getRetweetedStatus().getRetweetCount());
-                    System.out.println("RT = " + status.getRetweetedStatus().getRetweetCount());
-                } else{
-                    tw.setRetweetCount(status.getRetweetCount());
-                }
-                
-                tw.setLatitude(status.getGeoLocation().latitude);
-                tw.setLonghitude(status.getGeoLocation().longitude);
-                tw.setDate(status.getCreatedAt().toGMTString());
-                
-                tw.setMessage(tweetHandler.RewriteTweet(tw.getMessage()));   //Rewrites Tweet for Emoji Statuses
-                tweetHandler.addTweet(tw);
-                */
-                
-                //Print Tweet
                 String screenname = status.getUser().getScreenName();
-                String tweet = status.getText();
-                System.out.println("@" + screenname + 
-//                        "\n..ID| " + status.getId() +
-//                        "\n.SRC| " + status.getSource() +
-                        "\n..TW| " + tweet +
-//                        "\n..LL| " + status.getGeoLocation().getLatitude() + " " + status.getGeoLocation().getLongitude() +
-//                        "\n..PL| " + status.getPlace() +
-                        "\n" );
+                tw.setUsername(screenname);
                 
-                //Display tweet status
+                String tweet = tweetHandler.RewriteTweet(status.getText());
+                tw.setMessage(tweet);   //Rewrites Tweet for Emoji Statuses
                 
+                tw.setLatitude(status.getGeoLocation().getLatitude());
+                tw.setLongitude(status.getGeoLocation().getLongitude());
+                tw.setDate(status.getCreatedAt().toString());
                 
+                tweetHandler.addTweet(tw);
+                
+                //Display tweet status in UI
                 usernameField.setText("@"+screenname);
                 tweetField.setText(tweet);
                 latitudeField.setText(Double.toString(status.getGeoLocation().getLatitude()));
                 longitudeField.setText(Double.toString(status.getGeoLocation().getLongitude()));
-                
                 tweetCounter++;
                 counter.setText(Integer.toString(tweetCounter));
             }
@@ -147,9 +171,45 @@ public class CrawlerStream extends javax.swing.JFrame {
      */
     private static void ManilaStreamer(TwitterStream twitterStream){
         //Setting Location Coordinates and Retrieving Tweets
+        double southCoordinate = 120.90;
+        double westCoordinate = 14.370583;
+        double northCoordinate = 121.81;
+        double eastCoordinate = 14.583333;
+        
+        File dbConfigFile= new File(BOUNDARYBOX_CONFIG_FILE_PATH);
+        
+        try
+        {
+            Scanner scanner=new Scanner(dbConfigFile);
+            if (scanner.hasNextLine())
+            {
+                String temp=scanner.nextLine();
+                
+                southCoordinate = Double.parseDouble(temp);
+                
+                if (scanner.hasNextLine())
+                {
+                    westCoordinate = Double.parseDouble(scanner.nextLine());
+                    
+                    if (scanner.hasNextLine())
+                    {
+                        northCoordinate = Double.parseDouble(scanner.nextLine());
+                    }
+                    if (scanner.hasNextLine())
+                    {
+                        eastCoordinate = Double.parseDouble(scanner.nextLine());
+                    }
+                }
+            }           
+        }
+        catch (FileNotFoundException fnfex)
+        {
+            JOptionPane.showMessageDialog(null, "BOUNDARYBOX.conf cannot be found in the specified file path.", "Database Requirement", JOptionPane.ERROR_MESSAGE);
+        }
+        
         double[][] manilaBox = new double[][]{
-            {120.90, 14.370583},    //sw
-            {121.81, 14.583333}     //ne
+            {southCoordinate, westCoordinate},    //sw
+            {northCoordinate, eastCoordinate}     //ne
         };
         
         FilterQuery query = new FilterQuery().locations(manilaBox);
@@ -265,7 +325,7 @@ public class CrawlerStream extends javax.swing.JFrame {
         });
 
         titleVersion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titleVersion.setText("Twitter4J Streaming API Support 3.0.3");
+        titleVersion.setText("Twitter4J Streaming API Support 4.0.1");
         titleVersion.setEnabled(false);
         titleVersion.setFocusable(false);
 
