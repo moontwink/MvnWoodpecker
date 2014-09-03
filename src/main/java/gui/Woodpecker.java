@@ -14,11 +14,14 @@ import database.tweetHandler;
 import filemanagement.FilesCleaner;
 import filemanagement.ImportFiles;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.text.DefaultCaret;
 import model.LMDrillModel;
 import model.TMDrillModel;
@@ -33,6 +36,11 @@ public class Woodpecker extends javax.swing.JFrame {
 
     private String TABLE_NAME = "tweets";
     private CalendarType TABLE_CALENDAR_FORMAT = CalendarType.OTHER;
+    
+    private Timer myTimer;
+    public static final int TENTH_SEC = 100;
+    private int clockTick;  	//number of clock ticks; tick can be 1.0 s or 0.1 s
+    private double clockTime;  	//time in seconds
     
     /**
      * Creates new form Woodpecker
@@ -678,6 +686,16 @@ public class Woodpecker extends javax.swing.JFrame {
 
         @Override
         public void run() {
+            clockTick = 0;  		//initial clock setting in clock ticks
+            clockTime = ((double)clockTick)/10.0;
+            
+            myTimer = new Timer(TENTH_SEC, new ActionListener() {
+		public void actionPerformed(ActionEvent evt) {
+			clockTick++;
+			clockTime = ((double)clockTick)/10.0;
+		    }
+		});
+            myTimer.start();
             
             /* 
              * IF LANGUAGE MODELER IS SELECTED
@@ -880,7 +898,9 @@ public class Woodpecker extends javax.swing.JFrame {
 //                }
 //            }
 //            systemOutArea.append("\t* "+ TimeUnit.MINUTES.convert(System.nanoTime(), TimeUnit.NANOSECONDS) + " Elapsed\n");
-            systemOutArea.append("\t* "+ (double) System.nanoTime()/1000000000 + " Seconds\n");
+//            systemOutArea.append("\t* "+ (double) System.nanoTime()/1000000000 + " Seconds\n");
+            myTimer.stop();
+            systemOutArea.append("\t* "+ clockTime + " Seconds\n");
         }
     
     }

@@ -29,6 +29,17 @@ public class HelpWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
+        tipsTab = new javax.swing.JTabbedPane();
+        tips = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jSeparator10 = new javax.swing.JSeparator();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        jTextArea17 = new javax.swing.JTextArea();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel15 = new javax.swing.JLabel();
+        jSeparator11 = new javax.swing.JSeparator();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        jTextArea18 = new javax.swing.JTextArea();
         configTab = new javax.swing.JTabbedPane();
         database = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -57,11 +68,13 @@ public class HelpWindow extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JSeparator();
         jScrollPane8 = new javax.swing.JScrollPane();
         jTextArea8 = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
         jTextArea9 = new javax.swing.JTextArea();
         jLabel5 = new javax.swing.JLabel();
         jSeparator5 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
         filterCriteriaTab = new javax.swing.JTabbedPane();
         byKeyword = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -70,6 +83,7 @@ public class HelpWindow extends javax.swing.JFrame {
         jTextArea4 = new javax.swing.JTextArea();
         jScrollPane10 = new javax.swing.JScrollPane();
         jTextArea10 = new javax.swing.JTextArea();
+        jLabel13 = new javax.swing.JLabel();
         byDate = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jSeparator7 = new javax.swing.JSeparator();
@@ -77,12 +91,120 @@ public class HelpWindow extends javax.swing.JFrame {
         jTextArea11 = new javax.swing.JTextArea();
         jScrollPane12 = new javax.swing.JScrollPane();
         jTextArea12 = new javax.swing.JTextArea();
+        jLabel14 = new javax.swing.JLabel();
+        modelersTab = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jTextArea13 = new javax.swing.JTextArea();
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator8 = new javax.swing.JSeparator();
+        jScrollPane14 = new javax.swing.JScrollPane();
+        jTextArea14 = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        jScrollPane15 = new javax.swing.JScrollPane();
+        jTextArea15 = new javax.swing.JTextArea();
+        jScrollPane16 = new javax.swing.JScrollPane();
+        jTextArea16 = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Help");
         setBackground(new java.awt.Color(255, 255, 255));
         setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         setResizable(false);
+
+        tipsTab.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+
+        jLabel12.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel12.setText("WOODPECKER TIPS");
+
+        jTextArea17.setEditable(false);
+        jTextArea17.setColumns(20);
+        jTextArea17.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea17.setLineWrap(true);
+        jTextArea17.setRows(5);
+        jTextArea17.setText("When using Woodpecker, keep in mind the following:\n\n\t♥ Visualizations will take time to load\n\t\t(especially with big data),\n\t\tso SAVE or OPEN in browser instead\n\n\t♦ When Woodpecker creates the initial sub-corpus, \n\t\tit does so EVERY SINGLE TIME,\n\t\tdespite having the same filter criteria\n\n\t♣ Sometimes, the TOPIC MODELER will fail in\n\t\tfinishing approximating topics,\n\t\twhen this happens simply click BEGIN again\n\n\t♠ Woodpecker becomes easier to use and understand\n\t\twith CURIOSITY and EXPERIMENTATION");
+        jTextArea17.setAutoscrolls(false);
+        jScrollPane17.setViewportView(jTextArea17);
+
+        javax.swing.GroupLayout tipsLayout = new javax.swing.GroupLayout(tips);
+        tips.setLayout(tipsLayout);
+        tipsLayout.setHorizontalGroup(
+            tipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tipsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(tipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(tipsLayout.createSequentialGroup()
+                        .addGroup(tipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator10)
+                            .addGroup(tipsLayout.createSequentialGroup()
+                                .addComponent(jLabel12)
+                                .addGap(0, 324, Short.MAX_VALUE)))
+                        .addGap(15, 15, 15))
+                    .addGroup(tipsLayout.createSequentialGroup()
+                        .addComponent(jScrollPane17)
+                        .addContainerGap())))
+        );
+        tipsLayout.setVerticalGroup(
+            tipsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(tipsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tipsTab.addTab("Woodpecker Tips", tips);
+
+        jLabel15.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel15.setText("THE WOODPECKER TEAM");
+
+        jTextArea18.setEditable(false);
+        jTextArea18.setColumns(20);
+        jTextArea18.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea18.setLineWrap(true);
+        jTextArea18.setRows(5);
+        jTextArea18.setText("\t~\t\t~\t\t~\t\t~\n\t\t    De La Salle University\n\tCollege of Computer Studies - Software Technology\n\t\tCentre for Language Technologies\n\n\t\t    ADVISER --- Charibeth Cheng\n\t\t    PANELISTS\n\t\t\t    --- Allan Borra\n\t\t\t    --- Ralph Regalado\n\t\t\n\tGrace Joy Chua\t\t[gracej.chua@gmail.com]\n\tNancy Reena Naval\t[nancee.naval@gmail.com]\n\tMatthew Michael Rapes\t[matthewrapes@yahoo.com.ph]\n\n\t~\t\t~\t\t~\t\t~\n\nSCM: (https://github.com/moontwink/MvnWoodpecker)");
+        jTextArea18.setAutoscrolls(false);
+        jScrollPane18.setViewportView(jTextArea18);
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator11)
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(jLabel15)
+                                .addGap(0, 285, Short.MAX_VALUE)))
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                        .addComponent(jScrollPane18)
+                        .addContainerGap())))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator11, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        tipsTab.addTab("The TEAM", jPanel4);
+
+        jTabbedPane1.addTab("Woodpecker", tipsTab);
 
         configTab.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
 
@@ -119,12 +241,12 @@ public class HelpWindow extends javax.swing.JFrame {
                     .addGroup(databaseLayout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(databaseLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, databaseLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50))
         );
         databaseLayout.setVerticalGroup(
             databaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -134,9 +256,9 @@ public class HelpWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -176,7 +298,7 @@ public class HelpWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -215,12 +337,12 @@ public class HelpWindow extends javax.swing.JFrame {
                     .addGroup(boundaryboxLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane5))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(boundaryboxLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, boundaryboxLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
         boundaryboxLayout.setVerticalGroup(
             boundaryboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,9 +352,9 @@ public class HelpWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -256,13 +378,16 @@ public class HelpWindow extends javax.swing.JFrame {
 
         jTextArea8.setEditable(false);
         jTextArea8.setColumns(20);
-        jTextArea8.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
+        jTextArea8.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
         jTextArea8.setLineWrap(true);
         jTextArea8.setRows(5);
         jTextArea8.setText("GMT\n\t17 Oct 2013 05:47:46 GMT\nCST\n\tWed May 01 14:34:14 CST 2013\nSGT\n\tMon Jul 28 23:05:32 SGT 2014");
         jTextArea8.setAutoscrolls(false);
         jTextArea8.setOpaque(false);
         jScrollPane8.setViewportView(jTextArea8);
+
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel10.setText("NOTE: always click SELECT DATA when switching sources");
 
         javax.swing.GroupLayout importTabLayout = new javax.swing.GroupLayout(importTab);
         importTab.setLayout(importTabLayout);
@@ -275,24 +400,27 @@ public class HelpWindow extends javax.swing.JFrame {
                     .addComponent(jSeparator4)
                     .addGroup(importTabLayout.createSequentialGroup()
                         .addComponent(jLabel4)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(importTabLayout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(57, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         importTabLayout.setVerticalGroup(
             importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(importTabLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addGroup(importTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -310,6 +438,9 @@ public class HelpWindow extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
         jLabel5.setText("LOCAL DATABASE");
 
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel9.setText("NOTE: always click SELECT DATA when switching sources");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -317,22 +448,25 @@ public class HelpWindow extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane9)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
                     .addComponent(jSeparator5)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel5)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(43, 43, 43)
+                        .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE)
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -359,10 +493,13 @@ public class HelpWindow extends javax.swing.JFrame {
         jTextArea10.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jTextArea10.setLineWrap(true);
         jTextArea10.setRows(5);
-        jTextArea10.setText("AND (,)\n   fifa,world cup (fifa and world cup)\nOR (;)\n   fifa;world cup (fifa or world cup)\nBOTH\n   fifa;worldcup,germany \n\tfifa or (world cup and germany)");
+        jTextArea10.setText("AND (,)\n   \tfifa,world cup (fifa and world cup)\nOR (;)\n   \tfifa;world cup (fifa or world cup)\nBOTH\n   \tfifa;worldcup,germany \n\tfifa or (world cup and germany)");
         jTextArea10.setAutoscrolls(false);
         jTextArea10.setOpaque(false);
         jScrollPane10.setViewportView(jTextArea10);
+
+        jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel13.setText("NOTE: similar notations apply for drilldowns");
 
         javax.swing.GroupLayout byKeywordLayout = new javax.swing.GroupLayout(byKeyword);
         byKeyword.setLayout(byKeywordLayout);
@@ -374,25 +511,28 @@ public class HelpWindow extends javax.swing.JFrame {
                     .addComponent(jSeparator6)
                     .addGroup(byKeywordLayout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
                     .addComponent(jScrollPane4))
                 .addContainerGap())
             .addGroup(byKeywordLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(67, 67, 67)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         byKeywordLayout.setVerticalGroup(
             byKeywordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(byKeywordLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6)
+                .addGroup(byKeywordLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel13))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 139, Short.MAX_VALUE)
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -420,6 +560,9 @@ public class HelpWindow extends javax.swing.JFrame {
         jTextArea12.setOpaque(false);
         jScrollPane12.setViewportView(jTextArea12);
 
+        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel14.setText("NOTE: date filter is not available for drilldowns");
+
         javax.swing.GroupLayout byDateLayout = new javax.swing.GroupLayout(byDate);
         byDate.setLayout(byDateLayout);
         byDateLayout.setHorizontalGroup(
@@ -430,23 +573,26 @@ public class HelpWindow extends javax.swing.JFrame {
                     .addComponent(jSeparator7)
                     .addGroup(byDateLayout.createSequentialGroup()
                         .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel14))
                     .addComponent(jScrollPane11))
                 .addContainerGap())
             .addGroup(byDateLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
-                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addGap(66, 66, 66)
+                .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
         byDateLayout.setVerticalGroup(
             byDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(byDateLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7)
+                .addGroup(byDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel14))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -455,6 +601,122 @@ public class HelpWindow extends javax.swing.JFrame {
         filterCriteriaTab.addTab("By Date", byDate);
 
         jTabbedPane1.addTab("Filter Criteria", filterCriteriaTab);
+
+        modelersTab.setTabPlacement(javax.swing.JTabbedPane.BOTTOM);
+
+        jTextArea13.setEditable(false);
+        jTextArea13.setColumns(20);
+        jTextArea13.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea13.setLineWrap(true);
+        jTextArea13.setRows(5);
+        jTextArea13.setText("Woodpecker's language modeler makes use of Apache Lucene's \nNGramExtractor* modified to suit Woodpecker's requirements.\n\nHow does it work?\n\t♥ Ngrams are extracted from length 1 to 4\n\t♥ Ngrams are sorted according to their frequency\n\t\t(descending order)\n\t♥ Ngrams are passed to the TF-IDF module\n\n*(https://github.com/kylemarkwilliams/simseer-public/blob/master/src/simseer/extrators/NGramExtractor.java)");
+        jTextArea13.setAutoscrolls(false);
+        jScrollPane13.setViewportView(jTextArea13);
+
+        jLabel8.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel8.setText("LANGUAGE MODELER");
+
+        jTextArea14.setEditable(false);
+        jTextArea14.setColumns(20);
+        jTextArea14.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextArea14.setLineWrap(true);
+        jTextArea14.setRows(5);
+        jTextArea14.setText("TERM FREQUENCY-INVERSE DOCUMENT FREQUENCY\n\t= TF * IDF\n     TF = frequency of ngram\n     IDF = log10 * (total # of tweets / \n\t# of tweets containing the ngram\n");
+        jTextArea14.setAutoscrolls(false);
+        jTextArea14.setOpaque(false);
+        jScrollPane14.setViewportView(jTextArea14);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator8)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane14, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        modelersTab.addTab("Language Modeler", jPanel2);
+
+        jLabel11.setFont(new java.awt.Font("Trebuchet MS", 1, 14)); // NOI18N
+        jLabel11.setText("TOPIC MODELER");
+
+        jTextArea15.setEditable(false);
+        jTextArea15.setColumns(20);
+        jTextArea15.setFont(new java.awt.Font("Monospaced", 0, 12)); // NOI18N
+        jTextArea15.setLineWrap(true);
+        jTextArea15.setRows(5);
+        jTextArea15.setText("Woodpecker's topic modeler makes use of Mallet's Topic\nModeler* modified to suit Woodpecker's requirements.\n\nHow does it work?\n\t♥ Woodpecker imports all tweets into a mallet file\n\t♥ Mallet trains the topics using LDA \n\t\t(Latent Dirichlet Allocation)\n\t♥ Topics are passed to the TF-IDF module\n\n*(http://mallet.cs.umass.edu/topics.php)");
+        jTextArea15.setAutoscrolls(false);
+        jScrollPane15.setViewportView(jTextArea15);
+
+        jTextArea16.setEditable(false);
+        jTextArea16.setColumns(20);
+        jTextArea16.setFont(new java.awt.Font("Trebuchet MS", 0, 12)); // NOI18N
+        jTextArea16.setLineWrap(true);
+        jTextArea16.setRows(5);
+        jTextArea16.setText("TERM FREQUENCY-INVERSE DOCUMENT FREQUENCY\n\t= TF * IDF\n* Square Root (SqRt for score normalization)\n     TF = SqRt(sum of the frequency of keywords per topic)\n     IDF = log10 * (total # of tweets / \n\t# of tweets containing the topic's keywords\n");
+        jTextArea16.setAutoscrolls(false);
+        jTextArea16.setOpaque(false);
+        jScrollPane16.setViewportView(jTextArea16);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator9)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane15, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 386, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane15, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
+        );
+
+        modelersTab.addTab("Topic Modeler", jPanel3);
+
+        jTabbedPane1.addTab("Trend Detection", modelersTab);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -516,17 +778,34 @@ public class HelpWindow extends javax.swing.JFrame {
     private javax.swing.JTabbedPane filterCriteriaTab;
     private javax.swing.JPanel importTab;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
+    private javax.swing.JScrollPane jScrollPane13;
+    private javax.swing.JScrollPane jScrollPane14;
+    private javax.swing.JScrollPane jScrollPane15;
+    private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -536,17 +815,27 @@ public class HelpWindow extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
+    private javax.swing.JSeparator jSeparator11;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextArea jTextArea10;
     private javax.swing.JTextArea jTextArea11;
     private javax.swing.JTextArea jTextArea12;
+    private javax.swing.JTextArea jTextArea13;
+    private javax.swing.JTextArea jTextArea14;
+    private javax.swing.JTextArea jTextArea15;
+    private javax.swing.JTextArea jTextArea16;
+    private javax.swing.JTextArea jTextArea17;
+    private javax.swing.JTextArea jTextArea18;
     private javax.swing.JTextArea jTextArea2;
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTextArea jTextArea4;
@@ -555,6 +844,9 @@ public class HelpWindow extends javax.swing.JFrame {
     private javax.swing.JTextArea jTextArea7;
     private javax.swing.JTextArea jTextArea8;
     private javax.swing.JTextArea jTextArea9;
+    private javax.swing.JTabbedPane modelersTab;
     private javax.swing.JPanel oauth;
+    private javax.swing.JPanel tips;
+    private javax.swing.JTabbedPane tipsTab;
     // End of variables declaration//GEN-END:variables
 }
