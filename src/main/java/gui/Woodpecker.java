@@ -47,10 +47,10 @@ public class Woodpecker extends javax.swing.JFrame {
      */
     private void initialize() {
         this.setIconImage(Toolkit.getDefaultToolkit().getImage("iconwoodpecker.png"));
-        ImageIcon bgimg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir")+"/src/main/java/gui/" + "clouds.jpg"));
+        ImageIcon bgimg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir")+"/src/main/java/resources/" + "clouds.jpg"));
         background.setIcon(bgimg);
         
-        ImageIcon helpimg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir")+"/src/main/java/gui/" + "logo-highres_question-mark.png"));
+        ImageIcon helpimg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(System.getProperty("user.dir")+"/src/main/java/resources/" + "logo-highres_question-mark.png"));
         helpBtn.setIcon(helpimg);
         
         DefaultCaret caret = (DefaultCaret)systemOutArea.getCaret();

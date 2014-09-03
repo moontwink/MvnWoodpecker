@@ -73,9 +73,9 @@ public class tweetHandler {
             ps.setString(1, tm.getStatusId());
             ps.setString(2, tm.getUsername());
             ps.setString(3, tm.getMessage());
-            ps.setDouble(5, tm.getLatitude());
-            ps.setDouble(6, tm.getLongitude());
-            ps.setString(7, tm.getDate());
+            ps.setDouble(4, tm.getLatitude());
+            ps.setDouble(5, tm.getLongitude());
+            ps.setString(6, tm.getDate());
             
             int i = ps.executeUpdate();
             

@@ -100,6 +100,7 @@ public class HelpWindow extends javax.swing.JFrame {
 
         jTextArea2.setEditable(false);
         jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
         jTextArea2.setText("jdbc:mysql://localhost:3306/finaltweetsdb\nroot\np@ssword");
@@ -195,6 +196,7 @@ public class HelpWindow extends javax.swing.JFrame {
 
         jTextArea6.setEditable(false);
         jTextArea6.setColumns(20);
+        jTextArea6.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jTextArea6.setLineWrap(true);
         jTextArea6.setRows(5);
         jTextArea6.setText("SOUTH COORDINATE   -\t120.90\nWEST COORDINATE    -\t14.370583\nNORTH COORDINATE   -\t121.81\nEAST COORDINATE    -\t14.583333");
@@ -254,9 +256,10 @@ public class HelpWindow extends javax.swing.JFrame {
 
         jTextArea8.setEditable(false);
         jTextArea8.setColumns(20);
+        jTextArea8.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jTextArea8.setLineWrap(true);
         jTextArea8.setRows(5);
-        jTextArea8.setText("GMT\n\nCST\n\tWed May 01 14:34:14 CST 2013\nSGT\n\tMon Jul 28 23:05:32 SGT 2014");
+        jTextArea8.setText("GMT\n\t17 Oct 2013 05:47:46 GMT\nCST\n\tWed May 01 14:34:14 CST 2013\nSGT\n\tMon Jul 28 23:05:32 SGT 2014");
         jTextArea8.setAutoscrolls(false);
         jTextArea8.setOpaque(false);
         jScrollPane8.setViewportView(jTextArea8);
@@ -353,6 +356,7 @@ public class HelpWindow extends javax.swing.JFrame {
 
         jTextArea10.setEditable(false);
         jTextArea10.setColumns(20);
+        jTextArea10.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jTextArea10.setLineWrap(true);
         jTextArea10.setRows(5);
         jTextArea10.setText("AND (,)\n   fifa,world cup (fifa and world cup)\nOR (;)\n   fifa;world cup (fifa or world cup)\nBOTH\n   fifa;worldcup,germany \n\tfifa or (world cup and germany)");
@@ -408,6 +412,7 @@ public class HelpWindow extends javax.swing.JFrame {
 
         jTextArea12.setEditable(false);
         jTextArea12.setColumns(20);
+        jTextArea12.setFont(new java.awt.Font("Trebuchet MS", 0, 13)); // NOI18N
         jTextArea12.setLineWrap(true);
         jTextArea12.setRows(5);
         jTextArea12.setText("WOODPECKER\n\nEARLIEST DATE --- 17,OCT,2013\nLATEST DATE --- 23,Jul,2014");
@@ -441,7 +446,7 @@ public class HelpWindow extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

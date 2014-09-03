@@ -150,6 +150,9 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="13" style="0"/>
+                        </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
                         <Property name="text" type="java.lang.String" value="jdbc:mysql://localhost:3306/finaltweetsdb&#xa;root&#xa;p@ssword"/>
@@ -327,6 +330,9 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="13" style="0"/>
+                        </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
                         <Property name="text" type="java.lang.String" value="SOUTH COORDINATE   -&#x9;120.90&#xa;WEST COORDINATE    -&#x9;14.370583&#xa;NORTH COORDINATE   -&#x9;121.81&#xa;EAST COORDINATE    -&#x9;14.583333"/>
@@ -445,9 +451,12 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="13" style="0"/>
+                        </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="GMT&#xa;&#xa;CST&#xa;&#x9;Wed May 01 14:34:14 CST 2013&#xa;SGT&#xa;&#x9;Mon Jul 28 23:05:32 SGT 2014"/>
+                        <Property name="text" type="java.lang.String" value="GMT&#xa;&#x9;17 Oct 2013 05:47:46 GMT&#xa;CST&#xa;&#x9;Wed May 01 14:34:14 CST 2013&#xa;SGT&#xa;&#x9;Mon Jul 28 23:05:32 SGT 2014"/>
                         <Property name="autoscrolls" type="boolean" value="false"/>
                         <Property name="opaque" type="boolean" value="false"/>
                       </Properties>
@@ -638,6 +647,9 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="13" style="0"/>
+                        </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
                         <Property name="text" type="java.lang.String" value="AND (,)&#xa;   fifa,world cup (fifa and world cup)&#xa;OR (;)&#xa;   fifa;world cup (fifa or world cup)&#xa;BOTH&#xa;   fifa;worldcup,germany &#xa;&#x9;fifa or (world cup and germany)"/>
@@ -688,7 +700,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jSeparator7" min="-2" pref="10" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane11" pref="198" max="32767" attributes="0"/>
+                          <Component id="jScrollPane11" pref="208" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jScrollPane12" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -740,6 +752,9 @@
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
                         <Property name="columns" type="int" value="20"/>
+                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                          <Font name="Trebuchet MS" size="13" style="0"/>
+                        </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
                         <Property name="text" type="java.lang.String" value="WOODPECKER&#xa;&#xa;EARLIEST DATE --- 17,OCT,2013&#xa;LATEST DATE --- 23,Jul,2014"/>
